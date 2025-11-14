@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: LarIdosos
+
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: lar-idosos
+
+jwt:
+  key: ${JWT_KEY}
+  access-token-expiration: 86400000      # 24 hours in milliseconds
+  refresh-token-expiration: 15552000000    # 180 days in milliseconds
