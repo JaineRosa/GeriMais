@@ -1,9 +1,9 @@
 package com.example.LarIdosos.Models;
 
-import jakarta.persistence.Entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.Id;
 
 import java.util.List;
 import java.util.UUID;
@@ -17,6 +17,7 @@ import java.util.UUID;
 @AllArgsConstructor
 public class AgendamentoMedicamento {
 
+    @Id
     private String agendamentoId = UUID.randomUUID().toString();
 
     /**
