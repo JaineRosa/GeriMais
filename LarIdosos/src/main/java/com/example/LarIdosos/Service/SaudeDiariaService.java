@@ -75,8 +75,10 @@ public class SaudeDiariaService {
                     registro.getSaturacaoOxigenio() + "%",
                     registro.getDataHoraRegistro()
             );
-            // Envia para a fila de alertas críticos
-            rabbitTemplate.convertAndSend(RabbitMQConfig.HEALTH_CRITICAL_ALERT_QUEUE, dto);
+            rabbitTemplate.convertAndSend(
+                    RabbitMQConfig.EXCHANGE_NAME,
+                    RabbitMQConfig.HEALTH_CRITICAL_ALERT_QUEUE,
+                    dto);
             return;
         }
 
@@ -89,7 +91,10 @@ public class SaudeDiariaService {
                     registro.getBatimentosPorMinuto() + " BPM",
                     registro.getDataHoraRegistro()
             );
-            rabbitTemplate.convertAndSend("app.exchange",RabbitMQConfig.HEALTH_CRITICAL_ALERT_QUEUE, dto);
+            rabbitTemplate.convertAndSend(
+                    RabbitMQConfig.EXCHANGE_NAME,
+                    RabbitMQConfig.HEALTH_CRITICAL_ALERT_QUEUE,
+                    dto);
         }
     }
 }

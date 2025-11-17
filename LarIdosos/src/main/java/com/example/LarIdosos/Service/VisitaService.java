@@ -68,7 +68,10 @@ public class VisitaService {
         );
 
         System.out.println("Enviando notificação de visita agendada.");
-        rabbitTemplate.convertAndSend(RabbitMQConfig.VISIT_NOTIFICATION_QUEUE, dto);
+        rabbitTemplate.convertAndSend(
+                RabbitMQConfig.EXCHANGE_NAME,
+                RabbitMQConfig.VISIT_NOTIFICATION_QUEUE,
+                dto);
 
         return visitaSalva;
     }
@@ -111,7 +114,10 @@ public class VisitaService {
                 );
 
                 System.out.println("Enviando notificação: " + tipoNotificacao);
-                rabbitTemplate.convertAndSend(RabbitMQConfig.VISIT_NOTIFICATION_QUEUE, dto);
+                rabbitTemplate.convertAndSend(
+                        RabbitMQConfig.EXCHANGE_NAME,
+                        RabbitMQConfig.VISIT_NOTIFICATION_QUEUE,
+                        dto);
             }
         }
         return visitaRepository.save(visitaExistente);

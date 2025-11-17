@@ -69,10 +69,11 @@ public class SchedulerService {
 
             System.out.println("Enviando resumo de " + idoso.getNome() + " para " + responsavel.getEmail());
             rabbitTemplate.convertAndSend(
-                    "app.exchange",
+                    RabbitMQConfig.EXCHANGE_NAME,
                     RabbitMQConfig.EMAIL_RESUMO_QUEUE,
                     emailDto
             );
+
         }
     }
 
@@ -125,7 +126,6 @@ public class SchedulerService {
             sb.append("Nenhum medicamento agendado.\n");
         } else {
             for (AgendamentoMedicamento a : agendamentos) {
-                // (Não temos o nome do remédio aqui, só o ID. Para o projeto, isso basta)
                 sb.append("  - Medicação (ID: ").append(a.getMedicamentoId()).append(") nos horários: ")
                         .append(a.getHorarios()).append(" nos dias: ").append(a.getDiasSemana()).append("\n");
             }
