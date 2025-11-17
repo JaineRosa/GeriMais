@@ -1,12 +1,15 @@
 spring:
   application:
-    name: LarIdosos
+    name: notification-service
+
+  main:
+    allow-bean-definition-overriding: true
 
   data:
     mongodb:
       host: ${SPRING_DATA_MONGODB_HOST:localhost}
       port: 27017
-      database: lar-idosos
+      database: notification-service
 
   rabbitmq:
         host: ${SPRING_RABBITMQ_HOST:localhost}
@@ -14,12 +17,5 @@ spring:
         username: guest
         password: guest
 
-
-
-jwt:
-  key: ${JWT_KEY}
-  access-token-expiration: 86400000      # 24 hours in milliseconds
-  refresh-token-expiration: 15552000000    # 180 days in milliseconds
-
 server:
-  port: ${SERVER_PORT:8080}
+    port: ${SERVER_PORT:8090}

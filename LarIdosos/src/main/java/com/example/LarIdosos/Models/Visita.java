@@ -1,5 +1,7 @@
 package com.example.LarIdosos.Models;
 
+import com.example.LarIdosos.Models.Enum.StatusVisita;
+import com.example.LarIdosos.Models.Enum.TipoVisita;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,36 +10,105 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
 
-/**
- * Representa uma Visita (médica, familiar) na coleção 'visitas'.
- * Esta é uma coleção separada, NÃO é aninhada.
- */
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Document(collection = "visitas")
 public class Visita {
 
     @Id
     private String id;
-
-    /**
-     * Referência ao ID do Idoso que será visitado.
-     */
-    private String usuarioIdRef;
-
-    /**
-     * Referência ao ID do Cuidador que agendou (opcional).
-     */
-    private String cuidadorIdRef;
-
-    private String nomeVisitante; // Ex: "Dr. Carlos" ou "Maria (Filha)"
-
-    private String tipoVisita; // Ex: "MEDICA", "FAMILIAR"
-
-    private LocalDateTime dataHoraAgendada;
-
-    private String status; // Ex: "AGENDADA", "CONCLUIDA", "CANCELADA"
-
+    private String idosoId;
+    private String cuidadorId;
+    private String visitanteId;
+    private String medicoId;
+    private TipoVisita tipoVisita;
+    private LocalDateTime dataHoraVisita;
+    private StatusVisita statusVisita;
     private String observacoes;
+
+    public Visita(String id, String idosoId, String cuidadorId, String visitanteId, String medicoId, TipoVisita tipoVisita, LocalDateTime dataHoraVisita, StatusVisita statusVisita, String observacoes) {
+        this.id = id;
+        this.idosoId = idosoId;
+        this.cuidadorId = cuidadorId;
+        this.visitanteId = visitanteId;
+        this.medicoId = medicoId;
+        this.tipoVisita = tipoVisita;
+        this.dataHoraVisita = dataHoraVisita;
+        this.statusVisita = statusVisita;
+        this.observacoes = observacoes;
+    }
+
+    public Visita() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getIdosoId() {
+        return idosoId;
+    }
+
+    public void setIdosoId(String idosoId) {
+        this.idosoId = idosoId;
+    }
+
+    public String getCuidadorId() {
+        return cuidadorId;
+    }
+
+    public void setCuidadorId(String cuidadorId) {
+        this.cuidadorId = cuidadorId;
+    }
+
+    public String getVisitanteId() {
+        return visitanteId;
+    }
+
+    public void setVisitanteId(String visitanteId) {
+        this.visitanteId = visitanteId;
+    }
+
+    public String getMedicoId() {
+        return medicoId;
+    }
+
+    public void setMedicoId(String medicoId) {
+        this.medicoId = medicoId;
+    }
+
+    public TipoVisita getTipoVisita() {
+        return tipoVisita;
+    }
+
+    public void setTipoVisita(TipoVisita tipoVisita) {
+        this.tipoVisita = tipoVisita;
+    }
+
+    public LocalDateTime getDataHoraVisita() {
+        return dataHoraVisita;
+    }
+
+    public void setDataHoraVisita(LocalDateTime dataHoraVisita) {
+        this.dataHoraVisita = dataHoraVisita;
+    }
+
+    public StatusVisita getStatusVisita() {
+        return statusVisita;
+    }
+
+    public void setStatusVisita(StatusVisita statusVisita) {
+        this.statusVisita = statusVisita;
+    }
+
+    public String getObservacoes() {
+        return observacoes;
+    }
+
+    public void setObservacoes(String observacoes) {
+        this.observacoes = observacoes;
+    }
 }

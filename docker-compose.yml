@@ -1,0 +1,53 @@
+version: '3.8'
+services:
+  mongo:
+    image: mongo:latest
+    container_name: mongo_db
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo-data:/data/db
+
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq_server
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+
+  laridosos-service:
+    build:
+      context: ./LarIdosos
+      dockerfile: Dockerfile
+    container_name: laridosos_service
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SERVER_PORT=8080
+      - JWT_KEY=aW3v7q9T8y/B?E(G+KbPeShVmYp3s6v9
+    depends_on:
+      - mongo
+      - rabbitmq
+
+  notification-service:
+    build:
+      context: ./notification-service
+      dockerfile: Dockerfile
+    container_name: notification_service
+    ports:
+      - "8090:8090"
+    environment:
+      - SPRING_DATA_MONGODB_HOST=mongo
+      - SPRING_RABBITMQ_HOST=rabbitmq
+      - SERVER_PORT=8090
+    depends_on:
+      - mongo
+      - rabbitmq
+
+volumes:
+  mongo-data:

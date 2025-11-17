@@ -1,18 +1,22 @@
 package com.example.LarIdosos.Models;
 
 
+import com.example.LarIdosos.Models.Enum.TipoUsuario;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.bson.types.Binary;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import org.springframework.security.core.userdetails.User;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+
 @Document(collection = "Usuario")
 public class Usuario {
 
@@ -21,24 +25,155 @@ public class Usuario {
     private String nome;
     private String quarto;
     private Binary fotoUrl;
+    public TipoUsuario tipoUsuario;
+    @Indexed(unique = true)
+    public String email;
+    private String telefone;
+    private String senha;
+    @Indexed(unique = true)
+    private String cpf;
+    private LocalDate dataNascimento;
+    private String responsavelId;
 
-    // --- Referências ---
+    private List<String> notificacoesNaoLidas;
 
-    /**
-     * O ID (String) do Cuidador que é o Responsável Legal/Principal.
-     * Este é o contato primário para emergências.
-     */
-    private String responsavelIdRef;
+    private List<String> medicamentos;
 
-    /**
-     * Lista de TODOS os IDs (String) que podem acessar este prontuário
-     * (incluindo o responsável, enfermeiros, outros familiares).
-     */
-    private List<Cuidador> cuidadores;
+    private List<String> recomendacoesMedicas;
 
-    private List<Medicamento> medicamentos;
+    public Usuario() {
+    }
 
-    private List<AgendamentoMedicamento> agendamentos;
+    public Usuario(TipoUsuario tipoUsuario, String id, String nome, String quarto, Binary fotoUrl, String email, String telefone, String senha, String cpf, LocalDate dataNascimento, String responsavelId, List<String> notificacoesNaoLidas, List<String> medicamentos, List<String> recomendacoesMedicas) {
+        this.tipoUsuario = tipoUsuario;
+        this.id = id;
+        this.nome = nome;
+        this.quarto = quarto;
+        this.fotoUrl = fotoUrl;
+        this.email = email;
+        this.telefone = telefone;
+        this.senha = senha;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.responsavelId = responsavelId;
+        this.notificacoesNaoLidas = notificacoesNaoLidas;
+        this.medicamentos = medicamentos;
+        this.recomendacoesMedicas = recomendacoesMedicas;
+    }
 
-    private List<RecomendacaoMedica> recomendacoes;
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public String getQuarto() {
+        return quarto;
+    }
+
+    public void setQuarto(String quarto) {
+        this.quarto = quarto;
+    }
+
+    public Binary getFotoUrl() {
+        return fotoUrl;
+    }
+
+    public void setFotoUrl(Binary fotoUrl) {
+        this.fotoUrl = fotoUrl;
+    }
+
+    public TipoUsuario getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(TipoUsuario tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public void setTelefone(String telefone) {
+        this.telefone = telefone;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
+    public LocalDate getDataNascimento() {
+        return dataNascimento;
+    }
+
+    public void setDataNascimento(LocalDate dataNascimento) {
+        this.dataNascimento = dataNascimento;
+    }
+
+    public String getResponsavelId() {
+        return responsavelId;
+    }
+
+    public void setResponsavelId(String responsavelId) {
+        this.responsavelId = responsavelId;
+    }
+
+    public List<String> getNotificacoesNaoLidas() {
+        return notificacoesNaoLidas;
+    }
+
+    public void setNotificacoesNaoLidas(List<String> notificacoesNaoLidas) {
+        this.notificacoesNaoLidas = notificacoesNaoLidas;
+    }
+
+    public List<String> getMedicamentos() {
+        return medicamentos;
+    }
+
+    public void setMedicamentos(List<String> medicamentos) {
+        this.medicamentos = medicamentos;
+    }
+
+    public List<String> getRecomendacoesMedicas() {
+        return recomendacoesMedicas;
+    }
+
+    public void setRecomendacoesMedicas(List<String> recomendacoesMedicas) {
+        this.recomendacoesMedicas = recomendacoesMedicas;
+    }
+
+    public UserDetails toUserDetails() {
+        return new User(this.email, this.senha, new ArrayList<>());
+    }
 }
