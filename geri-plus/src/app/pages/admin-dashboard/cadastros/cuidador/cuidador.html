@@ -1,1 +1,6 @@
-<p>cuidador works!</p>
+<app-form-cadastro
+  [titulo]="'Cadastro de Cuidador'"
+  [campos]="cuidadorCampos"
+  [salvarLabel]="'Salvar Cuidador'"
+  (submitForm)="onSubmitCuidador($event)"
+></app-form-cadastro>

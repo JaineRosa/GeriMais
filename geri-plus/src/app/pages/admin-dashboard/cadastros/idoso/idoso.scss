@@ -1,0 +1,39 @@
+@use 'sass:color';
+@use '../../../../../styles/variables' as vars;
+.cadastro-page {
+  padding: 2rem;
+
+  h1 {
+    margin-bottom: 1rem;
+    color: vars.$primary-color;
+  }
+
+  .btn {
+    margin-bottom: 1.5rem;
+  }
+
+  .table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+
+    th,
+    td {
+      padding: 1rem;
+      border-bottom: 1px solid vars.$gray-medium;
+      text-align: left;
+    }
+
+    th {
+      background-color: vars.$gray-light;
+      font-weight: 600;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+  }
+}

@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,25 +21,53 @@ import org.springframework.web.bind.annotation.RestController;
 public class AuthController {
 
     private final AuthenticationManager authenticationManager;
-    private final UsuarioRepository usuarioRepository; // (Ou UsuarioService)
+    private final UsuarioRepository usuarioRepository;
     private final JwtUtil jwtUtil;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequestDto request) {
+        System.out.println(">>> DEBUG LOGIN V2 <<<");
+        System.out.println("1. Recebido do Front: " + request.getEmail() + " | Senha: " + request.getSenha());
+
         try {
+            Usuario userBanco = usuarioRepository.findByEmail(request.getEmail()).orElse(null);
+            if (userBanco != null) {
+                System.out.println("2. Usuário encontrado: " + userBanco.getEmail());
+                System.out.println("3. Hash no Banco: " + userBanco.getSenha());
+
+                boolean confere = passwordEncoder.matches(request.getSenha(), userBanco.getSenha());
+                System.out.println(">>> 4. A SENHA CONFERE MANUALMENTE? " + confere);
+
+                if (!confere) {
+                    System.out.println("!!! AVISO: A senha não bateu na checagem manual !!!");
+                }
+            } else {
+                System.out.println("!!! Usuário não encontrado no findByEmail !!!");
+            }
+
+            System.out.println("5. Chamando AuthenticationManager...");
             authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getEmail(), request.getSenha())
             );
 
+            System.out.println("6. Autenticação SUCESSO!");
+
             final Usuario usuario = usuarioRepository.findByEmail(request.getEmail())
                     .orElseThrow(() -> new RuntimeException("Usuário não encontrado após autenticação"));
 
-            final String token = jwtUtil.generateToken(usuario.toUserDetails()); // (Precisamos de um helper)
+            final String token = jwtUtil.generateToken(usuario.toUserDetails());
 
-            return ResponseEntity.ok(new LoginResponseDto(token));
+            return ResponseEntity.ok(
+                    new LoginResponseDto(
+                            token,
+                            usuario.getTipoUsuario() )
+            );
 
         } catch (Exception e) {
-            return ResponseEntity.status(401).body("Email ou senha inválidos.");
+            System.out.println(">>> ERRO FATAL <<<");
+            e.printStackTrace();
+            return ResponseEntity.status(401).body("Erro Backend: " + e.getMessage());
         }
     }
 }

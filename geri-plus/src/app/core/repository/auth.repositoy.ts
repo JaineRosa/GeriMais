@@ -2,13 +2,13 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { delay } from 'rxjs/operators';
-import { AuthModel } from '../../models/auth.model';
+import { AuthModel } from '../models/auth.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthRepository {
-  private readonly baseUrl = 'http://localhost:8080/api/auth';
+  private readonly baseUrl = '';
   private readonly http = inject(HttpClient);
 
   // 🔹 Controle: se true, usa MOCK; se false, chama backend real
@@ -20,7 +20,7 @@ export class AuthRepository {
    */
   login(credentials: {
     email?: string; // usado só para ADMIN
-    password?: string; // usado só para ADMIN
+    senha?: string; // usado só para ADMIN
     nomeFamiliar?: string; // usado para FAMILIAR
     nomeIdoso?: string; // usado para FAMILIAR
     cpfIdoso?: string; // usado para FAMILIAR

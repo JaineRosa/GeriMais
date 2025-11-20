@@ -39,7 +39,7 @@ services:
       - SPRING_DATA_MONGODB_HOST=mongo
       - SPRING_RABBITMQ_HOST=rabbitmq
       - SERVER_PORT=8080
-      - JWT_KEY=aW3v7q9T8y/B?E(G+KbPeShVmYp3s6v9
+      - JWT_KEY=YWFhYmJiY2NjZGRkZWVlZmZmMDEyMzQ1Njc4OWFiY2RlZmYwMTIzNDU2Nzg5YQ==
     depends_on:
       mongo:
         condition: service_healthy

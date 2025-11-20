@@ -1,1 +1,7 @@
-<p>admin works!</p>
+<!-- Insere o componente de formulário reutilizável -->
+<app-form-cadastro
+  [campos]="adminCampos"
+  titulo="Cadastro de Administrador"
+  salvarLabel="Salvar Admin"
+  (submit)="onSubmitAdmin($event)"
+></app-form-cadastro>

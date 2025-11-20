@@ -1,1 +1,7 @@
-<p>responsavel works!</p>
+<app-form-cadastro
+  [titulo]="'Cadastro de Responsável'"
+  [campos]="responsavelCampos"
+  [salvarLabel]="'Salvar Responsável'"
+  (submitForm)="onSubmitResponsavel($event)"
+></app-form-cadastro>
+

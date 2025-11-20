@@ -1,0 +1,141 @@
+<aside class="sidebar">
+  <nav class="nav flex-column">
+    <!-- Dashboard -->
+    <a
+      routerLink="dashboard"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-link"
+    >
+      <i class="fas fa-chart-line me-2"></i> Visão Geral
+    </a>
+
+    <!-- Accordion Cadastros -->
+    <div class="accordion" id="accordionCadastros">
+      <div class="accordion-item">
+        <h2 class="accordion-header" id="headingCadastros">
+          <button
+            class="accordion-button collapsed"
+            type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#collapseCadastros"
+          >
+            <i class="fas fa-users me-2"></i> Cadastros
+          </button>
+        </h2>
+        <div
+          id="collapseCadastros"
+          class="accordion-collapse collapse"
+          data-bs-parent="#accordionCadastros"
+        >
+          <div class="accordion-body">
+            <ul class="list-unstyled">
+              <li>
+                <a
+                  routerLink="cadastros/idoso"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  <i class="fas fa-user me-2"></i> Idoso
+                </a>
+              </li>
+              <li>
+                <a
+                  routerLink="cadastros/responsavel"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  <i class="fas fa-user-friends me-2"></i> Responsável
+                </a>
+              </li>
+              <li>
+                <a
+                  routerLink="cadastros/cuidador"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  <i class="fas fa-user-nurse me-2"></i> Cuidador
+                </a>
+              </li>
+              <li>
+                <a
+                  routerLink="cadastros/visitante"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  <i class="fas fa-user-tag me-2"></i> Visitante
+                </a>
+              </li>
+              <li>
+                <a
+                  routerLink="cadastros/medico"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  <i class="fas fa-user-md me-2"></i> Médico
+                </a>
+              </li>
+              <li>
+                <a
+                  routerLink="cadastros/medicamento"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  <i class="fas fa-pills me-2"></i> Medicamentos
+                </a>
+              </li>
+              <li>
+                <a
+                  routerLink="cadastros/admin"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  <i class="fas fa-user-shield me-2"></i> Admin
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Outros links -->
+    <a
+      routerLink="prescricoes-medicas"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-link"
+    >
+      <i class="fas fa-notes-medical me-2"></i> Prescrições Médicas
+    </a>
+    <a
+      routerLink="registro-diario"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-link"
+    >
+      <i class="fas fa-calendar-day me-2"></i> Registro Diário
+    </a>
+    <a
+      routerLink="notificacoes"
+      routerLinkActive="active"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class="nav-link"
+    >
+      <i class="fas fa-bell me-2"></i> Notificações
+    </a>
+    <!-- Botão Sair (aparece no sidebar em telas pequenas) -->
+    <div class="logout-mobile">
+      <button
+        type="button"
+        class="btn btn-outline-light w-100 text-start"
+        title="Sair"
+        aria-label="Sair"
+        routerLink="/login"
+      >
+        <i class="fas fa-sign-out-alt me-2" aria-hidden="true"></i>
+        <span>Sair</span>
+      </button>
+    </div>
+  </nav>
+</aside>

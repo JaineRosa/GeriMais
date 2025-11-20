@@ -1,1 +1,6 @@
-<p>idoso works!</p>
+<app-form-cadastro
+  [titulo]="'Cadastro de Idoso'"
+  [campos]="idosoCampos"
+  [salvarLabel]="'Salvar Idoso'"
+  (submitForm)="onSubmitIdoso($event)"
+></app-form-cadastro>

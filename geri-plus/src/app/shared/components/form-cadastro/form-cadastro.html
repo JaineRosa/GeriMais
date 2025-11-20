@@ -1,0 +1,140 @@
+<div class="form-wrapper">
+  <h5 *ngIf="titulo" class="mb-3">{{ titulo }}</h5>
+
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="row g-3">
+      <div *ngFor="let campo of campos" class="col-12 col-md-6">
+        <label class="form-label" [attr.for]="campo.nome">{{ campo.label }}</label>
+
+        <ng-container [ngSwitch]="campo.tipo">
+          <!-- Text -->
+          <input
+            *ngSwitchCase="'text'"
+            class="form-control"
+            [id]="campo.nome"
+            placeholder="{{ campo.placeholder || campo.label }}"
+            title="{{ campo.label }}"
+            [formControlName]="campo.nome"
+            type="text"
+          />
+
+          <!-- Email -->
+          <input
+            *ngSwitchCase="'email'"
+            class="form-control"
+            [id]="campo.nome"
+            placeholder="{{ campo.placeholder || campo.label }}"
+            title="{{ campo.label }}"
+            [formControlName]="campo.nome"
+            type="email"
+          />
+
+          <!-- Password -->
+          <input
+            *ngSwitchCase="'password'"
+            class="form-control"
+            [id]="campo.nome"
+            placeholder="{{ campo.placeholder || campo.label }}"
+            title="{{ campo.label }}"
+            [formControlName]="campo.nome"
+            type="password"
+          />
+
+          <!-- Date -->
+          <input
+            *ngSwitchCase="'date'"
+            class="form-control"
+            [id]="campo.nome"
+            placeholder="{{ campo.placeholder || campo.label }}"
+            title="{{ campo.label }}"
+            [formControlName]="campo.nome"
+            type="date"
+          />
+
+          <!-- Number -->
+          <input
+            *ngSwitchCase="'number'"
+            class="form-control"
+            [id]="campo.nome"
+            placeholder="{{ campo.placeholder || campo.label }}"
+            title="{{ campo.label }}"
+            [formControlName]="campo.nome"
+            type="number"
+          />
+
+          <!-- Textarea -->
+          <textarea
+            *ngSwitchCase="'textarea'"
+            class="form-control"
+            rows="3"
+            [id]="campo.nome"
+            placeholder="{{ campo.placeholder || campo.label }}"
+            title="{{ campo.label }}"
+            [formControlName]="campo.nome"
+          ></textarea>
+
+          <!-- Select -->
+          <select
+            *ngSwitchCase="'select'"
+            class="form-select"
+            [id]="campo.nome"
+            title="{{ campo.label }}"
+            aria-label="{{ campo.label }}"
+            [formControlName]="campo.nome"
+          >
+            <option value="">{{ campo.placeholder || 'Selecione...' }}</option>
+            <option *ngFor="let op of campo.opcoes" [value]="op.value">{{ op.label }}</option>
+          </select>
+
+          <!-- Array (lista dinâmica) -->
+          <div *ngSwitchCase="'array'" [formArrayName]="campo.nome">
+            <div class="d-flex flex-column gap-2">
+              <div
+                *ngFor="let ctrl of getArray(campo.nome).controls; let i = index"
+                class="d-flex gap-2"
+              >
+                <input
+                  class="form-control"
+                  placeholder="{{ campo.arrayItemPlaceholder || campo.label }}"
+                  title="{{ campo.arrayItemPlaceholder || campo.label }}"
+                  [formControlName]="i"
+                  type="text"
+                />
+                <button
+                  type="button"
+                  class="btn btn-outline-danger"
+                  (click)="removeArrayItem(campo.nome, i)"
+                  title="Remover item"
+                  aria-label="Remover item"
+                >
+                  Remover
+                </button>
+              </div>
+              <button
+                type="button"
+                class="btn btn-outline-secondary"
+                (click)="addArrayItem(campo.nome)"
+                title="Adicionar item"
+                aria-label="Adicionar item"
+              >
+                Adicionar
+              </button>
+            </div>
+          </div>
+        </ng-container>
+
+        <!-- Mensagem de erro -->
+        <div
+          class="text-danger mt-1"
+          *ngIf="getControl(campo.nome)?.invalid && getControl(campo.nome)?.touched"
+        >
+          Campo inválido ou obrigatório.
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <button type="submit" class="btn btn-primary">{{ salvarLabel }}</button>
+    </div>
+  </form>
+</div>

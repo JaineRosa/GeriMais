@@ -1,49 +1,18 @@
-<aside class="sidebar">
-  <h2 class="logo">Geri+</h2>
-  <nav class="nav flex-column">
-    <!-- Dashboard -->
-    <a routerLink="dashboard" routerLinkActive="active" class="nav-link">Visão Geral</a>
-
-    <!-- Accordion Cadastros -->
-    <div class="accordion" id="accordionCadastros">
-      <div class="accordion-item">
-        <h2 class="accordion-header" id="headingCadastros">
-          <button
-            class="accordion-button collapsed"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#collapseCadastros"
-          >
-            Cadastros
-          </button>
-        </h2>
-        <div
-          id="collapseCadastros"
-          class="accordion-collapse collapse"
-          data-bs-parent="#accordionCadastros"
-        >
-          <div class="accordion-body">
-            <ul class="list-unstyled">
-              <li><a routerLink="cadastros/idoso" routerLinkActive="active">Idoso</a></li>
-              <li>
-                <a routerLink="cadastros/responsavel" routerLinkActive="active">Responsável</a>
-              </li>
-              <li><a routerLink="cadastros/cuidador" routerLinkActive="active">Cuidador</a></li>
-              <li><a routerLink="cadastros/visitante" routerLinkActive="active">Visitante</a></li>
-              <li><a routerLink="cadastros/medico" routerLinkActive="active">Médico</a></li>
-              <li><a routerLink="cadastros/medicacao" routerLinkActive="active">Medicação</a></li>
-              <li><a routerLink="cadastros/admin" routerLinkActive="active">Admin</a></li>
-            </ul>
-          </div>
-        </div>
-      </div>
+<section class="dashboard">
+  <h1>Visão Geral</h1>
+  <h2>Bem-vindo ao painel administrativo do GERI+</h2>
+  <div class="card-grid">
+    <div class="card metric-card">
+      <h2>Total de Idosos</h2>
+      <p class="value">42</p>
     </div>
-
-    <!-- Outros links -->
-    <a routerLink="prescricoes-medicas" routerLinkActive="active" class="nav-link"
-      >Prescrições Médicas</a
-    >
-    <a routerLink="registro-diario" routerLinkActive="active" class="nav-link">Registro Diário</a>
-    <a routerLink="notificacoes" routerLinkActive="active" class="nav-link">Notificações</a>
-  </nav>
-</aside>
+    <div class="card metric-card">
+      <h2>Total de Cuidadores</h2>
+      <p class="value">18</p>
+    </div>
+    <div class="card metric-card">
+      <h2>Notificações Pendentes</h2>
+      <p class="value">7</p>
+    </div>
+  </div>
+</section>

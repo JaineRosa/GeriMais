@@ -10,8 +10,5 @@ import { RouterModule } from '@angular/router';
   styleUrls: ['./dashboard.scss']
 })
 export class Dashboard {
-  //Aqui você pode colocar propriedades globais do painel
-  // Exemplo: nome do usuário logado, notificações, etc.
-  
-  usuarioLogado = 'Administrador'; // exemplo
+
 }

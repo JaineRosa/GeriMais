@@ -1,3 +1,7 @@
+// user.model.ts
+// Modelo de usuário no frontend, espelhando o Usuario.java do backend.
+// Ajustes: tipos Java (LocalDate, Binary, Enum) foram convertidos para tipos simples (string, string[]).
+
 export interface UserModel {
   id: string; // @Id → identificador único do usuário
   nome: string; // nome do usuário

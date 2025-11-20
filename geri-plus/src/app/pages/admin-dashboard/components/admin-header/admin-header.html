@@ -1,0 +1,26 @@
+<header class="admin-header">
+  <div class="logo">
+    <img src="assets/logos/logo-coracao.png" alt="Geri+ Admin" />
+    <span class="logo-text">Geri<span class="plus">+</span></span>
+  </div>
+
+  <!-- Botão sanduíche -->
+  <button
+    class="menu-toggle"
+    type="button"
+    (click)="menuToggle.emit()"
+    title="Abrir menu"
+    aria-label="Abrir menu"
+  >
+    <i class="fas fa-bars" aria-hidden="true"></i>
+    <span class="visually-hidden">Abrir menu</span>
+  </button>
+
+  <div class="user-info">
+    <span class="user-name">{{ userName }}</span>
+    <a routerLink="/login" class="btn btn-outline-primary" title="Sair" aria-label="Sair">
+      <i class="fas fa-sign-out-alt" aria-hidden="true"></i>
+      <span class="visually-hidden">Sair</span>
+    </a>
+  </div>
+</header>

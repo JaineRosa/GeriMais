@@ -2,8 +2,8 @@ import { inject, Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { AuthRepository } from '../repository/auth.repositoy';
-import { AuthModel } from '../../models/auth.model';
-import { UserModel } from '../../models/user.model';
+import { AuthModel } from '../models/auth.model';
+import { UserModel } from '../models/user.model';
 
 export const currentKey = 'currentUser';
 
@@ -13,16 +13,24 @@ export const currentKey = 'currentUser';
 export class AuthService {
   private repository = inject(AuthRepository);
 
-
   login(email: string, senha: string): Observable<boolean> {
-    return this.repository.login({ email, password: senha, platform: 'WEB' }).pipe(
-      map((value: AuthModel) => {
-        localStorage.setItem(currentKey, JSON.stringify(value));
-        console.log('Login realizado com sucesso:', value);
+    // Garante que envia 'senha' para o backend
+    return this.repository.login({ email, senha: senha, platform: 'WEB' }).pipe(
+      map((response: any) => {
+        console.log('AuthService: Resposta bruta do login:', response);
+        
+        // Tenta normalizar a resposta antes de salvar
+        // Se o backend mandar usuario fora do padrão, tentamos ajustar aqui
+        if (!response.usuario && response.user) {
+            response.usuario = response.user;
+        }
+
+        // Salva no localStorage
+        localStorage.setItem(currentKey, JSON.stringify(response));
         return true;
       }),
       catchError((err) => {
-        console.error('Erro ao realizar login:', err);
+        console.error('AuthService: Erro no login:', err);
         return of(false);
       })
     );
@@ -37,14 +45,23 @@ export class AuthService {
     );
   }
 
+  /**
+   * Verifica se há sessão ativa
+   */
   isLoggedIn(): boolean {
     return !!localStorage.getItem(currentKey);
   }
 
+  /**
+   * Faz logout
+   */
   logout(): void {
     localStorage.removeItem(currentKey);
   }
 
+  /**
+   * Retorna o objeto completo do usuário logado
+   */
   getUsuario(): UserModel | null {
     const raw = localStorage.getItem(currentKey);
     if (!raw) return null;
@@ -58,7 +75,25 @@ export class AuthService {
   }
 
   getPerfil(): string {
-    const usuario = this.getUsuario();
-    return usuario?.tipoUsuario || '';
+    const raw = localStorage.getItem(currentKey);
+    if (!raw) return '';
+
+    try {
+      const data = JSON.parse(raw);
+      
+      // 1. Tenta ler de usuario.tipoUsuario (Padrão novo Java)
+      if (data?.usuario?.tipoUsuario) return data.usuario.tipoUsuario;
+      
+      // 2. Tenta ler de user.tipoUsuario (Padrão antigo ou AuthModel)
+      if (data?.user?.tipoUsuario) return data.user.tipoUsuario;
+      
+      // 3. Tenta ler da raiz (caso o backend tenha mudado DTO)
+      if (data?.tipoUsuario) return data.tipoUsuario;
+
+      return '';
+    } catch (err) {
+      console.error('Erro ao ler perfil:', err);
+      return '';
+    }
   }
 }

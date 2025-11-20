@@ -1,0 +1,13 @@
+<div class="admin-layout">
+  <app-admin-header
+    [menuAberto]="menuAberto"
+    (menuToggle)="menuAberto = !menuAberto"
+  ></app-admin-header>
+
+  <div class="admin-body">
+    <app-admin-sidebar *ngIf="menuAberto || telaGrande"></app-admin-sidebar>
+    <main class="admin-content">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

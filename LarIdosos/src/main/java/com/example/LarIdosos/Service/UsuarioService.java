@@ -31,8 +31,14 @@ public class UsuarioService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        System.out.println(">>> AUTENTICANDO USUÁRIO <<<");
+        System.out.println("Buscando email: " + email);
+
         Usuario usuario = usuarioRepository.findByEmail(email)
-                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado com e-mail: " + email));
+                .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+
+        System.out.println("Usuário encontrado no Banco!");
+        System.out.println("Senha (Hash) no Banco: " + usuario.getSenha()); // <--- QUERO VER ISSO
 
         return new User(usuario.getEmail(), usuario.getSenha(), new ArrayList<>());
     }

@@ -1,0 +1,80 @@
+@use '../../../../../styles/variables' as vars;
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: vars.$gray-light;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid vars.$gray-medium;
+  flex-wrap: wrap;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    img {
+      height: 40px;
+      width: auto;
+    }
+
+    .logo-text {
+      font-size: vars.$font-size-large;
+      font-weight: bold;
+      color: vars.$text-dark;
+
+      .plus {
+        color: vars.$primary-color;
+      }
+    }
+  }
+
+  .menu-toggle {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: vars.$text-dark;
+    cursor: pointer;
+    margin-left: auto;
+    display: none; // escondido por padrão
+  }
+
+  .user-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    .user-name {
+      font-weight: bold;
+      color: vars.$text-dark;
+    }
+
+    .btn {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.8rem;
+    }
+  }
+
+  // ✅ Regras de visibilidade por tamanho de tela
+  @media (max-width: 768px) {
+
+    .menu-toggle {
+      display: block; // aparece só em telas pequenas
+    }
+
+    .user-info {
+      display: none; // esconde nome e botão em telas pequenas
+    }
+  }
+
+  @media (min-width: 769px) {
+    .menu-toggle {
+      display: none; // esconde botão sanduíche em telas grandes
+    }
+
+    .user-info {
+      display: flex; // mostra nome e botão em telas grandes
+    }
+  }
+}

@@ -1,1 +1,6 @@
-<p>visitante works!</p>
+<app-form-cadastro
+  [titulo]="'Cadastro de Visitante'"
+  [campos]="visitanteCampos"
+  [salvarLabel]="'Salvar Visitante'"
+  (submitForm)="onSubmitVisitante($event)"
+></app-form-cadastro>

@@ -8,16 +8,18 @@ import { PainelIdoso } from './pages/painel-idoso/painel-idoso';
 // Guards
 import { authGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
+import { AdminLayout } from './pages/admin-dashboard/components/admin-layout/admin-layout';
 
 export const routes: Routes = [
   { path: '', component: Home }, // rota raiz com navbar e footer
   { path: 'login', component: Login }, // sem navbar e footer
   { path: 'sobre', component: Sobre }, // rota para "Sobre Nós"
 
-  // 🔹 Admin Dashboard
+    // 🔹 Admin Dashboard
   {
     path: 'admin',
     canActivate: [authGuard, RoleGuard],
+    component: AdminLayout, // <-- layout com header + sidebar
     children: [
       {
         path: 'dashboard',
@@ -51,9 +53,11 @@ export const routes: Routes = [
           import('./pages/admin-dashboard/cadastros/medico/medico').then((m) => m.Medico),
       },
       {
-        path: 'cadastros/medicacao',
+        path: 'cadastros/medicamento',
         loadComponent: () =>
-          import('./pages/admin-dashboard/cadastros/medicacao/medicacao').then((m) => m.Medicacao),
+          import('./pages/admin-dashboard/cadastros/medicamento/medicamento').then(
+            (m) => m.Medicamento
+          ),
       },
       {
         path: 'cadastros/admin',
@@ -78,6 +82,11 @@ export const routes: Routes = [
         path: 'notificacoes',
         loadComponent: () =>
           import('./pages/admin-dashboard/notificacoes/notificacoes').then((m) => m.Notificacoes),
+      },
+      {
+        path: '',
+        redirectTo: 'dashboard',
+        pathMatch: 'full', // <-- redireciona /admin para /admin/dashboard
       },
     ],
   },
