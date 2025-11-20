@@ -1,0 +1,60 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">
+      <img src="assets/logos/logo-site.png" alt="Geri+ Logo" height="60" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-label="Abrir menu de navegação"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <!-- Links sempre visíveis -->
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/"><i class="fa-regular fa-house"></i>Início</a>
+        </li>
+        <li class="nav-item">
+          <!-- Aqui usamos o método scrollTo -->
+          <a class="nav-link" (click)="scrollTo('funcionalidades')">
+            <i class="fa-solid fa-fire"></i>Funcionalidades
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="sobre"
+            ><i class="fa-regular fa-circle-question"></i>Sobre Nós</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/login" routerLinkActive="active">
+            <i class="fa-solid fa-up-right-from-square"></i>Sou cliente
+          </a>
+        </li>
+
+        <!-- Links condicionais -->
+        <!-- Links condicionais -->
+        <li class="nav-item" *ngIf="isAdmin()">
+          <a class="nav-link" routerLink="/admin/dashboard">
+            <i class="fa-solid fa-grip"></i>Painel Admin
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="isFamiliar()">
+          <a class="nav-link" [routerLink]="['/painel-idoso', usuarioLogado?.idosoId]">
+            <i class="fa-solid fa-grip"></i>Painel do Idoso
+          </a>
+        </li>
+
+        <li class="nav-item" *ngIf="isLoggedIn()">
+          <a class="nav-link" (click)="logout()">
+            <i class="fa-solid fa-right-from-bracket"></i>Sair
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

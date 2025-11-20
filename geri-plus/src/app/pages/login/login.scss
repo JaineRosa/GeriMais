@@ -1,0 +1,130 @@
+@use '../../../styles/variables' as vars;
+
+.login-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  width: 100vw;
+  background: linear-gradient(135deg, var(--bs-primary), var(--bs-success));
+  padding: 1rem;
+}
+
+/* Contêiner central que mantém imagem e formulário juntos */
+.login-container {
+  position: relative; /* necessário para o botão ficar dentro do container */
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  max-width: 1100px;
+  background-color: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+}
+
+/* Botão voltar */
+.back-btn {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  border-radius: 50px;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  z-index: 10; /* garante que fique acima da imagem/form */
+  transition: all 0.3s ease;
+
+  &:hover {
+    background-color: vars.$primary-color;
+    color: #fff;
+  }
+}
+
+/* Coluna da imagem (esquerda) */
+.login-image {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: vars.$light-blue;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Preenche sem distorcer */
+  }
+}
+
+/* Coluna do formulário (direita) */
+.login-form {
+  flex: 1;
+  padding: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+  .logo-container {
+    text-align: center;
+    margin-bottom: 1.5rem;
+
+    img {
+      height: 80px; /* tamanho fixo do logo */
+      width: auto;  /* mantém proporção */
+    }
+  }
+
+  h2 {
+    color: vars.$primary-color;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+
+  .subtitle {
+    text-align: center;
+    color: vars.$gray-medium;
+    margin-bottom: 2rem;
+  }
+
+  .form-control {
+    border-radius: 8px;
+  }
+
+  .btn {
+    margin-top: 1rem;
+  }
+}
+
+/* Responsivo */
+@media (max-width: 992px) {
+  .login-container {
+    max-width: 900px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column; /* empilha no mobile */
+  }
+
+  .login-image {
+    display: none; /* oculta a imagem em telas pequenas */
+  }
+
+  .login-form {
+    padding: 2rem;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+}
+
+@media (max-width: 420px) {
+  .login-form {
+    padding: 1.5rem;
+  }
+
+  .logo-container img {
+    height: 64px; /* logo um pouco menor em telas muito pequenas */
+  }
+}

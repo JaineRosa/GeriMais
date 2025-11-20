@@ -1,0 +1,89 @@
+<div class="login-wrapper">
+  <div class="login-container">
+    <!-- Botão voltar -->
+    <button type="button" class="btn btn-outline-primary back-btn" routerLink="/home">
+      ← Voltar
+    </button>
+    <div class="login-container">
+      <!-- Imagem institucional à esquerda -->
+      <div class="login-image">
+        <img src="assets/images/image-login.png" alt="Imagem institucional" />
+      </div>
+
+      <!-- Formulário à direita -->
+      <div class="login-form">
+        <div class="logo-container">
+          <img src="assets/logos/logo-site.png" alt="Geri+ Logo" />
+        </div>
+
+        <h2>Olá, seja bem-vindo(a)!</h2>
+        <p class="subtitle">Acesse sua conta para continuar cuidando com carinho 💙</p>
+
+        <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div class="form-check mb-3">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              id="isFamiliar"
+              formControlName="isFamiliar"
+            />
+            <label class="form-check-label" for="isFamiliar">Sou Familiar</label>
+          </div>
+
+          <!-- Campos comuns (apenas Admin) -->
+          <div *ngIf="!loginForm.get('isFamiliar')?.value">
+            <div class="mb-3">
+              <label for="email">Email:</label>
+              <input id="email" type="email" class="form-control" formControlName="email" />
+            </div>
+
+            <div class="mb-3">
+              <label for="senha">Senha:</label>
+              <input id="senha" type="password" class="form-control" formControlName="senha" />
+            </div>
+          </div>
+
+          <div *ngIf="loginForm.get('isFamiliar')?.value">
+            <div class="mb-3">
+              <label for="nomeFamiliar">Nome do Familiar:</label>
+              <input
+                id="nomeFamiliar"
+                type="text"
+                class="form-control"
+                formControlName="nomeFamiliar"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="nomeHospede">Primeiro nome do hóspede:</label>
+              <input
+                id="nomeHospede"
+                type="text"
+                class="form-control"
+                formControlName="nomeHospede"
+              />
+            </div>
+
+            <div class="mb-3">
+              <label for="cpfHospede">CPF do hóspede:</label>
+              <input
+                id="cpfHospede"
+                type="text"
+                class="form-control"
+                formControlName="cpfHospede"
+              />
+            </div>
+          </div>
+
+          <div *ngIf="errorMessage" class="alert alert-danger text-center">
+            {{ errorMessage }}
+          </div>
+
+          <button type="submit" class="btn btn-secondary w-100" [disabled]="loginForm.invalid">
+            Entrar
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,22 @@
+.navbar-brand {
+  font-size: 1.5rem;
+  color: var(--bs-primary);
+}
+
+.nav-link {
+  cursor: pointer;
+  font-weight: 400;
+  color: var(--bs-body-color);
+  text-decoration: none; /* remove sublinhado */
+  transition: color 0.2s ease-in-out; /* transição apenas na cor */
+  &:hover {
+    color: var(--bs-success);
+    text-decoration: none; /* garante sem sublinhado no hover */
+  }
+  &:focus {
+    outline: none;
+    text-decoration: none;
+    box-shadow: none;
+  }
+}
+

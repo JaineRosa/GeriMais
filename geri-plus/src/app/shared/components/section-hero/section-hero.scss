@@ -1,0 +1,40 @@
+@use '../../../../styles/variables' as vars;
+
+.section-hero {
+  min-height: 40vh;
+  background: linear-gradient(135deg, var(--bs-primary), var(--bs-success));
+  color: vars.$text-light;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+
+  .titulo {
+    font-weight: 700;
+  }
+
+  .subtitulo {
+    margin-top: 1rem;
+  }
+
+  .btn {
+    font-weight: 600;
+    margin-top: 1.5rem;
+  }
+
+  /* Variações de tamanho */
+  &.small {
+    @include vars.section-size(vars.$section-padding-small, 1.5rem, 1rem, 0.9rem);
+  }
+
+  &.medium {
+    @include vars.section-size(vars.$section-padding-medium, 2rem, 1.2rem, 1rem);
+  }
+
+  &.large {
+    min-height: 80vh; // ocupa quase toda a tela
+    @include vars.section-size(vars.$section-padding-xlarge, 3rem, 2rem, 1.5rem);
+  }
+}

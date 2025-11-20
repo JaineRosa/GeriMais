@@ -1,0 +1,41 @@
+@use 'sass:color';
+@use '../../../../styles/variables' as vars;
+
+.sidebar {
+  width: 250px;
+  background-color: vars.$primary-color;
+  color: vars.$text-light;
+  padding: 1rem;
+
+  .nav-link {
+    color: vars.$text-light;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+
+    &.active {
+      color: vars.$accent-color;
+    }
+  }
+
+  .accordion-button {
+    background-color: vars.$primary-color;
+    color: vars.$text-light;
+    font-weight: bold;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    &:not(.collapsed) {
+      background-color: color.adjust(vars.$primary-color, $lightness: -10%);
+    }
+  }
+
+  .accordion-body a {
+    color: vars.$text-light;
+
+    &:hover {
+      color: vars.$accent-color;
+    }
+  }
+}

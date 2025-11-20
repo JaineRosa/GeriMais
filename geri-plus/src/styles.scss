@@ -1,0 +1,208 @@
+@use 'sass:color';
+@use './styles/variables' as vars;
+
+/* Importando Bootstrap */
+@use 'bootstrap/scss/bootstrap';
+
+/* Importando FontAwesome */
+$fa-font-path: '@fortawesome/fontawesome-free/webfonts';
+@import '@fortawesome/fontawesome-free/scss/fontawesome';
+@import '@fortawesome/fontawesome-free/scss/solid';
+@import '@fortawesome/fontawesome-free/scss/regular';
+@import '@fortawesome/fontawesome-free/scss/brands';
+
+/* ================================
+   🔄 Reset global
+   ================================ */
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  /* principal para WebKit (iOS / Safari / Chrome) */
+  -webkit-text-size-adjust: 100%;
+
+  /* -ms para legacy (deve vir antes da versão não‑prefixada) */
+  -ms-text-size-adjust: 100%;
+
+  /* fallback para navegadores que suportam a propriedade não‑prefixada */
+  text-size-adjust: 100%;
+
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+}
+
+app-root {
+  display: block;
+  height: 100%;
+}
+
+/* ================================
+   🎨 Bootstrap override
+   ================================ */
+:root {
+  --bs-primary: #{vars.$primary-color};
+  --bs-success: #{vars.$accent-color};
+  --bs-body-color: #{vars.$text-dark};
+  --bs-body-bg: #{vars.$text-light};
+}
+
+/* ================================
+   🌍 Estilos globais
+   ================================ */
+body {
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  color: vars.$text-dark;
+  background-color: vars.$gray-light;
+}
+
+/* ================================
+   📦 Card padrão
+   ================================ */
+.card {
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* ================================
+   🔘 Botões globais
+   ================================ */
+
+.btn {
+  border: none; // remove qualquer borda padrão
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0.75rem 1.5rem;
+  transition: background-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+  text-decoration: none;
+
+  &:hover {
+    transform: translateY(-2px);
+    cursor: pointer;
+  }
+}
+/* Remove sublinhado de botões */
+button.btn,
+a.btn {
+  text-decoration: none !important;
+}
+/* Tamanhos globais */
+.btn-sm {
+  font-size: 0.9rem;
+  padding: 0.5rem 1rem;
+}
+
+.btn-lg {
+  font-size: 1.1rem;
+  padding: 0.9rem 2rem;
+  font-weight: 600;
+}
+
+@mixin btn-base($bg, $border, $color: vars.$text-light) {
+  background-color: $bg;
+  border-color: $border;
+  color: $color;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: color.adjust($bg, $lightness: -10%);
+  }
+}
+
+@mixin btn-outline($color) {
+  background-color: transparent;
+  border: 2px solid $color;
+  color: $color;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    background-color: $color;
+    color: vars.$text-light;
+  }
+}
+
+/* Botões sólidos */
+.btn-primary {
+  @include btn-base(vars.$primary-color, vars.$primary-color);
+}
+.btn-success {
+  @include btn-base(vars.$accent-color, vars.$accent-color);
+}
+.btn-secondary {
+  @include btn-base(vars.$accent-color, vars.$accent-color);
+}
+
+/* Botões outline */
+.btn-outline-primary {
+  @include btn-outline(vars.$primary-color);
+}
+.btn-outline-success {
+  @include btn-outline(vars.$accent-color);
+}
+
+/* ================================
+   📝 Inputs
+   ================================ */
+.form-control,
+.form-select {
+  border: 1px solid vars.$gray-medium;
+  border-radius: 8px;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+
+  &:focus {
+    border-color: vars.$primary-color;
+    box-shadow: 0 0 0 0.2rem rgba(58, 124, 165, 0.25);
+  }
+}
+
+/* ================================
+   🔗 Links
+   ================================ */
+a {
+  color: vars.$primary-color;
+  text-decoration: none;
+  transition: color 0.2s ease-in-out;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+/* ================================
+   ⚠️ Alertas
+   ================================ */
+.alert-danger {
+  background-color: color.adjust(vars.$error-color, $lightness: 40%);
+  color: vars.$dark-blue;
+  border: 1px solid vars.$error-color;
+}
+/* Ícones utilitários */
+.icon-primary {
+  color: vars.$primary-color;
+}
+.icon-accent {
+  color: vars.$accent-color;
+}
+.icon-darkblue {
+  color: vars.$dark-blue;
+}
+.icon-error {
+  color: vars.$error-color;
+}
+.icon-lightblue {
+  color: vars.$light-blue;
+}

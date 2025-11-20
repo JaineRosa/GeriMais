@@ -1,0 +1,15 @@
+<section
+  class="section-hero text-center d-flex flex-column align-items-center justify-content-center"
+  [ngClass]="tamanho"
+>
+  <h2 class="titulo">{{ titulo }}</h2>
+  <p *ngIf="subtitulo" class="subtitulo">{{ subtitulo }}</p>
+  <a
+    *ngIf="botaoTexto && botaoLink"
+    [href]="botaoLink"
+    class="btn btn-light btn-lg mt-3"
+    aria-label="{{ botaoTexto }}"
+  >
+    {{ botaoTexto }}
+  </a>
+</section>

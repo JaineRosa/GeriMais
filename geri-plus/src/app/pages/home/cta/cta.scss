@@ -1,0 +1,38 @@
+@use '../../../../styles/variables' as vars;
+
+.cta {
+  padding: vars.$section-padding-xlarge;
+  min-height: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // centraliza verticalmente
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, vars.$primary-color, vars.$accent-color);
+  color: vars.$text-light;
+
+  .titulo {
+    font-size: vars.$font-size-large;
+    font-weight: 700;
+    margin-bottom: 1rem;
+  }
+
+  .subtitulo {
+    font-size: vars.$font-size-medium;
+    margin-bottom: 2rem;
+    color: vars.$gray-light;
+  }
+
+  .btn {
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    background-color: vars.$dark-blue;
+    border: none;
+
+    &:hover {
+      background-color: vars.$accent-color;
+      color: vars.$text-light;
+    }
+  }
+}

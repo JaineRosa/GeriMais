@@ -1,0 +1,61 @@
+@use '../../../../styles/variables' as vars;
+
+.resultados-container {
+  background-color: vars.$gray-light;
+  padding: vars.$section-padding-large; // mais respiro na section
+}
+
+.titulo {
+  color: vars.$dark-blue;
+  font-weight: 700;
+  font-size: vars.$font-size-large;
+  margin-bottom: 2rem;
+}
+
+.resultado-card {
+  border: none;
+  background-color: vars.$text-light;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  padding: 2rem;
+  min-height: 280px; // garante altura mínima maior
+  display: flex;
+  flex-direction: column;
+  justify-content: center; // centraliza conteúdo verticalmente
+
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  .valor {
+    font-size: vars.$font-size-large;
+    font-weight: bold;
+    color: vars.$primary-color;
+    margin-bottom: 0.5rem;
+  }
+
+  .descricao {
+    font-size: vars.$font-size-medium;
+    color: vars.$text-dark;
+  }
+
+  .icon-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+  }
+
+  .icon-primary {
+    color: vars.$primary-color;
+  }
+
+  .icon-accent {
+    color: vars.$accent-color;
+  }
+
+  .icon-darkblue {
+    color: vars.$dark-blue;
+  }
+}

@@ -1,0 +1,51 @@
+@use '../../../../styles/variables' as vars;
+
+.faq {
+  padding: vars.$section-padding-medium;
+  background-color: vars.$gray-light;
+
+  /* Limite de largura e centralização */
+  max-width: 800px;
+  margin: 0 auto;
+
+  .titulo {
+    color: vars.$dark-blue;
+    font-size: vars.$font-size-large;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  .accordion-item {
+    border: none;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+  }
+
+  .accordion-button {
+    background-color: vars.$primary-color;
+    color: vars.$text-light;
+    font-weight: 600;
+    font-size: vars.$font-size-medium;
+
+    &:focus {
+      box-shadow: none;
+      border-color: vars.$accent-color;
+    }
+  }
+
+  .accordion-button:not(.collapsed) {
+    background-color: vars.$accent-color;
+    color: vars.$text-light;
+  }
+
+  .accordion-body {
+    background-color: vars.$text-light;
+    color: vars.$text-dark;
+    font-size: vars.$font-size-small; // texto menor para respostas
+    line-height: 1.5;
+    padding: 1.25rem;
+  }
+}

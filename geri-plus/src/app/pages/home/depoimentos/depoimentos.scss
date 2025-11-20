@@ -1,0 +1,60 @@
+@use '../../../../styles/variables' as vars;
+
+.depoimentos {
+  padding: vars.$section-padding-medium;
+  min-height: 400px;
+  background-color: vars.$gray-light;
+
+  .titulo {
+    color: vars.$dark-blue;
+    font-size: vars.$font-size-large;
+    font-weight: 700;
+  }
+
+  .depoimento-card {
+    max-width: 600px;
+    border: 1px solid vars.$gray-medium;
+    border-radius: 12px;
+    padding: 2rem;
+    background-color: vars.$text-light;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: translateY(-5px);
+      border-color: vars.$primary-color;
+    }
+
+    .texto {
+      font-size: vars.$font-size-medium;
+      color: vars.$text-dark;
+      margin-bottom: 1rem;
+    }
+
+    .autor {
+      color: vars.$primary-color;
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    .instituicao {
+      color: vars.$accent-color;
+      font-size: vars.$font-size-small;
+    }
+  }
+
+  /* Ajuste dos ícones de navegação */
+  .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    filter: invert(1); // deixa ícones visíveis sobre fundo claro
+  }
+
+  /* Indicadores do carrossel */
+  .carousel-indicators [data-bs-target] {
+    background-color: vars.$primary-color; // cor principal
+  }
+
+  .carousel-indicators .active {
+    background-color: vars.$accent-color; // destaque ativo em verde calmo
+  }
+}
