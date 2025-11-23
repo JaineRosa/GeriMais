@@ -11,7 +11,7 @@ import { RoleGuard } from './core/guards/role.guard';
 import { AdminLayout } from './pages/admin-dashboard/components/admin-layout/admin-layout';
 
 export const routes: Routes = [
-   { path: '', component: Home }, // rota raiz com navbar e footer
+  { path: '', component: Home }, // rota raiz com navbar e footer
   { path: 'login', component: Login }, // sem navbar e footer
   { path: 'sobre', component: Sobre }, // rota para "Sobre Nós"
 
@@ -63,6 +63,13 @@ export const routes: Routes = [
         path: 'cadastros/admin',
         loadComponent: () =>
           import('./pages/admin-dashboard/cadastros/admin/admin').then((m) => m.Admin),
+      },
+      {
+        path: 'cadastros/prescricao',
+        loadComponent: () =>
+          import(
+            './pages/admin-dashboard/cadastros/cad-prescrico-medica/cad-prescrico-medica'
+          ).then((m) => m.CadPrescricoMedica),
       },
       {
         path: 'prescricoes-medicas',

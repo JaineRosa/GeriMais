@@ -20,7 +20,7 @@ type CampoTipo =
   | 'textarea'
   | 'array';
 
-interface Opcao {
+export interface Opcao {
   value: string;
   label: string;
 }

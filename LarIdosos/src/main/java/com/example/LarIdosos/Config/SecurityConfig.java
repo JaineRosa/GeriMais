@@ -39,7 +39,18 @@ public class SecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/usuarios").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/recomendacoes/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/recomendacoes/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/medicamentos/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/medicamentos/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/agendamentos/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/agendamentos/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/saude-diaria/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/saude-diaria/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/prescricao/**").permitAll() // <-- liberando prescrição
+                        .requestMatchers(HttpMethod.GET, "/api/prescricao/**").permitAll()
+                        .requestMatchers("/api/prescricao/**").permitAll()
                         .anyRequest().authenticated()
                 )
 

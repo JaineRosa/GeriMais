@@ -1,11 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { TabelaPrescricoes } from '../../../shared/components/tabela-prescricoes/tabela-prescricoes';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-prescricoes-medicas',
   standalone: true,
-  imports: [CommonModule, TabelaPrescricoes],
+  imports: [CommonModule, TabelaPrescricoes,RouterModule],
   templateUrl: './prescricoes-medicas.html',
   styleUrls: ['./prescricoes-medicas.scss'],
 })

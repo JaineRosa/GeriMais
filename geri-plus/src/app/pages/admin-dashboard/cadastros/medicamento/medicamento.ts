@@ -100,14 +100,6 @@ export class Medicamento implements OnInit {
     // O payload agora só contém dados mestres (nome, dosagem, via, observacoes)
     const medicamentoData: MedicamentoModel = { ...payload };
 
-    // Remove campos irrelevantes para o cadastro mestre que podem estar no Model
-    medicamentoData.agendamentosId = undefined;
-    medicamentoData.dataPrescricao = undefined;
-    medicamentoData.medicoId = undefined;
-    medicamentoData.idosoId = undefined;
-    medicamentoData.frequenciaDiaria = undefined;
-    medicamentoData.duracaoTratamento = undefined;
-
     let operacao: Observable<MedicamentoModel>;
 
     if (this.initialValue && this.initialValue.id) {

@@ -8,9 +8,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 
-@Document(collection = "recomendacoes")
+@Document(collection = "prescricoes")
 public class RecomendacaoMedica {
 
     @Id
@@ -18,19 +19,11 @@ public class RecomendacaoMedica {
     private String medicoId;
     private String idosoId;
     private LocalDateTime dataRecomendacao;
-    private String descricao;
+    private String descricaoGeral;
     public PrioridadeRecomendacao prioridade;
+    private List<ItemPrescrito> medicamentosPrescritos;
 
     public RecomendacaoMedica() {
-    }
-
-    public RecomendacaoMedica(String id, String medicoId, String idosoId, LocalDateTime dataRecomendacao, String descricao, PrioridadeRecomendacao prioridade) {
-        Id = id;
-        this.medicoId = medicoId;
-        this.idosoId = idosoId;
-        this.dataRecomendacao = dataRecomendacao;
-        this.descricao = descricao;
-        this.prioridade = prioridade;
     }
 
     public String getId() {
@@ -65,19 +58,27 @@ public class RecomendacaoMedica {
         this.dataRecomendacao = dataRecomendacao;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public PrioridadeRecomendacao getPrioridade() {
         return prioridade;
     }
 
     public void setPrioridade(PrioridadeRecomendacao prioridade) {
         this.prioridade = prioridade;
+    }
+
+    public List<ItemPrescrito> getMedicamentosPrescritos() {
+        return medicamentosPrescritos;
+    }
+
+    public void setMedicamentosPrescritos(List<ItemPrescrito> medicamentosPrescritos) {
+        this.medicamentosPrescritos = medicamentosPrescritos;
+    }
+
+    public String getDescricaoGeral() {
+        return descricaoGeral;
+    }
+
+    public void setDescricaoGeral(String descricaoGeral) {
+        this.descricaoGeral = descricaoGeral;
     }
 }

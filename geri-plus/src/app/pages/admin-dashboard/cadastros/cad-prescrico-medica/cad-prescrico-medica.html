@@ -1,0 +1,100 @@
+<form [formGroup]="prescricaoForm" (ngSubmit)="submit()">
+  <h2>Cadastro de Prescrição Médica</h2>
+
+  <div class="form-group">
+    <label for="idosoId">Idoso</label>
+    <select formControlName="idosoId" id="idosoId">
+      <option *ngFor="let idoso of idosos" [value]="idoso.id">{{ idoso.nome }}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="medicoId">Médico Solicitante</label>
+    <select formControlName="medicoId" id="medicoId">
+      <option *ngFor="let medico of medicos" [value]="medico.id">{{ medico.nome }}</option>
+    </select>
+  </div>
+
+  <hr />
+  <h3>Medicamentos Prescritos</h3>
+  <div formArrayName="medicamentos">
+    <div
+      *ngFor="let med of medicamentosArray.controls; let i = index"
+      [formGroupName]="i"
+      class="medicamento-item"
+    >
+      <h4>Item #{{ i + 1 }}</h4>
+
+      <div class="form-group">
+        <label>Medicamento do Catálogo</label>
+        <select formControlName="medicamentoBaseId">
+          <option *ngFor="let m of medicamentos" [value]="m.id">{{ m.nome }}</option>
+        </select>
+      </div>
+
+      <div class="form-row">
+        <input formControlName="dosagem" placeholder="Dosagem (Ex: 500mg)" />
+        <input formControlName="frequenciaDiaria" placeholder="Frequência diária (Ex: 2)" />
+        <input
+          formControlName="duracaoTratamento"
+          placeholder="Duração do tratamento (Ex: 10 dias)"
+        />
+      </div>
+
+      <div class="form-group">
+        <textarea
+          formControlName="observacoesPrescricao"
+          placeholder="Observações específicas da prescrição"
+        ></textarea>
+      </div>
+
+      <div class="dias-semana">
+        <label>Dias da Semana:</label>
+        <label *ngFor="let dia of diasSemana">
+          <input type="checkbox" (change)="toggleDiaSemana(i, dia, $event)" /> {{ dia }}
+        </label>
+      </div>
+
+      <div class="horarios-section">
+        <label>Adicionar Horário:</label>
+        <input #horarioInput type="time" />
+        <button type="button" (click)="addHorario(i, horarioInput.value, horarioInput)">
+          Adicionar Horário
+        </button>
+
+        <ul class="horarios-list">
+          <li *ngFor="let h of getHorarios(i).controls; let hi = index">
+            {{ h.value }} <button type="button" (click)="removeHorario(i, hi)">Remover</button>
+          </li>
+        </ul>
+      </div>
+
+      <button type="button" class="btn-remove" (click)="removeMedicamento(i)">
+        Remover Medicamento
+      </button>
+      <hr />
+    </div>
+  </div>
+
+  <button type="button" class="btn-add" (click)="addMedicamento()">Adicionar Medicamento</button>
+
+  <hr />
+  <h3>Recomendação Médica Geral</h3>
+  <div formGroupName="recomendacao">
+    <div class="form-group">
+      <label>Descrição Geral (Não Medicamentosa)</label>
+      <textarea formControlName="descricaoGeral"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Prioridade</label>
+      <select formControlName="prioridade">
+        <option value="ALTA">Alta</option>
+        <option value="MEDIA">Média</option>
+        <option value="BAIXA">Baixa</option>
+      </select>
+    </div>
+  </div>
+
+  <button type="submit" class="btn-submit">Salvar Prescrição Completa</button>
+</form>

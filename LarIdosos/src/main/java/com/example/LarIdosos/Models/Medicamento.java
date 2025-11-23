@@ -18,30 +18,18 @@ public class Medicamento {
     private String id;
     private String nome;
     private String dosagem;
-    private String frequenciaDiaria;
-    private String duracaoTratamento;
     private ViaAdmMecidacao viaAdministracao;
     private String observacoes;
-    private LocalDateTime dataPrescricao;
-    private String medicoId;
-    private String idosoId;
-    private List<String> agendamentosId;
 
     public Medicamento() {
     }
 
-    public Medicamento(String id, String nome, String dosagem, String frequenciaDiaria, String duracaoTratamento, ViaAdmMecidacao viaAdministracao, String observacoes, LocalDateTime dataPrescricao, String medicoId, String idosoId, List<String> agendamentosId) {
+    public Medicamento(String id, String nome, String dosagem, ViaAdmMecidacao viaAdministracao, String observacoes) {
         this.id = id;
         this.nome = nome;
         this.dosagem = dosagem;
-        this.frequenciaDiaria = frequenciaDiaria;
-        this.duracaoTratamento = duracaoTratamento;
         this.viaAdministracao = viaAdministracao;
         this.observacoes = observacoes;
-        this.dataPrescricao = dataPrescricao;
-        this.medicoId = medicoId;
-        this.idosoId = idosoId;
-        this.agendamentosId = agendamentosId;
     }
 
     public String getId() {
@@ -68,22 +56,6 @@ public class Medicamento {
         this.dosagem = dosagem;
     }
 
-    public String getFrequenciaDiaria() {
-        return frequenciaDiaria;
-    }
-
-    public void setFrequenciaDiaria(String frequenciaDiaria) {
-        this.frequenciaDiaria = frequenciaDiaria;
-    }
-
-    public String getDuracaoTratamento() {
-        return duracaoTratamento;
-    }
-
-    public void setDuracaoTratamento(String duracaoTratamento) {
-        this.duracaoTratamento = duracaoTratamento;
-    }
-
     public ViaAdmMecidacao getViaAdministracao() {
         return viaAdministracao;
     }
@@ -98,37 +70,5 @@ public class Medicamento {
 
     public void setObservacoes(String observacoes) {
         this.observacoes = observacoes;
-    }
-
-    public LocalDateTime getDataPrescricao() {
-        return dataPrescricao;
-    }
-
-    public void setDataPrescricao(LocalDateTime dataPrescricao) {
-        this.dataPrescricao = dataPrescricao;
-    }
-
-    public String getMedicoId() {
-        return medicoId;
-    }
-
-    public void setMedicoId(String medicoId) {
-        this.medicoId = medicoId;
-    }
-
-    public String getIdosoId() {
-        return idosoId;
-    }
-
-    public void setIdosoId(String idosoId) {
-        this.idosoId = idosoId;
-    }
-
-    public List<String> getAgendamentosId() {
-        return agendamentosId;
-    }
-
-    public void setAgendamentosId(List<String> agendamentosId) {
-        this.agendamentosId = agendamentosId;
     }
 }

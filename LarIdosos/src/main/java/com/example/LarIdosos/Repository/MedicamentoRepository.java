@@ -9,7 +9,4 @@ import java.util.List;
 @Repository
 public interface MedicamentoRepository extends MongoRepository<Medicamento, String> {
 
-    List<Medicamento> findByIdosoId(String idosoId);
-
-    List<Medicamento> findByMedicoId(String medicoId);
 }

@@ -1,7 +1,6 @@
 package com.example.LarIdosos.Service;
 
 import com.example.LarIdosos.Config.RabbitMQConfig;
-import com.example.LarIdosos.Models.AgendamentoMedicamento;
 import com.example.LarIdosos.Models.DTO.EmailNotificationDto;
 import com.example.LarIdosos.Models.Enum.TipoUsuario;
 import com.example.LarIdosos.Models.RecomendacaoMedica;
@@ -30,8 +29,6 @@ public class SchedulerService {
     private VisitaRepository visitaRepository;
     @Autowired
     private RecomendacaoMedicaRepository recomendacaoMedicaRepository;
-    @Autowired
-    private AgendamentoMedicamentoRepository agendamentoMedicamentoRepository;
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
@@ -116,18 +113,7 @@ public class SchedulerService {
             sb.append("Nenhuma nova recomendação médica hoje.\n");
         } else {
             for (RecomendacaoMedica r : recs) {
-                sb.append("  - ").append(r.getDescricao()).append(" (Prioridade: ").append(r.getPrioridade()).append(")\n");
-            }
-        }
 
-        sb.append("\n--- MEDICAMENTOS AGENDADOS ---\n");
-        List<AgendamentoMedicamento> agendamentos = agendamentoMedicamentoRepository.findByIdosoId(idoso.getId());
-        if (agendamentos.isEmpty()) {
-            sb.append("Nenhum medicamento agendado.\n");
-        } else {
-            for (AgendamentoMedicamento a : agendamentos) {
-                sb.append("  - Medicação (ID: ").append(a.getMedicamentoId()).append(") nos horários: ")
-                        .append(a.getHorarios()).append(" nos dias: ").append(a.getDiasSemana()).append("\n");
             }
         }
 

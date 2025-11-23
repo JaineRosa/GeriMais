@@ -1,5 +1,7 @@
 package com.example.LarIdosos.Models.DTO;
 
+import com.example.LarIdosos.Models.Enum.PrioridadeRecomendacao;
+
 import java.time.LocalDateTime;
 
 public class SaudeDiariaAlertaDto {
@@ -56,5 +58,31 @@ public class SaudeDiariaAlertaDto {
 
     public void setDataHoraRegistro(LocalDateTime dataHoraRegistro) {
         this.dataHoraRegistro = dataHoraRegistro;
+    }
+
+    public static class RecomendacaoDTO {
+        private String descricao;
+        private PrioridadeRecomendacao prioridadeRecomendacao;
+
+        public RecomendacaoDTO(String descricao, PrioridadeRecomendacao prioridadeRecomendacao) {
+            this.descricao = descricao;
+            this.prioridadeRecomendacao = prioridadeRecomendacao;
+        }
+
+        public String getDescricao() {
+            return descricao;
+        }
+
+        public void setDescricao(String descricao) {
+            this.descricao = descricao;
+        }
+
+        public PrioridadeRecomendacao getPrioridadeRecomendacao() {
+            return prioridadeRecomendacao;
+        }
+
+        public void setPrioridadeRecomendacao(PrioridadeRecomendacao prioridadeRecomendacao) {
+            this.prioridadeRecomendacao = prioridadeRecomendacao;
+        }
     }
 }

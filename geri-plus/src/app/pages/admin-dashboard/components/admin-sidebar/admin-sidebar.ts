@@ -9,8 +9,6 @@ import { RouterLink, RouterModule } from '@angular/router';
   styleUrl: './admin-sidebar.scss',
 })
 export class AdminSidebar {
-  //Aqui você pode colocar propriedades globais do painel
-  // Exemplo: nome do usuário logado, notificações, etc.
-  
-  usuarioLogado = 'Administrador'; // exemplo
+ 
+  usuarioLogado = 'Administrador';
 }

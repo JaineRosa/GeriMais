@@ -37,15 +37,6 @@ public class MedicamentoController {
         return ResponseEntity.ok(medicamentoService.buscarPorId(id));
     }
 
-    @GetMapping("/idoso/{idosoId}")
-    public ResponseEntity<List<Medicamento>> listarPorIdoso(@PathVariable String idosoId) {
-        return ResponseEntity.ok(medicamentoService.listarPorIdoso(idosoId));
-    }
-
-    @GetMapping("/medico/{medicoId}")
-    public ResponseEntity<List<Medicamento>> listarPorMedico(@PathVariable String medicoId) {
-        return ResponseEntity.ok(medicamentoService.listarPorMedico(medicoId));
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizarMedicamento(@PathVariable String id, @RequestBody Medicamento medicamento) {
