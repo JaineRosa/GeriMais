@@ -16,10 +16,9 @@ public interface UsuarioRepository extends MongoRepository<Usuario, String> {
 
     Optional<Usuario> findByCpf(String cpf);
 
-    @Query("{ 'nome': { $regex: ?0, $options: 'i' } }")
-    List<Usuario> buscarPorNome(String nome);
+    Optional<Usuario> findByNome(String nome);
 
-    List<Usuario> findByQuarto(String quarto);
+    Optional<Usuario> findByNomeAndCpf(String nome, String cpf);
 
     List<Usuario> findByTipoUsuario(TipoUsuario tipoUsuario);
 }

@@ -58,7 +58,9 @@ public class UsuarioService implements UserDetailsService {
     }
 
     public List<Usuario> buscarPorNome(String nome) {
-        return usuarioRepository.buscarPorNome(nome);
+        return usuarioRepository.findByNome(nome)
+                .map(List::of)
+                .orElseGet(ArrayList::new);
     }
 
     public List<Usuario> listarPorTipo(TipoUsuario tipo) {

@@ -11,82 +11,44 @@ export class AuthRepository {
   private readonly baseUrl = '';
   private readonly http = inject(HttpClient);
 
-  // 🔹 Controle: se true, usa MOCK; se false, chama backend real
-  private readonly USE_MOCK = false;
-
-  /**
-   * Faz login do usuário
-   * @param credentials { email, password, platform }
-   */
   login(credentials: {
-    email?: string; // usado só para ADMIN
-    senha?: string; // usado só para ADMIN
-    nomeFamiliar?: string; // usado para FAMILIAR
-    nomeIdoso?: string; // usado para FAMILIAR
-    cpfIdoso?: string; // usado para FAMILIAR
+    email?: string;
+    senha?: string;
+    nomeFamiliar?: string;
+    nomeIdoso?: string;
+    cpfIdoso?: string;
     platform: string;
   }): Observable<AuthModel> {
-    if (this.USE_MOCK) {
-      // 🔹 Decide perfil conforme campos enviados
-      let tipoUsuario = 'ADMIN';
-      if (credentials.nomeFamiliar && credentials.nomeIdoso && credentials.cpfIdoso) {
-        tipoUsuario = 'FAMILIAR';
-      }
+    const isFamiliarLogin =
+      credentials.nomeFamiliar && credentials.nomeIdoso && credentials.cpfIdoso;
 
-      const mock: AuthModel = {
-        token: 'mock-token-123',
-        expiresIn: 3600,
-        user: {
-          id: '1',
-          nome:
-            tipoUsuario === 'ADMIN' ? 'Admin Mock' : credentials.nomeFamiliar || 'Familiar Mock',
-          email: credentials.email || '',
-          cpf: credentials.cpfIdoso || '',
-          tipoUsuario: tipoUsuario,
-          quarto: '12A',
-          telefone: '99999-9999',
-          dataNascimento: '1950-05-10',
-          responsavelId: 'resp001',
-          statusResidencia: 'ATIVO',
-          notificacoesNaoLidas: [],
-          medicamentos: [],
-          recomendacoesMedicas: [],
-          cuidadoresId: [],
-        },
+    let endpoint: string;
+    let payload: any;
+
+    if (isFamiliarLogin) {
+      endpoint = '/api/auth/familiar';
+      payload = {
+        nomeFamiliar: credentials.nomeFamiliar,
+        nomeIdoso: credentials.nomeIdoso,
+        cpfIdoso: credentials.cpfIdoso,
       };
-
-      return of(mock).pipe(delay(500));
+    } else {
+      endpoint = '/api/auth/login';
+      payload = {
+        email: credentials.email,
+        senha: credentials.senha,
+        platform: credentials.platform,
+      };
     }
 
-    // 🔹 Backend real (quando pronto)
-    return this.http.post<AuthModel>(`${this.baseUrl}/api/auth/login`, credentials);
+    return this.http.post<AuthModel>(`${this.baseUrl}${endpoint}`, payload);
   }
 
-  /**
-   * Atualiza token de acesso
-   * @param token string
-   */
   refreshToken(token: string): Observable<string> {
     return this.http.post(`${this.baseUrl}/auth/refresh`, { token }) as Observable<string>;
   }
 
-  /**
-   * Cadastra novo usuário
-   * @param usuario objeto com dados do usuário
-   */
   cadastrar(usuario: any): Observable<any> {
-    if (this.USE_MOCK) {
-      // Mock simples — retorna o usuário com ID fake
-      const mock = {
-        ...usuario,
-        id: 'mock-id-123',
-        createdAt: new Date(),
-      };
-
-      return of(mock).pipe(delay(500));
-    }
-
-    // 🔹 Backend real (quando pronto)
     return this.http.post<any>(`${this.baseUrl}/api/usuarios`, usuario);
   }
 }

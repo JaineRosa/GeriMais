@@ -37,24 +37,26 @@ export class Login {
   setupFamiliarValidation(): void {
     // ... (mantenha sua lógica de validação aqui, ela está correta) ...
     this.loginForm.get('isFamiliar')?.valueChanges.subscribe((isFamiliar: boolean) => {
-        if (isFamiliar) {
-            this.loginForm.get('nomeFamiliar')?.setValidators([Validators.required]);
-            this.loginForm.get('nomeHospede')?.setValidators([Validators.required]);
-            this.loginForm.get('cpfHospede')?.setValidators([Validators.required, Validators.minLength(11)]);
-            this.loginForm.get('email')?.clearValidators();
-            this.loginForm.get('senha')?.clearValidators();
-        } else {
-            this.loginForm.get('nomeFamiliar')?.clearValidators();
-            this.loginForm.get('nomeHospede')?.clearValidators();
-            this.loginForm.get('cpfHospede')?.clearValidators();
-            this.loginForm.get('email')?.setValidators([Validators.required, Validators.email]);
-            this.loginForm.get('senha')?.setValidators([Validators.required, Validators.minLength(6)]);
-        }
-        this.loginForm.get('nomeFamiliar')?.updateValueAndValidity();
-        this.loginForm.get('nomeHospede')?.updateValueAndValidity();
-        this.loginForm.get('cpfHospede')?.updateValueAndValidity();
-        this.loginForm.get('email')?.updateValueAndValidity();
-        this.loginForm.get('senha')?.updateValueAndValidity();
+      if (isFamiliar) {
+        this.loginForm.get('nomeFamiliar')?.setValidators([Validators.required]);
+        this.loginForm.get('nomeHospede')?.setValidators([Validators.required]);
+        this.loginForm
+          .get('cpfHospede')
+          ?.setValidators([Validators.required, Validators.minLength(11)]);
+        this.loginForm.get('email')?.clearValidators();
+        this.loginForm.get('senha')?.clearValidators();
+      } else {
+        this.loginForm.get('nomeFamiliar')?.clearValidators();
+        this.loginForm.get('nomeHospede')?.clearValidators();
+        this.loginForm.get('cpfHospede')?.clearValidators();
+        this.loginForm.get('email')?.setValidators([Validators.required, Validators.email]);
+        this.loginForm.get('senha')?.setValidators([Validators.required, Validators.minLength(6)]);
+      }
+      this.loginForm.get('nomeFamiliar')?.updateValueAndValidity();
+      this.loginForm.get('nomeHospede')?.updateValueAndValidity();
+      this.loginForm.get('cpfHospede')?.updateValueAndValidity();
+      this.loginForm.get('email')?.updateValueAndValidity();
+      this.loginForm.get('senha')?.updateValueAndValidity();
     });
   }
 
@@ -75,16 +77,16 @@ export class Login {
           if (sucesso) {
             // Verifica o perfil para redirecionar para o lugar certo
             const perfil = this.authService.getPerfil();
-            
+
             if (perfil === 'ADMIN') {
-                this.router.navigate(['/admin/dashboard']);
+              this.router.navigate(['/admin/dashboard']);
             } else if (perfil === 'CUIDADOR_PROFISSIONAL') {
-                 // Se tiver rota específica para cuidador, redirecione aqui
-                 // Por enquanto pode ser a mesma dashboard ou outra
-                 this.router.navigate(['/admin/dashboard']); 
+              // Se tiver rota específica para cuidador, redirecione aqui
+              // Por enquanto pode ser a mesma dashboard ou outra
+              this.router.navigate(['/admin/dashboard']);
             } else {
-                // Fallback
-                this.router.navigate(['/home']);
+              // Fallback
+              this.router.navigate(['/home']);
             }
           } else {
             this.errorMessage = 'Email ou senha inválidos.';
@@ -94,17 +96,34 @@ export class Login {
           console.error(err);
           // Trata o erro 401 especificamente se quiser
           if (err.status === 401) {
-              this.errorMessage = 'Email ou senha incorretos.';
+            this.errorMessage = 'Email ou senha incorretos.';
           } else {
-              this.errorMessage = 'Erro de conexão com o servidor.';
+            this.errorMessage = 'Erro de conexão com o servidor.';
           }
-        }
+        },
       });
     } else {
-      // Lógica para FAMILIAR (Mantida igual, assumindo que loginFamiliar trata o redirecionamento ou retorna true)
+      this.errorMessage = null; // Limpa erros anteriores
       const { nomeFamiliar, nomeHospede, cpfHospede } = payload;
-      // ... (sua lógica de familiar) ...
-        alert('Funcionalidade de login familiar em desenvolvimento/mock.');
+      this.authService.loginFamiliar(nomeFamiliar, nomeHospede, cpfHospede).subscribe({
+        next: (sucesso) => {
+          if (sucesso) {
+            const idosoId = this.authService.getIdosoIdAcesso();
+
+            if (idosoId) {
+              this.router.navigate(['/painel-idoso', idosoId]);
+            } else {
+              this.errorMessage = 'Acesso confirmado, mas o ID do idoso não foi encontrado.';
+            }
+          } else {
+            this.errorMessage = 'Dados de familiar/hóspede não conferem.';
+          }
+        },
+        error: (err) => {
+          console.error(err);
+          this.errorMessage = 'Falha ao verificar os dados do familiar.';
+        },
+      });
     }
   }
 }

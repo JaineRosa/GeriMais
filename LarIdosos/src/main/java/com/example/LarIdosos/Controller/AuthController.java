@@ -1,11 +1,14 @@
 package com.example.LarIdosos.Controller;
 
 import com.example.LarIdosos.Config.JwtUtil;
+import com.example.LarIdosos.Models.DTO.AuthFamiliarResponseDTO;
+import com.example.LarIdosos.Models.DTO.LoginFamiliarDTO;
 import com.example.LarIdosos.Models.DTO.LoginRequestDto;
 import com.example.LarIdosos.Models.DTO.LoginResponseDto;
 import com.example.LarIdosos.Models.Usuario;
 import com.example.LarIdosos.Repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -68,6 +71,37 @@ public class AuthController {
             System.out.println(">>> ERRO FATAL <<<");
             e.printStackTrace();
             return ResponseEntity.status(401).body("Erro Backend: " + e.getMessage());
+        }
+    }
+    @PostMapping("/familiar")
+    public ResponseEntity<?> loginFamiliar(@RequestBody LoginFamiliarDTO dto) {
+        try {
+            Usuario idoso = usuarioRepository.findByNomeAndCpf(dto.getNomeIdoso(), dto.getCpfIdoso())
+                    .orElseThrow(() -> new RuntimeException("Idoso/Hóspede não encontrado."));
+            Usuario responsavel = usuarioRepository.findByNome(dto.getNomeFamiliar())
+                    .orElseThrow(() -> new RuntimeException("Responsável não encontrado."));
+            String idResponsavelDoIdoso = idoso.getResponsavelId();
+            String idResponsavelEncontrado = responsavel.getId();
+            if (idResponsavelDoIdoso == null || !idResponsavelDoIdoso.equals(idResponsavelEncontrado)) {
+                throw new RuntimeException("Vínculo familiar não corresponde ao Idoso informado.");
+            }
+            final String token = jwtUtil.generateToken(responsavel.toUserDetails());
+
+            return ResponseEntity.ok(
+                    new AuthFamiliarResponseDTO(
+                            token,
+                            responsavel.getTipoUsuario().toString(),
+                            idoso.getId()
+                    )
+            );
+
+        } catch (RuntimeException e) {
+            // Captura erros de "não encontrado" ou "vínculo inválido"
+            System.out.println("ERRO LOGIN FAMILIAR: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
+        } catch (Exception e) {
+            System.out.println("ERRO INTERNO NO LOGIN FAMILIAR: " + e.getMessage());
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro interno no servidor.");
         }
     }
 }
