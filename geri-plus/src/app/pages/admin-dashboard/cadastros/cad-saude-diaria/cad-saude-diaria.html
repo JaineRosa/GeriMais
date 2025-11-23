@@ -1,0 +1,116 @@
+<div class="card p-4">
+  <h2>{{ isEditMode ? 'Editar Registro de Saúde' : 'Novo Registro de Saúde Diária' }}</h2>
+  <form [formGroup]="saudeForm" (ngSubmit)="submit()">
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <label for="idosoId" class="form-label">Paciente (Idoso) *</label>
+            <select
+                id="idosoId"
+                class="form-control"
+                formControlName="idosoId"
+                [attr.disabled]="isEditMode ? true : null"
+                [class.is-invalid]="saudeForm.get('idosoId')?.invalid && saudeForm.get('idosoId')?.touched"
+            >
+                <option value="" disabled>Selecione o Paciente</option>
+                <option *ngFor="let paciente of pacientes" [value]="paciente.id">
+                    {{ paciente.nome }}
+                </option>
+            </select>
+            <div *ngIf="saudeForm.get('idosoId')?.invalid && saudeForm.get('idosoId')?.touched" class="invalid-feedback">
+                A seleção do paciente é obrigatória.
+            </div>
+            <small *ngIf="isEditMode" class="text-muted">Paciente não pode ser alterado na edição.</small>
+        </div>
+
+        <div class="col-md-6">
+            <label for="cuidadorId" class="form-label">Cuidador Responsável *</label>
+            <select
+                id="cuidadorId"
+                class="form-control"
+                formControlName="cuidadorId"
+                [class.is-invalid]="saudeForm.get('cuidadorId')?.invalid && saudeForm.get('cuidadorId')?.touched"
+            >
+                <option value="" disabled>Selecione o Cuidador</option>
+                <option *ngFor="let cuidador of cuidadores" [value]="cuidador.id">
+                    {{ cuidador.nome }}
+                </option>
+            </select>
+            <div *ngIf="saudeForm.get('cuidadorId')?.invalid && saudeForm.get('cuidadorId')?.touched" class="invalid-feedback">
+                A seleção do cuidador é obrigatória.
+            </div>
+        </div>
+    </div>
+    
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="humor" class="form-label">Humor</label>
+        <select id="humor" class="form-control" formControlName="humor" [class.is-invalid]="saudeForm.get('humor')?.invalid && saudeForm.get('humor')?.touched">
+          <option value="" disabled>Selecione o humor</option>
+          <option value="FELIZ">Feliz</option>
+          <option value="CALMO">Calmo</option>
+          <option value="IRRITADO">Irritado</option>
+          <option value="TRISTE">Triste</option>
+          <option value="AGITADO">Agitado</option>
+        </select>
+        <div *ngIf="saudeForm.get('humor')?.invalid && saudeForm.get('humor')?.touched" class="invalid-feedback">
+          Humor é obrigatório.
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="sistolica" class="form-label">Pressão Sistólica (Ex: 120)</label>
+        <input id="sistolica" type="text" class="form-control" formControlName="pressaoArterialSistolica" placeholder="mmHg" [class.is-invalid]="saudeForm.get('pressaoArterialSistolica')?.invalid && saudeForm.get('pressaoArterialSistolica')?.touched">
+        <div *ngIf="saudeForm.get('pressaoArterialSistolica')?.invalid && saudeForm.get('pressaoArterialSistolica')?.touched" class="invalid-feedback">
+          Sistólica é obrigatória.
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="diastolica" class="form-label">Pressão Diastólica (Ex: 80)</label>
+        <input id="diastolica" type="text" class="form-control" formControlName="pressaoArterialDiastolica" placeholder="mmHg" [class.is-invalid]="saudeForm.get('pressaoArterialDiastolica')?.invalid && saudeForm.get('pressaoArterialDiastolica')?.touched">
+        <div *ngIf="saudeForm.get('pressaoArterialDiastolica')?.invalid && saudeForm.get('pressaoArterialDiastolica')?.touched" class="invalid-feedback">
+          Diastólica é obrigatória.
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-4 mb-3">
+        <label for="temperatura" class="form-label">Temperatura (°C)</label>
+        <input id="temperatura" type="number" step="0.1" class="form-control" formControlName="temperaturaCorporal" placeholder="Ex: 36.5" [class.is-invalid]="saudeForm.get('temperaturaCorporal')?.invalid && saudeForm.get('temperaturaCorporal')?.touched">
+        <div *ngIf="saudeForm.get('temperaturaCorporal')?.invalid && saudeForm.get('temperaturaCorporal')?.touched" class="invalid-feedback">
+          Temperatura inválida ou obrigatória (35°C a 42°C).
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="batimentos" class="form-label">Batimentos (BPM)</label>
+        <input id="batimentos" type="number" class="form-control" formControlName="batimentosPorMinuto" placeholder="Ex: 80" [class.is-invalid]="saudeForm.get('batimentosPorMinuto')?.invalid && saudeForm.get('batimentosPorMinuto')?.touched">
+        <div *ngIf="saudeForm.get('batimentosPorMinuto')?.invalid && saudeForm.get('batimentosPorMinuto')?.touched" class="invalid-feedback">
+          Batimentos inválidos ou obrigatórios.
+        </div>
+      </div>
+
+      <div class="col-md-4 mb-3">
+        <label for="saturacao" class="form-label">Saturação de Oxigênio (%)</label>
+        <input id="saturacao" type="number" class="form-control" formControlName="saturacaoOxigenio" placeholder="Ex: 98" [class.is-invalid]="saudeForm.get('saturacaoOxigenio')?.invalid && saudeForm.get('saturacaoOxigenio')?.touched">
+        <div *ngIf="saudeForm.get('saturacaoOxigenio')?.invalid && saudeForm.get('saturacaoOxigenio')?.touched" class="invalid-feedback">
+          Saturação inválida ou obrigatória (50% a 100%).
+        </div>
+      </div>
+    </div>
+
+    <div class="mb-4">
+      <label for="observacoes" class="form-label">Observações do Cuidador</label>
+      <textarea id="observacoes" class="form-control" formControlName="observacoesCuidador" rows="3"></textarea>
+    </div>
+
+    <button type="submit" class="btn btn-primary" [disabled]="saudeForm.invalid">
+      {{ isEditMode ? 'Salvar Edição' : 'Cadastrar Registro' }}
+    </button>
+    <button type="button" class="btn btn-secondary ms-2" (click)="router.navigate(['/saude-diaria/lista'])">
+      Cancelar
+    </button>
+  </form>
+</div>

@@ -2,7 +2,7 @@ package com.example.LarIdosos.Controller;
 
 import com.example.LarIdosos.Models.DTO.PrescricaoDTO;
 import com.example.LarIdosos.Models.RecomendacaoMedica;
-import com.example.LarIdosos.Service.PrescricaoService;
+import com.example.LarIdosos.Service.PrescricaoService; // Importação estava faltando na cópia original
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +30,18 @@ public class PrescricaoController {
                     .body("Erro de validação ou ID: " + e.getMessage());
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> buscarPorId(@PathVariable String id) {
+        var prescricao = prescricaoService.buscarPorId(id);
+
+        if (prescricao == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(prescricao);
+    }
+
     @GetMapping("/idoso/{idosoId}")
     public ResponseEntity<?> buscarPrescricaoPorIdoso(@PathVariable String idosoId) {
         try {
@@ -39,6 +51,18 @@ public class PrescricaoController {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
                     .body("Erro ao buscar prescrição: " + e.getMessage());
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> editarPrescricao(@PathVariable String id, @RequestBody PrescricaoDTO dto) {
+        try {
+            // Chama o novo método implementado no Service
+            RecomendacaoMedica atualizada = prescricaoService.editarPrescricao(id, dto);
+            return ResponseEntity.ok(atualizada);
+        } catch (RuntimeException e) {
+            // Captura o erro se o ID da prescrição não existir ou outro erro de validação
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao editar: " + e.getMessage());
         }
     }
 }

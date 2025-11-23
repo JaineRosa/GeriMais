@@ -41,6 +41,11 @@ public class SaudeDiariaService {
                 .orElseThrow(() -> new RuntimeException("Registro de saúde não encontrado com ID: " + id));
     }
 
+    public List<SaudeDiaria> listarTodos() {
+        // Usa o método findAll() do MongoRepository para trazer todos
+        return saudeDiariaRepository.findAll();
+    }
+
 
     public SaudeDiaria criarRegistro(SaudeDiaria registro) {
         Usuario idoso = usuarioRepository.findById(registro.getIdosoId())
@@ -56,6 +61,19 @@ public class SaudeDiariaService {
         verificarAlertasCriticos(registroSalvo, idoso.getResponsavelId());
 
         return registroSalvo;
+    }
+
+    public SaudeDiaria atualizarRegistro(String id, SaudeDiaria registroAtualizado) {
+        SaudeDiaria registroExistente = buscarPorId(id);
+        registroExistente.setHumor(registroAtualizado.getHumor());
+        registroExistente.setPressaoArterialSistolica(registroAtualizado.getPressaoArterialSistolica());
+        registroExistente.setPressaoArterialDiastolica(registroAtualizado.getPressaoArterialDiastolica());
+        registroExistente.setTemperaturaCorporal(registroAtualizado.getTemperaturaCorporal());
+        registroExistente.setBatimentosPorMinuto(registroAtualizado.getBatimentosPorMinuto());
+        registroExistente.setSaturacaoOxigenio(registroAtualizado.getSaturacaoOxigenio());
+        registroExistente.setObservacoesCuidador(registroAtualizado.getObservacoesCuidador());
+
+        return saudeDiariaRepository.save(registroExistente);
     }
 
     public void deletarRegistro(String id) {

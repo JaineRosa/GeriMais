@@ -1,0 +1,207 @@
+@use 'sass:color';
+@use '../../../../styles/variables' as vars;
+
+// Importação das variáveis de forma simplificada
+$primary: vars.$primary-color;
+$accent: vars.$accent-color;
+$text-dark: vars.$text-dark;
+$text-light: vars.$text-light;
+$gray-light: vars.$gray-light;
+$gray-medium: vars.$gray-medium;
+$dark-blue: vars.$dark-blue;
+
+/* ------------------------------------------------------------------- */
+/* --- ESTILOS GERAIS DO CONTAINER (Página de Visualização) --- */
+/* ------------------------------------------------------------------- */
+.container {
+  padding: 30px;
+  background-color: $gray-light;
+  min-height: 100vh;
+
+  h2 {
+    color: $text-dark;
+    margin-bottom: 25px;
+    font-size: vars.$font-size-xlarge;
+    font-weight: 700;
+    border-bottom: 2px solid $gray-medium;
+    padding-bottom: 10px;
+  }
+}
+
+/* ------------------------------------------------------------------- */
+/* --- ESTILOS DO FILTRO DE IDOSO --- */
+/* ------------------------------------------------------------------- */
+.filtro {
+  margin-bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background-color: $text-light;
+  border: 1px solid $gray-medium;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
+
+  label {
+    font-weight: 600;
+    color: $text-dark;
+    white-space: nowrap;
+    font-size: vars.$font-size-small;
+  }
+
+  select {
+    padding: 10px;
+    border: 1px solid $gray-medium;
+    border-radius: 4px;
+    font-size: vars.$font-size-small;
+    min-width: 250px;
+    background-color: $text-light;
+
+    &:focus {
+      border-color: $primary;
+      box-shadow: 0 0 0 3px color.adjust($primary, $alpha: -0.8);
+      outline: none;
+    }
+  }
+}
+
+/* Mensagens de Erro/Carregamento */
+.erro {
+  color: vars.$error-color;
+  font-weight: 600;
+  margin-top: 15px;
+  padding: 10px;
+  background-color: color.adjust(vars.$error-color, $alpha: -0.9);
+  border: 1px solid color.adjust(vars.$error-color, $alpha: -0.8);
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------------- */
+/* --- ESTILOS DO CARD DA PRESCRIÇÃO (Bloco Principal) --- */
+/* ------------------------------------------------------------------- */
+.prescricao-card {
+  background-color: $text-light;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 25px 30px;
+  margin-bottom: 30px;
+  // Destaque de cor primária na lateral esquerda, mantendo a consistência do design
+  border-left: 5px solid $primary;
+  position: relative; // Para posicionar o botão Editar
+
+  h3 {
+    color: $dark-blue;
+    font-size: vars.$font-size-large;
+    margin-top: 0;
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+
+  p {
+    margin-bottom: 20px;
+    color: $text-dark;
+    font-size: vars.$font-size-small;
+  }
+
+  p strong {
+    font-weight: 700;
+  }
+
+  h4 {
+    color: $primary;
+    font-size: vars.$font-size-medium;
+    margin-top: 20px;
+    margin-bottom: 15px;
+    border-bottom: 1px dashed $gray-medium; // Linha pontilhada para separar
+    padding-bottom: 5px;
+    font-weight: 600;
+  }
+}
+
+/* ------------------------------------------------------------------- */
+/* --- ESTILOS DA LISTA DE MEDICAMENTOS (Itens Prescritos) --- */
+/* ------------------------------------------------------------------- */
+.lista-medicamentos {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 40px;
+}
+
+.item-medicamento {
+  border: 1px solid color.adjust($primary, $alpha: -0.85); // Borda suave baseada no primário
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: color.adjust($primary, $alpha: -0.95); // Fundo super sutil
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.item-medicamento .linha1 {
+  font-size: vars.$font-size-small;
+  color: $text-dark;
+  margin-bottom: 10px;
+  font-weight: 500;
+}
+
+.item-medicamento .linha1 strong {
+  color: $dark-blue; // Destaque para o Nome do Medicamento
+  font-size: vars.$font-size-medium;
+  font-weight: 700;
+}
+
+/* Estilo para Dias da Semana e Horários */
+.dias,
+.horarios,
+.obs {
+  margin-top: 8px;
+  font-size: vars.$font-size-xsmall;
+  color: $text-dark;
+}
+
+.dias strong,
+.horarios strong,
+.obs strong {
+  margin-right: 5px;
+  font-weight: 600;
+  color: $dark-blue;
+}
+
+/* Visualização de Dias/Horários (Pílulas) */
+.dias span,
+.horarios span {
+  display: inline-block;
+  // Usando a cor de destaque (accent) ou primária
+  background-color: $accent;
+  color: $text-light;
+  padding: 4px 10px;
+  border-radius: 15px;
+  margin-right: 5px;
+  margin-top: 3px;
+  font-size: vars.$font-size-xsmall;
+  font-weight: 500;
+}
+
+/* ------------------------------------------------------------------- */
+/* --- ESTILOS DO BOTÃO DE EDITAR --- */
+/* ------------------------------------------------------------------- */
+.btn-editar {
+  position: absolute;
+  top: 25px;
+  right: 30px;
+
+  background-color: $accent; // Usando a cor accent para Editar
+  color: $text-light;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: vars.$font-size-small;
+  transition: background-color 0.3s, transform 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+
+  &:hover {
+    background-color: color.adjust($accent, $lightness: -8%);
+    transform: translateY(-1px);
+  }
+}

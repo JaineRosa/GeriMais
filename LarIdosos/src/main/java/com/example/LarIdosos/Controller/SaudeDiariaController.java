@@ -27,6 +27,10 @@ public class SaudeDiariaController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+    @GetMapping
+    public ResponseEntity<List<SaudeDiaria>> listarTodos() {
+        return ResponseEntity.ok(saudeDiariaService.listarTodos());
+    }
 
     @GetMapping("/idoso/{idosoId}")
     public ResponseEntity<List<SaudeDiaria>> listarPorIdoso(@PathVariable String idosoId) {
@@ -41,6 +45,16 @@ public class SaudeDiariaController {
     @GetMapping("/{id}")
     public ResponseEntity<SaudeDiaria> buscarPorId(@PathVariable String id) {
         return ResponseEntity.ok(saudeDiariaService.buscarPorId(id));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<?> atualizarRegistro(@PathVariable String id, @RequestBody SaudeDiaria registroAtualizado) {
+        try {
+            SaudeDiaria registro = saudeDiariaService.atualizarRegistro(id, registroAtualizado);
+            return ResponseEntity.ok(registro); // Retorna 200 OK
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")

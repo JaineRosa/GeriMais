@@ -102,6 +102,15 @@
                   <i class="fas fa-user-shield me-2"></i> Prescrição Medica
                 </a>
               </li>
+              <li>
+                <a
+                  routerLink="saude-diaria/cadastrar"
+                  routerLinkActive="active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                >
+                  <i class="fas fa-user-shield me-2"></i> Saúde Diária
+                </a>
+              </li>
             </ul>
           </div>
         </div>
@@ -110,7 +119,7 @@
 
     <!-- Outros links -->
     <a
-      routerLink="prescricoes-medicas"
+      routerLink="lista-prescricoes"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
       class="nav-link"
@@ -118,7 +127,7 @@
       <i class="fas fa-notes-medical me-2"></i> Prescrições Médicas
     </a>
     <a
-      routerLink="registro-diario"
+      routerLink="saude-diaria/lista"
       routerLinkActive="active"
       [routerLinkActiveOptions]="{ exact: true }"
       class="nav-link"

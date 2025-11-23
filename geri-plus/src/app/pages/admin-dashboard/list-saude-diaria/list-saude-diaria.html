@@ -1,0 +1,70 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="titulo">Lista de Registros de Saúde Diária</h2>
+    <a [routerLink]="['/admin/saude-diaria/cadastrar']" class="btn btn-primary">
+      <i class="fas fa-plus me-2"></i> Novo Registro
+    </a>
+  </div>
+
+  <div class="row mb-4">
+      <div class="col-md-4">
+          <label for="filtroPaciente" class="form-label">Filtrar por Paciente</label>
+          <select
+              id="filtroPaciente"
+              class="form-select"
+              [(ngModel)]="pacienteSelecionadoId"
+              (change)="aplicarFiltro()"
+          >
+              <option value="">Mostrar Todos</option>
+              <option *ngFor="let paciente of pacientes" [value]="paciente.id">
+                  {{ paciente.nome }}
+              </option>
+          </select>
+      </div>
+  </div>
+
+  <div *ngIf="loading" class="alert alert-info text-center">
+    Carregando registros...
+  </div>
+  
+  <div *ngIf="!loading && registrosFiltrados.length === 0" class="alert alert-warning text-center">
+    Nenhum registro encontrado para o filtro selecionado.
+  </div>
+
+  <div *ngIf="!loading && registrosFiltrados.length > 0" class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th>Paciente</th> <th>Data/Hora</th>
+          <th>Cuidador</th> <th>Temp. (°C)</th>
+          <th>PA (mm/Hg)</th>
+          <th>Saturação (%)</th>
+          <th>Humor</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let reg of registrosFiltrados">
+          <td>{{ getNomeById(reg.idosoId, pacientes) }}</td> 
+          
+          <td>{{ reg.dataHoraRegistro | date: 'dd/MM/yyyy HH:mm' }}</td>
+          
+          <td>{{ getNomeById(reg.cuidadorId, cuidadores) }}</td> 
+          
+          <td>{{ reg.temperaturaCorporal }}</td>
+          <td>{{ reg.pressaoArterialSistolica }}/{{ reg.pressaoArterialDiastolica }}</td>
+          <td [class.alerta-critico]="reg.saturacaoOxigenio < 90">{{ reg.saturacaoOxigenio }}</td>
+          <td>{{ reg.humor }}</td>
+          <td>
+            <button class="btn btn-sm btn-info me-2" (click)="editarRegistro(reg.id)" title="Editar">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button class="btn btn-sm btn-danger" (click)="excluirRegistro(reg.id)" title="Excluir">
+              <i class="fas fa-trash"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

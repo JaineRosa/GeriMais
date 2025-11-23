@@ -37,20 +37,19 @@ public class SecurityConfig {
                 .csrf(csrf -> csrf.disable())
 
                 .authorizeHttpRequests(auth -> auth
+                        // 1. Rotas de autenticação/usuário
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/usuarios").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/recomendacoes/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/recomendacoes/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/medicamentos/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/medicamentos/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/agendamentos/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/agendamentos/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/saude-diaria/**").permitAll()
-                        .requestMatchers(HttpMethod.GET, "/api/saude-diaria/**").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/api/prescricao/**").permitAll() // <-- liberando prescrição
-                        .requestMatchers(HttpMethod.GET, "/api/prescricao/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll() // POST para criar usuário
+                        .requestMatchers("/api/usuarios/**").permitAll() // GET de usuários, etc.
+
+                        // 2. Liberar todas as rotas da API (usando o padrão geral)
                         .requestMatchers("/api/prescricao/**").permitAll()
+                        .requestMatchers("/api/recomendacoes/**").permitAll()
+                        .requestMatchers("/api/medicamentos/**").permitAll()
+                        .requestMatchers("/api/agendamentos/**").permitAll()
+                        .requestMatchers("/api/saude-diaria/**").permitAll()
+
+                        // 3. Qualquer outra requisição, exige autenticação (última regra)
                         .anyRequest().authenticated()
                 )
 

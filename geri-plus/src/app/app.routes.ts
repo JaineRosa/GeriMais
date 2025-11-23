@@ -9,6 +9,10 @@ import { PainelIdoso } from './pages/painel-idoso/painel-idoso';
 import { authGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 import { AdminLayout } from './pages/admin-dashboard/components/admin-layout/admin-layout';
+import { ListPrescricaoMedicaComponent } from './pages/admin-dashboard/list-prescricao-medica/list-prescricao-medica';
+import { CadPrescricoMedica } from './pages/admin-dashboard/cadastros/cad-prescrico-medica/cad-prescrico-medica';
+import { ListSaudeDiaria } from './pages/admin-dashboard/list-saude-diaria/list-saude-diaria';
+import { CadSaudeDiaria } from './pages/admin-dashboard/cadastros/cad-saude-diaria/cad-saude-diaria';
 
 export const routes: Routes = [
   { path: '', component: Home }, // rota raiz com navbar e footer
@@ -72,11 +76,14 @@ export const routes: Routes = [
           ).then((m) => m.CadPrescricoMedica),
       },
       {
-        path: 'prescricoes-medicas',
-        loadComponent: () =>
-          import('./pages/admin-dashboard/prescricoes-medicas/prescricoes-medicas').then(
-            (m) => m.PrescricoesMedicas
-          ),
+        path: 'prescricoes/editar/:id',
+        component: CadPrescricoMedica,
+        title: 'Editar Prescrição',
+      },
+      {
+        path: 'lista-prescricoes',
+        component: ListPrescricaoMedicaComponent,
+        title: 'Lista de Prescrições',
       },
       {
         path: 'registro-diario',
@@ -94,6 +101,23 @@ export const routes: Routes = [
         path: '',
         redirectTo: 'dashboard',
         pathMatch: 'full', // <-- redireciona /admin para /admin/dashboard
+      },
+      {
+        path: 'saude-diaria/lista',
+        component: ListSaudeDiaria,
+        title: 'Lista de Registros de Saúde',
+        // Adicione canActivate aqui se houver guarda de rota (ex: login/autenticação)
+      },
+      {
+        path: 'saude-diaria/cadastrar',
+        component: CadSaudeDiaria,
+        title: 'Novo Registro de Saúde',
+      },
+      {
+        // Rota para EDIÇÃO, usando um parâmetro (id) na URL
+        path: 'saude-diaria/cadastrar/:id',
+        component: CadSaudeDiaria,
+        title: 'Editar Registro de Saúde',
       },
     ],
   },
