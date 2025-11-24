@@ -8,7 +8,7 @@ import {
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterModule } from '@angular/router';
 
 import { IdosoService } from '../../../../core/service/idoso.service';
 import { MedicoService } from '../../../../core/service/medico.service';
@@ -22,7 +22,7 @@ import { PrescricaoDTO } from '../../../../core/DTO/PrescricaoDTO';
 @Component({
   selector: 'app-cad-prescricao-medica',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule],
   templateUrl: './cad-prescrico-medica.html',
   styleUrl: './cad-prescrico-medica.scss',
 })
@@ -54,7 +54,7 @@ export class CadPrescricoMedica implements OnInit {
       idosoId: ['', Validators.required],
       medicoId: ['', Validators.required],
       medicamentos: this.fb.array([]),
-
+      dataRecomendacao: [''],
       recomendacao: this.fb.group({
         descricaoGeral: [''],
         prioridade: ['NORMAL'],
@@ -168,19 +168,20 @@ export class CadPrescricoMedica implements OnInit {
       this.prescricaoService.update(this.prescricaoId, payload).subscribe(
         () => {
           alert('Prescrição atualizada com sucesso!');
-          this.router.navigate(['lista-prescricoes']);
+          this.router.navigate(['admin/lista-prescricoes']);
         },
         (error) => {
-          // Adicione tratamento de erro
           console.error('Erro ao atualizar prescrição:', error);
           alert('Erro ao atualizar prescrição. Verifique o console.');
         }
       );
     } else {
+      payload.dataRecomendacao = new Date().toISOString();
       this.prescricaoService.salvarPrescricao(payload).subscribe(
         () => {
-          alert('Prescrição cadastrada com sucesso!');
-          this.router.navigate(['lista-prescricoes']);
+          this.router.navigate(['/admin/lista-prescricoes']).then(() => {
+            alert('Prescrição cadastrada com sucesso!');
+          });
         },
         (error) => {
           // Adicione tratamento de erro

@@ -18,10 +18,10 @@ public class RecomendacaoMedica {
     private String Id;
     private String medicoId;
     private String idosoId;
-    private LocalDateTime dataRecomendacao;
     private String descricaoGeral;
     public PrioridadeRecomendacao prioridade;
     private List<ItemPrescrito> medicamentosPrescritos;
+    private String dataRecomendacao;
 
     public RecomendacaoMedica() {
     }
@@ -50,12 +50,12 @@ public class RecomendacaoMedica {
         this.idosoId = idosoId;
     }
 
-    public LocalDateTime getDataRecomendacao() {
-        return dataRecomendacao;
+    public String getDescricaoGeral() {
+        return descricaoGeral;
     }
 
-    public void setDataRecomendacao(LocalDateTime dataRecomendacao) {
-        this.dataRecomendacao = dataRecomendacao;
+    public void setDescricaoGeral(String descricaoGeral) {
+        this.descricaoGeral = descricaoGeral;
     }
 
     public PrioridadeRecomendacao getPrioridade() {
@@ -74,11 +74,11 @@ public class RecomendacaoMedica {
         this.medicamentosPrescritos = medicamentosPrescritos;
     }
 
-    public String getDescricaoGeral() {
-        return descricaoGeral;
+    public String getDataRecomendacao() {
+        return dataRecomendacao;
     }
 
-    public void setDescricaoGeral(String descricaoGeral) {
-        this.descricaoGeral = descricaoGeral;
+    public void setDataRecomendacao(String dataRecomendacao) {
+        this.dataRecomendacao = dataRecomendacao;
     }
 }

@@ -38,7 +38,7 @@
       (click)="selecionarAba('recomendacoes')"
       [class.ativo]="abaSelecionada === 'recomendacoes'"
     >
-      <i class="fas fa-notes-medical"></i> Recomendações Médicas
+            <i class="fas fa-notes-medical"></i> Recomendações Médicas    
     </button>
 
     <button
@@ -60,17 +60,18 @@
     >
     </app-dados-gerais>
 
-    <app-medicamentos *ngIf="abaSelecionada === 'medicamentos'"[cpfHospede]="'909.443.059-20'"></app-medicamentos>
-
+    <app-medicamentos
+      *ngIf="abaSelecionada === 'medicamentos'"
+      [cpfHospede]="'909.443.059-20'"
+    ></app-medicamentos>
 
     <app-cuidadores *ngIf="abaSelecionada === 'cuidadores'" [cpfHospede]="cpfHospede">
     </app-cuidadores>
 
-    <app-recomendacoes-medicas *ngIf="abaSelecionada === 'recomendacoes'" [cpfHospede]="cpfHospede">
-    </app-recomendacoes-medicas>
+   <app-recomendacoes-medicas *ngIf="abaSelecionada === 'recomendacoes'" [idosoId]="idosoMongoId">
+    </app-recomendacoes-medicas>
 
     <app-notificacoes *ngIf="abaSelecionada === 'notificacoes'" [cpfHospede]="cpfHospede">
     </app-notificacoes>
   </div>
 </section>
-

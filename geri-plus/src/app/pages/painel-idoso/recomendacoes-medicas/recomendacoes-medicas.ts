@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CardGenerico } from '../../../shared/components/card-generico/card-generico';
+import { PrescricaoService } from '../../../core/service/prescricao.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-recomendacoes-medicas',
@@ -9,21 +11,53 @@ import { CardGenerico } from '../../../shared/components/card-generico/card-gene
   templateUrl: './recomendacoes-medicas.html',
   styleUrls: ['./recomendacoes-medicas.scss'],
 })
-export class RecomendacoesMedicas {
-  @Input() cpfHospede!: string;
+export class RecomendacoesMedicas implements OnInit {
+  @Input() idosoId: string | null = null;
+  todasRecomendacoesGerais: any[] = [];
 
-  prescricoesDoIdoso: any[] = [];
+  constructor(private prescricaoService: PrescricaoService, private route: ActivatedRoute) {}
 
-  ngOnInit() {
-    const todasPrescricoes = [
-      { nome: 'Fisioterapia', descricao: '3x por semana', idosoId: '909.443.059-20' },
-      { nome: 'Exame de sangue', descricao: 'Agendado para 25/11', idosoId: '909.443.059-20' },
-      {
-        nome: 'Consulta cardiologista',
-        descricao: 'Agendada para 30/11',
-        idosoId: '123.456.789-00',
+ ngOnInit() {
+    if (this.idosoId) {
+      this.carregarPrescricoes(this.idosoId);
+    } else {
+      console.error('ID do Idoso não fornecido via Input.');
+    }
+  }
+
+  carregarPrescricoes(id: string): void {
+    this.prescricaoService.getByIdoso(id).subscribe({
+      next: (data) => {
+        // MUDANÇA: Atribui o array completo de recomendações processadas
+        this.todasRecomendacoesGerais = this.processarTodasRecomendacoesGerais(data); 
       },
-    ];
-    this.prescricoesDoIdoso = todasPrescricoes.filter((p) => p.idosoId === this.cpfHospede);
+      error: (err) => {
+        console.error('Erro ao buscar prescrições:', err);
+      },
+    });
+  }
+
+  processarTodasRecomendacoesGerais(data: any[]): any[] {
+    if (!data || data.length === 0) {
+      return [];
+    }
+
+    const recomendacoesProcessadas = data.map((recomendacao) => {
+      return {
+        dataRecomendacao: recomendacao.dataRecomendacao,
+        descricaoGeral: recomendacao.descricaoGeral,
+        prioridade: recomendacao.prioridade,
+        medicoId: recomendacao.medicoId, 
+      };
+    });
+    
+
+    recomendacoesProcessadas.sort((a, b) => {
+      const dataA = new Date(a.dataRecomendacao);
+      const dataB = new Date(b.dataRecomendacao);
+      return dataB.getTime() - dataA.getTime();
+    });
+
+    return recomendacoesProcessadas;
   }
 }

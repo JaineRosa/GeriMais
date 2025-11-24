@@ -6,6 +6,7 @@ import { Cuidadores } from '../../cuidadores/cuidadores';
 import { RecomendacoesMedicas } from '../../recomendacoes-medicas/recomendacoes-medicas';
 import { Notificacoes } from '../../notificacoes/notificacoes';
 import { PainelHeader } from '../painel-header/painel-header';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-painel-container',
@@ -30,7 +31,18 @@ export class PainelContainer {
 
   abaSelecionada: string = 'dados-gerais';
 
+  idosoMongoId: string | null = null;
+
   selecionarAba(aba: string) {
     this.abaSelecionada = aba;
+  }
+
+   constructor(private route: ActivatedRoute) {} 
+
+  ngOnInit() {
+    this.route.paramMap.subscribe(params => {
+      this.idosoMongoId = params.get('id');
+      console.log("ID do Idoso (Mongo) lido da URL:", this.idosoMongoId);
+    });
   }
 }

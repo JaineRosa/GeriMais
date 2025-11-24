@@ -7,8 +7,9 @@ public class PrescricaoDTO {
     private String medicoId;
     private List<MedicamentoPrescritoDTO> medicamentos; // Lista de Itens Prescritos
     private RecomendacaoDTO recomendacao; // Recomendação Geral
-
+    private String dataRecomendacao;
     // Getters e Setters
+
     public String getIdosoId() {
         return idosoId;
     }
@@ -39,5 +40,13 @@ public class PrescricaoDTO {
 
     public void setRecomendacao(RecomendacaoDTO recomendacao) {
         this.recomendacao = recomendacao;
+    }
+
+    public String getDataRecomendacao() {
+        return dataRecomendacao;
+    }
+
+    public void setDataRecomendacao(String dataRecomendacao) {
+        this.dataRecomendacao = dataRecomendacao;
     }
 }

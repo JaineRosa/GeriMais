@@ -1,12 +1,30 @@
 <section>
-  <h2>Recomendações Médicas</h2>
+  <h2>🩺 Histórico de Recomendações Médicas Gerais</h2>
+
+  <div *ngIf="!todasRecomendacoesGerais.length" class="alert alert-info">
+    Nenhuma recomendação médica geral encontrada para este idoso.
+  </div>
+
   <app-card-generico
-    *ngFor="let p of prescricoesDoIdoso"
-    titulo="{{ p.nome }}"
-    subtitulo="{{ p.dosagem }}"
-    descricao="Horários: {{ p.frequenciaDiaria }} | Observações: {{ p.observacoes }}"
-    icone="pills"
-    tipo="{{ 'success' }}"
+    *ngFor="let recomendacao of todasRecomendacoesGerais; let i = index"
+    titulo="{{ recomendacao.descricaoGeral }}"
+    subtitulo="Prioridade: {{ recomendacao.prioridade }}"
+    descricao="Recomendação {{ i + 1 }}"
+    icone="notes"
+    tipo="info"
   >
+    <div class="card-footer-info">
+      <strong>
+        <ng-container *ngIf="recomendacao.dataRecomendacao; else dataNaoRegistrada">
+          "Data da Recomendação:
+          {{
+            recomendacao.dataRecomendacao
+              ? (recomendacao.dataRecomendacao | date : 'dd/MM/yyyy')
+              : 'Não Registrada'
+          }}"
+        </ng-container>
+        <ng-template #dataNaoRegistrada> Não Registrada </ng-template>
+      </strong>
+    </div>
   </app-card-generico>
 </section>

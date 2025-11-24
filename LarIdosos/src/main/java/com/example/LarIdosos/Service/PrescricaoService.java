@@ -66,7 +66,9 @@ public class PrescricaoService {
         novaPrescricao.setMedicoId(dto.getMedicoId());
         novaPrescricao.setDescricaoGeral(dto.getRecomendacao().getDescricaoGeral());
         novaPrescricao.setPrioridade(dto.getRecomendacao().getPrioridade());
-
+        if (dto.getDataRecomendacao() != null) {
+            novaPrescricao.setDataRecomendacao(dto.getDataRecomendacao());
+        }
         novaPrescricao.setMedicamentosPrescritos(mapMedicamentos(dto.getMedicamentos()));
 
         return recomendacaoRepository.save(novaPrescricao);

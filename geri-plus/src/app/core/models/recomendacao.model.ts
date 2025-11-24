@@ -13,4 +13,5 @@ export interface RecomendacaoMedicaModel {
 
     // DETALHES DA PRESCRIÇÃO
     medicamentosPrescritos: ItemPrescritoModel[];
+    dataCadastro?: string;
 }

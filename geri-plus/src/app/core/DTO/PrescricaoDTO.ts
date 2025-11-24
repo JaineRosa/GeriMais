@@ -11,4 +11,5 @@ export interface PrescricaoDTO {
     
     // Recomendação geral
     recomendacao: RecomendacaoDTO;
+    dataRecomendacao?: string;
 }
