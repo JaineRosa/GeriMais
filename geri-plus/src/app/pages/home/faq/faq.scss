@@ -4,7 +4,6 @@
   padding: vars.$section-padding-medium;
   background-color: vars.$gray-light;
 
-  /* Limite de largura e centralização */
   max-width: 800px;
   margin: 0 auto;
 
@@ -44,7 +43,7 @@
   .accordion-body {
     background-color: vars.$text-light;
     color: vars.$text-dark;
-    font-size: vars.$font-size-small; // texto menor para respostas
+    font-size: vars.$font-size-small; 
     line-height: 1.5;
     padding: 1.25rem;
   }

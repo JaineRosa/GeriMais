@@ -7,11 +7,11 @@
   cursor: pointer;
   font-weight: 400;
   color: var(--bs-body-color);
-  text-decoration: none; /* remove sublinhado */
-  transition: color 0.2s ease-in-out; /* transição apenas na cor */
+  text-decoration: none; 
+  transition: color 0.2s ease-in-out; 
   &:hover {
     color: var(--bs-success);
-    text-decoration: none; /* garante sem sublinhado no hover */
+    text-decoration: none; 
   }
   &:focus {
     outline: none;

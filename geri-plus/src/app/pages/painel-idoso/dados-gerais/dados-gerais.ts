@@ -6,7 +6,7 @@ interface Notificacao {
   titulo: string;
   data: string;
   mensagem: string;
-  tipo?: string; // pode ser 'default', 'info', 'success', 'warning', 'error'
+  tipo?: string; 
 }
 
 @Component({
@@ -24,7 +24,7 @@ export class DadosGerais implements OnInit {
 
 
   ngOnInit() {
-    // 🔹 MOCK: dados fixos para teste
+    
     this.dadosIdoso = {
       nome: 'João da Silva',
       cpf: '123.456.789-00',
@@ -37,15 +37,6 @@ export class DadosGerais implements OnInit {
       foto: 'assets/images/idoso-avatar.png',
     };
 
-    /*
-    🔹 FUTURO COM SERVICE:
-    constructor(private idosoService: IdosoService) {}
-
-    ngOnInit() {
-      const cpfIdoso = '123.456.789-00'; // virá do login ou rota
-      this.dadosIdoso = this.idosoService.getIdosoPorCpf(cpfIdoso);
-    }
-    */
   }
   notificacoes: Notificacao[] = [
     {

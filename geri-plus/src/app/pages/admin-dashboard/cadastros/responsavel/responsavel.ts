@@ -59,7 +59,7 @@ export class Responsavel implements OnInit {
   initialValue: any = null;
   modoEdicao = false;
 
-  // Ao iniciar, busca do backend
+  
   ngOnInit(): void {
     this.carregarResponsaveis();
   }
@@ -100,11 +100,11 @@ export class Responsavel implements OnInit {
   async onSubmitResponsavel(payload: any): Promise<void> {
     let fotoString = null;
 
-    // Converte a foto se for um objeto File
+    
     if (payload.foto && payload.foto instanceof File) {
       fotoString = await this.converterBase64(payload.foto);
     }
-    // Mantém a foto se for uma string (caso de edição)
+    
     else if (typeof payload.foto === 'string') {
       fotoString = payload.foto;
     }
@@ -115,12 +115,12 @@ export class Responsavel implements OnInit {
     const data: UserModel = {
       ...payload,
       cpf: cpfLimpo,
-      fotoUrl: fotoString, // Envia a string Base64
+      fotoUrl: fotoString, 
       statusResidencia: status,
       tipoUsuario: 'RESPONSAVEL',
-    }; // Remove o campo 'foto' original, pois o backend espera 'fotoUrl'
+    }; 
 
-    delete (data as any).foto; // EDITAR
+    delete (data as any).foto; 
 
     if (this.initialValue && this.initialValue.id) {
       this.responsavelService.atualizar(this.initialValue.id, data).subscribe({
@@ -130,7 +130,7 @@ export class Responsavel implements OnInit {
           alert('Responsável atualizado com sucesso!');
           this.modoEdicao = false;
           this.initialValue = null;
-          this.carregarResponsaveis(); // Recarrega para atualizar a lista
+          this.carregarResponsaveis(); 
         },
         error: (err) => {
           console.error(err);
@@ -138,7 +138,7 @@ export class Responsavel implements OnInit {
         },
       });
       return;
-    } // CRIAR
+    } 
 
     this.responsavelService.criar(data).subscribe({
       next: (resp) => {
@@ -146,7 +146,7 @@ export class Responsavel implements OnInit {
         alert('Responsável criado com sucesso!');
         this.modoEdicao = false;
         this.initialValue = null;
-        this.carregarResponsaveis(); // Recarrega para sanitizar e mostrar a foto
+        this.carregarResponsaveis(); 
       },
       error: (err) => {
         console.error(err);

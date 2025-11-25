@@ -10,7 +10,7 @@ export class VisitanteService {
   constructor(private userRepo: UserRepository) {}
 
   listar(): Observable<UserModel[]> {
-    // Busca todos os usuários do tipo VISITANTE
+    
     return this.userRepo.getByType('VISITANTE');
   }
 
@@ -19,7 +19,7 @@ export class VisitanteService {
   }
 
   criar(visitante: UserModel): Observable<UserModel> {
-    visitante.tipoUsuario = 'VISITANTE'; // Garante o tipo correto
+    visitante.tipoUsuario = 'VISITANTE'; 
     return this.userRepo.post(visitante);
   }
 

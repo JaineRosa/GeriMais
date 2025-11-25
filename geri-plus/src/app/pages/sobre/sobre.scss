@@ -11,10 +11,10 @@
   }
 }
 
-/* Hero como banner */
+
 .sobre-hero-wrapper {
   width: 100%;
-  min-height: 60vh; // desktop
+  min-height: 60vh; 
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,21 +37,19 @@
     transform: scale(1.05);
   }
 
-  /* 🔹 Ajuste para telas pequenas */
   @media (max-width: 768px) {
-    min-height: 40vh; // reduz altura do hero
+    min-height: 40vh; 
     padding: 0.5rem;
 
     .hero-image img {
-      max-width: 90%;   // ocupa mais largura, mas proporcional
+      max-width: 90%;   
       margin-top: 0.5rem;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); // sombra mais leve
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); 
     }
   }
 }
 
 
-/* Valores */
 .valores {
   max-width: 1100px;
   width: 100%;
@@ -65,13 +63,13 @@
 
   .valores-grid {
     display: flex;
-    flex-direction: row; // 🔄 lado a lado por padrão
+    flex-direction: row; 
     justify-content: center;
     gap: 2rem;
     margin-top: 2rem;
-    flex-wrap: wrap; // 🔄 permite quebrar linha em telas menores
+    flex-wrap: wrap; 
 
-    // 🔒 Estilização local para app-card-generico
+    
     app-card-generico {
       flex: 1;
       max-width: 220px;
@@ -83,13 +81,13 @@
       box-shadow: 0 6px 16px rgba(vars.$sky-blue, 0.55);
       text-align: center;
 
-      /* 🔹 Transição suave */
+ 
       transition: all 0.3s ease-in-out;
 
-      /* 🔹 Efeito ao passar o mouse */
+
       &:hover {
-        transform: translateY(-6px); // sobe levemente
-        box-shadow: 0 10px 20px rgba(vars.$sky-blue, 0.65); // sombra mais intensa
+        transform: translateY(-6px); 
+        box-shadow: 0 10px 20px rgba(vars.$sky-blue, 0.65); 
       }
     }
 
@@ -102,13 +100,12 @@
         height: 180px;
         width: 180px;
         padding: 1.5rem;
-        margin-bottom: 0; // espaçamento entre cards
+        margin-bottom: 0; 
       }
     }
   }
 }
 
-/* Timeline */
 .historia {
   max-width: 1100px;
   width: 100%;

@@ -112,11 +112,11 @@ export class Medico implements OnInit {
   async onSubmitMedico(payload: any): Promise<void> {
     let fotoString = null;
 
-    // Converte foto → Base64
+    
     if (payload.foto && payload.foto instanceof File) {
       fotoString = await this.converterBase64(payload.foto);
     }
-    // Mantém foto atual
+    
     else if (typeof payload.foto === 'string') {
       fotoString = payload.foto;
     }
@@ -127,9 +127,9 @@ export class Medico implements OnInit {
       tipoUsuario: 'MEDICO',
     };
 
-    delete (data as any).foto; // Remove campo original
+    delete (data as any).foto; 
 
-    // Editar
+    
     if (this.initialValue && this.initialValue.id) {
       this.medicoService.atualizar(this.initialValue.id, data).subscribe({
         next: (resp) => {
@@ -148,7 +148,7 @@ export class Medico implements OnInit {
       return;
     }
 
-    // Criar
+    
     this.medicoService.criar(data).subscribe({
       next: (resp) => {
         this.listaMedicos.push(resp);

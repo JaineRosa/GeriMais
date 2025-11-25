@@ -19,8 +19,8 @@ standalone: true,
 export class ListSaudeDiaria   implements OnInit {
 
   registros: any[] = [];
-  pacientes: Pessoa[] = []; // Lista para o filtro e mapeamento de nomes
-  cuidadores: Pessoa[] = []; // Lista para mapeamento de nomes
+  pacientes: Pessoa[] = []; 
+  cuidadores: Pessoa[] = []; 
   loading: boolean = true;
   
   pacienteSelecionadoId: string = ''; 
@@ -37,12 +37,12 @@ export class ListSaudeDiaria   implements OnInit {
   }
 
   carregarDadosIniciais(): void {
-      this.carregarPacientesECuidadores(); // Carrega as listas de nomes
-      this.carregarRegistros(); // Carrega os registros
+      this.carregarPacientesECuidadores(); 
+      this.carregarRegistros(); 
   }
   
   carregarPacientesECuidadores(): void {
-      // Carrega Pacientes
+      
       this.idosoService.listar().subscribe({
           next: (data: Pessoa[]) => {
               this.pacientes = data; 
@@ -51,7 +51,7 @@ export class ListSaudeDiaria   implements OnInit {
               console.error('ERRO ao carregar pacientes:', err);
           }
       });
-      // Carrega Cuidadores
+      
       this.cuidadorService.listar().subscribe({
           next: (data: Pessoa[]) => {
               this.cuidadores = data; 
@@ -77,14 +77,14 @@ export class ListSaudeDiaria   implements OnInit {
     });
   }
   
-  // 🌟 NOVO MÉTODO: TRADUÇÃO DE ID PARA NOME 🌟
+  
   getNomeById(id: string, lista: Pessoa[]): string {
     if (!id || !lista) return 'N/A';
     const item = lista.find(p => p.id === id);
     return item ? item.nome : 'N/A';
   }
 
-  // Lógica de Filtragem no Front-end (usa o array 'registros')
+  
   get registrosFiltrados(): any[] {
     if (!this.pacienteSelecionadoId) {
       return this.registros; 
@@ -93,7 +93,7 @@ export class ListSaudeDiaria   implements OnInit {
   }
 
   aplicarFiltro(): void {
-      // O getter 'registrosFiltrados' atualiza a lista automaticamente.
+      
   }
 
   editarRegistro(id: string): void {

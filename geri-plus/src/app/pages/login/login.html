@@ -1,16 +1,12 @@
 <div class="login-wrapper">
   <div class="login-container">
-    <!-- Botão voltar -->
     <button type="button" class="btn btn-outline-primary back-btn" routerLink="/home">
       ← Voltar
     </button>
     <div class="login-container">
-      <!-- Imagem institucional à esquerda -->
       <div class="login-image">
         <img src="assets/images/image-login.png" alt="Imagem institucional" />
       </div>
-
-      <!-- Formulário à direita -->
       <div class="login-form">
         <div class="logo-container">
           <img src="assets/logos/logo-site.png" alt="Geri+ Logo" />
@@ -29,8 +25,6 @@
             />
             <label class="form-check-label" for="isFamiliar">Sou Familiar</label>
           </div>
-
-          <!-- Campos comuns (apenas Admin) -->
           <div *ngIf="!loginForm.get('isFamiliar')?.value">
             <div class="mb-3">
               <label for="email">Email:</label>

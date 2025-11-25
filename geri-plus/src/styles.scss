@@ -7,9 +7,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import 'bootstrap/scss/bootstrap';
 
-/* ================================
-   🔄 Reset global
-   ================================ */
 html,
 body {
   margin: 0;
@@ -25,13 +22,13 @@ body {
 }
 
 html {
-  /* principal para WebKit (iOS / Safari / Chrome) */
+  
   -webkit-text-size-adjust: 100%;
 
-  /* -ms para legacy (deve vir antes da versão não‑prefixada) */
+  
   -ms-text-size-adjust: 100%;
 
-  /* fallback para navegadores que suportam a propriedade não‑prefixada */
+  
   text-size-adjust: 100%;
 
   scroll-behavior: smooth;
@@ -47,9 +44,6 @@ app-root {
   height: 100%;
 }
 
-/* ================================
-   🎨 Bootstrap override
-   ================================ */
 :root {
   --bs-primary: #{vars.$primary-color};
   --bs-success: #{vars.$accent-color};
@@ -57,29 +51,19 @@ app-root {
   --bs-body-bg: #{vars.$text-light};
 }
 
-/* ================================
-   🌍 Estilos globais
-   ================================ */
 body {
   font-family: 'Segoe UI', Roboto, sans-serif;
   color: vars.$text-dark;
   background-color: vars.$gray-light;
 }
 
-/* ================================
-   📦 Card padrão
-   ================================ */
 .card {
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-/* ================================
-   🔘 Botões globais
-   ================================ */
-
 .btn {
-  border: none; // remove qualquer borda padrão
+  border: none; 
   border-radius: 8px;
   font-weight: 600;
   padding: 0.75rem 1.5rem;
@@ -91,12 +75,12 @@ body {
     cursor: pointer;
   }
 }
-/* Remove sublinhado de botões */
+
 button.btn,
 a.btn {
   text-decoration: none !important;
 }
-/* Tamanhos globais */
+
 .btn-sm {
   font-size: 0.9rem;
   padding: 0.5rem 1rem;
@@ -120,7 +104,7 @@ a.btn {
 }
 
 @mixin btn-outline($color, $border: null, $text: null) {
-  // usa valores opcionais quando fornecidos, senão usa $color
+  
   $border-color: if($border == null, $color, $border);
   $text-color: if($text == null, $color, $text);
 
@@ -135,7 +119,7 @@ a.btn {
   }
 }
 
-/* Botões sólidos */
+
 .btn-primary {
   @include btn-base(vars.$primary-color, vars.$primary-color);
 }
@@ -146,7 +130,7 @@ a.btn {
   @include btn-base(vars.$accent-color, vars.$accent-color);
 }
 
-/* Botões outline */
+
 .btn-outline-primary {
   @include btn-outline(vars.$primary-color);
 }
@@ -156,7 +140,7 @@ a.btn {
 .btn-outline-danger {
   @include btn-outline(vars.$error-color);
 }
-/* Botão de sair (vermelho suave) */
+
 .btn-exit {
   @include btn-base(vars.$exit-red, vars.$exit-red, vars.$text-light);
 
@@ -166,9 +150,6 @@ a.btn {
   }
 }
 
-/* ================================
-   📝 Inputs
-   ================================ */
 .form-control,
 .form-select {
   border: 1px solid vars.$gray-medium;
@@ -181,9 +162,6 @@ a.btn {
   }
 }
 
-/* ================================
-   🔗 Links
-   ================================ */
 a {
   color: vars.$primary-color;
   text-decoration: none;
@@ -194,15 +172,12 @@ a {
   }
 }
 
-/* ================================
-   ⚠️ Alertas
-   ================================ */
 .alert-danger {
   background-color: color.adjust(vars.$error-color, $lightness: 40%);
   color: vars.$dark-blue;
   border: 1px solid vars.$error-color;
 }
-/* Ícones utilitários */
+
 .icon-primary {
   color: vars.$primary-color;
 }

@@ -1,10 +1,8 @@
 <div class="cadastro-page">
   <h1>Cadastro de Administradores</h1>
 
-  <!-- Botão para novo cadastro -->
   <button type="button" class="btn btn-primary mb-3" (click)="novoCadastro()">+ Novo Admin</button>
 
-  <!-- Lista de administradores cadastrados -->
   <app-lista-cards
     [titulo]="'Administradores cadastrados'"
     [itens]="listaAdmins"
@@ -15,7 +13,6 @@
   >
   </app-lista-cards>
 
-  <!-- Formulário de cadastro -->
   <app-form-cadastro
     *ngIf="modoEdicao"
   [titulo]="'Cadastro de Administrador'"

@@ -18,7 +18,7 @@ export const RoleGuard: CanActivateFn = (route, state) => {
   }
 
   console.warn('RoleGuard: Acesso NEGADO. Redirecionando para /home');
-  // Mudei para /home pois /painel pode não existir ou ser protegido também
+  
   router.navigate(['/home']); 
   return false;
 };

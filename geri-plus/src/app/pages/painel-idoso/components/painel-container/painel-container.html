@@ -1,5 +1,4 @@
 <section class="painel-container">
-  <!-- Header -->
   <app-painel-header
     [nomeFamiliar]="nomeFamiliar"
     [nomeHospede]="nomeHospede"
@@ -7,7 +6,6 @@
   >
   </app-painel-header>
 
-  <!-- Menu fixo -->
   <nav class="menu-painel">
     <button
       type="button"
@@ -38,7 +36,7 @@
       (click)="selecionarAba('recomendacoes')"
       [class.ativo]="abaSelecionada === 'recomendacoes'"
     >
-            <i class="fas fa-notes-medical"></i> Recomendações Médicas    
+      <i class="fas fa-notes-medical"></i>Recomendações Médicas
     </button>
 
     <button
@@ -50,7 +48,6 @@
     </button>
   </nav>
 
-  <!-- Área fixa para conteúdo -->
   <div class="conteudo-painel">
     <app-dados-gerais
       *ngIf="abaSelecionada === 'dados-gerais'"
@@ -68,8 +65,9 @@
     <app-cuidadores *ngIf="abaSelecionada === 'cuidadores'" [cpfHospede]="cpfHospede">
     </app-cuidadores>
 
-   <app-recomendacoes-medicas *ngIf="abaSelecionada === 'recomendacoes'" [idosoId]="idosoMongoId">
-    </app-recomendacoes-medicas>
+    <app-recomendacoes-medicas *ngIf="abaSelecionada === 'recomendacoes'" [idosoId]="idosoMongoId">
+         
+    </app-recomendacoes-medicas>
 
     <app-notificacoes *ngIf="abaSelecionada === 'notificacoes'" [cpfHospede]="cpfHospede">
     </app-notificacoes>

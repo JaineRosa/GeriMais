@@ -37,7 +37,7 @@
     color: vars.$text-dark;
     cursor: pointer;
     margin-left: auto;
-    display: none; // escondido por padrão
+    display: none; 
   }
 
   .user-info {
@@ -56,25 +56,25 @@
     }
   }
 
-  // ✅ Regras de visibilidade por tamanho de tela
+  
   @media (max-width: 768px) {
 
     .menu-toggle {
-      display: block; // aparece só em telas pequenas
+      display: block; 
     }
 
     .user-info {
-      display: none; // esconde nome e botão em telas pequenas
+      display: none; 
     }
   }
 
   @media (min-width: 769px) {
     .menu-toggle {
-      display: none; // esconde botão sanduíche em telas grandes
+      display: none; 
     }
 
     .user-info {
-      display: flex; // mostra nome e botão em telas grandes
+      display: flex; 
     }
   }
 }

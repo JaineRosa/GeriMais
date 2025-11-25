@@ -9,22 +9,14 @@
     *ngFor="let recomendacao of todasRecomendacoesGerais; let i = index"
     titulo="{{ recomendacao.descricaoGeral }}"
     subtitulo="Prioridade: {{ recomendacao.prioridade }}"
-    descricao="Recomendação {{ i + 1 }}"
+    subtitulo="Data da Recomendação:
+          {{
+      recomendacao.dataRecomendacao
+        ? (recomendacao.dataRecomendacao | date : 'dd/MM/yyyy')
+        : 'Não Registrada'
+    }}"
     icone="notes"
     tipo="info"
   >
-    <div class="card-footer-info">
-      <strong>
-        <ng-container *ngIf="recomendacao.dataRecomendacao; else dataNaoRegistrada">
-          "Data da Recomendação:
-          {{
-            recomendacao.dataRecomendacao
-              ? (recomendacao.dataRecomendacao | date : 'dd/MM/yyyy')
-              : 'Não Registrada'
-          }}"
-        </ng-container>
-        <ng-template #dataNaoRegistrada> Não Registrada </ng-template>
-      </strong>
-    </div>
   </app-card-generico>
 </section>

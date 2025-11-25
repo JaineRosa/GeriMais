@@ -51,7 +51,7 @@ public class SaudeDiariaController {
     public ResponseEntity<?> atualizarRegistro(@PathVariable String id, @RequestBody SaudeDiaria registroAtualizado) {
         try {
             SaudeDiaria registro = saudeDiariaService.atualizarRegistro(id, registroAtualizado);
-            return ResponseEntity.ok(registro); // Retorna 200 OK
+            return ResponseEntity.ok(registro);
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

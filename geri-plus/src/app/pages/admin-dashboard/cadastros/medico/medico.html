@@ -1,10 +1,8 @@
 <div class="cadastro-page">
   <h1>Cadastro de Médicos</h1>
 
-  <!-- Botão para novo cadastro -->
   <button type="button" class="btn btn-primary mb-3" (click)="novoCadastro()">+ Novo Médico</button>
 
-  <!-- Lista de médicos cadastrados -->
   <app-lista-cards
     [titulo]="'Médicos cadastrados'"
     [itens]="listaMedicos"
@@ -15,7 +13,6 @@
   >
   </app-lista-cards>
 
-  <!-- Formulário de cadastro -->
   <app-form-cadastro
     *ngIf="modoEdicao"
     [titulo]="'Cadastro de Médico'"

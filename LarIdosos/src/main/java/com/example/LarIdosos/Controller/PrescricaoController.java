@@ -57,11 +57,9 @@ public class PrescricaoController {
     @PutMapping("/{id}")
     public ResponseEntity<?> editarPrescricao(@PathVariable String id, @RequestBody PrescricaoDTO dto) {
         try {
-            // Chama o novo método implementado no Service
             RecomendacaoMedica atualizada = prescricaoService.editarPrescricao(id, dto);
             return ResponseEntity.ok(atualizada);
         } catch (RuntimeException e) {
-            // Captura o erro se o ID da prescrição não existir ou outro erro de validação
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao editar: " + e.getMessage());
         }
     }

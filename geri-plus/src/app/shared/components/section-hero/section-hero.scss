@@ -24,7 +24,6 @@
     margin-top: 1.5rem;
   }
 
-  /* Variações de tamanho */
   &.small {
     @include vars.section-size(vars.$section-padding-small, 1.5rem, 1rem, 0.9rem);
   }
@@ -34,7 +33,7 @@
   }
 
   &.large {
-    min-height: 80vh; // ocupa quase toda a tela
+    min-height: 80vh; 
     @include vars.section-size(vars.$section-padding-xlarge, 3rem, 2rem, 1.5rem);
   }
 }

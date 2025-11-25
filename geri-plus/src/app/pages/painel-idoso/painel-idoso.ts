@@ -18,28 +18,3 @@ export class PainelIdoso {
 
   
 }
-/* para integrar com o back depois
-@Injectable({ providedIn: 'root' })
-export class IdosoService {
-  listaIdosos: any[] = [
-    {
-      nome: 'João da Silva',
-      cpf: '123.456.789-00',
-      dataNascimento: '1940-05-10',
-      responsavelId: 'RESP001',
-      quarto: '12B',
-      statusResidencia: 'ATIVO',
-      medicamentos: ['Dipirona', 'Losartana'],
-      recomendacoesMedicas: ['Evitar esforço físico'],
-      foto: 'assets/images/idoso-avatar.png',
-    },
-    // outros idosos...
-  ];
-
-  getIdosoPorCpf(cpf: string) {
-    return this.listaIdosos.find(idoso => idoso.cpf === cpf);
-  }
-}
-
-
-*/

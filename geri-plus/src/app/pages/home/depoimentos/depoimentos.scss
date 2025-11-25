@@ -46,15 +46,15 @@
   /* Ajuste dos ícones de navegação */
   .carousel-control-prev-icon,
   .carousel-control-next-icon {
-    filter: invert(1); // deixa ícones visíveis sobre fundo claro
+    filter: invert(1); 
   }
 
   /* Indicadores do carrossel */
   .carousel-indicators [data-bs-target] {
-    background-color: vars.$primary-color; // cor principal
+    background-color: vars.$primary-color; 
   }
 
   .carousel-indicators .active {
-    background-color: vars.$accent-color; // destaque ativo em verde calmo
+    background-color: vars.$accent-color; 
   }
 }

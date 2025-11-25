@@ -1,30 +1,30 @@
 @use 'sass:color';
-@use '../../../../../styles/variables' as vars; // Importa variáveis com namespace 'vars'
+@use '../../../../../styles/variables' as vars; 
 
 .cadastro-prescricao-container {
-  // Estilo geral do contêiner do formulário
+  
   padding: 20px;
-  background-color: vars.$gray-light; // CORRIGIDO
+  background-color: vars.$gray-light; 
   min-height: 100vh;
   box-sizing: border-box;
 
   h2 {
-    color: vars.$text-dark; // CORRIGIDO
-    font-size: vars.$font-size-xlarge; // CORRIGIDO
+    color: vars.$text-dark; 
+    font-size: vars.$font-size-xlarge; 
     margin-bottom: 1.5rem;
   }
 
   h3 {
-    color: vars.$dark-blue; // CORRIGIDO
-    font-size: vars.$font-size-medium; // CORRIGIDO
+    color: vars.$dark-blue; 
+    font-size: vars.$font-size-medium; 
     margin-top: 2rem;
     margin-bottom: 1rem;
-    border-bottom: 2px solid vars.$gray-medium; // CORRIGIDO
+    border-bottom: 2px solid vars.$gray-medium; 
     padding-bottom: 0.5rem;
   }
 }
 
-// Estilização das abas (Prescrever Medicamento / Registrar Recomendação)
+
 .tab-buttons {
   display: flex;
   margin-bottom: 1rem;
@@ -37,43 +37,43 @@
     font-weight: 600;
     transition: background-color 0.3s, color 0.3s;
 
-    // Estilo padrão
-    background-color: vars.$accent-color; // CORRIGIDO
-    color: vars.$text-light; // CORRIGIDO
+    
+    background-color: vars.$accent-color; 
+    color: vars.$text-light; 
     opacity: 0.8;
 
     &:hover {
       opacity: 1;
     }
 
-    // Estilo para a aba ATIVA
+    
     &.active {
-      background-color: vars.$primary-color; // CORRIGIDO
-      color: vars.$text-light; // CORRIGIDO
+      background-color: vars.$primary-color; 
+      color: vars.$text-light; 
       opacity: 1;
     }
   }
 
-  // Estilo específico para o botão de recomendação (Verde)
+  
   .tab-button-recomendacao {
-    background-color: vars.$accent-color; // CORRIGIDO
+    background-color: vars.$accent-color; 
 
     &.active {
-      background-color: vars.$forest-green; // CORRIGIDO
+      background-color: vars.$forest-green; 
     }
   }
 }
 
-// Contêiner principal do formulário (o bloco branco)
+
 .form-container {
-  background-color: vars.$text-light; // CORRIGIDO
+  background-color: vars.$text-light; 
   padding: 2rem;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 2rem;
 }
 
-// Estilos para grupos de campos e inputs
+
 .form-group,
 .form-row {
   margin-bottom: 1.5rem;
@@ -89,8 +89,8 @@ label {
   display: block;
   margin-bottom: 0.5rem;
   font-weight: 500;
-  color: vars.$text-dark; // CORRIGIDO
-  font-size: vars.$font-size-small; // CORRIGIDO
+  color: vars.$text-dark; 
+  font-size: vars.$font-size-small; 
 }
 
 input[type='text'],
@@ -100,15 +100,15 @@ select,
 textarea {
   width: 100%;
   padding: 10px;
-  border: 1px solid vars.$gray-medium; // CORRIGIDO
+  border: 1px solid vars.$gray-medium; 
   border-radius: 4px;
   box-sizing: border-box;
-  font-size: vars.$font-size-small; // CORRIGIDO
-  background-color: color.adjust(vars.$gray-light, $lightness: -3%); // CORRIGIDO
+  font-size: vars.$font-size-small; 
+  background-color: color.adjust(vars.$gray-light, $lightness: -3%); 
 
   &:focus {
-    border-color: vars.$primary-color; // CORRIGIDO
-    box-shadow: 0 0 0 0.1rem color.adjust(vars.$primary-color, $alpha: -0.7); // CORRIGIDO
+    border-color: vars.$primary-color; 
+    box-shadow: 0 0 0 0.1rem color.adjust(vars.$primary-color, $alpha: -0.7); 
     outline: none;
   }
 }
@@ -118,10 +118,10 @@ textarea {
   min-height: 80px;
 }
 
-// Estilo dos botões de ação e submissão
+
 .btn-submit {
-  background-color: vars.$primary-color; // CORRIGIDO
-  color: vars.$text-light; // CORRIGIDO
+  background-color: vars.$primary-color; 
+  color: vars.$text-light; 
   padding: 10px 20px;
   border: none;
   border-radius: 4px;
@@ -131,71 +131,71 @@ textarea {
   margin-top: 1rem;
 
   &:hover {
-    background-color: vars.$dark-blue; // CORRIGIDO
+    background-color: vars.$dark-blue; 
   }
 
   &:disabled {
-    background-color: vars.$gray-medium; // CORRIGIDO
+    background-color: vars.$gray-medium; 
     cursor: not-allowed;
   }
 }
 
-// Estilização do FormArray (Itens Prescritos)
+
 .medicamento-item {
-  border: 1px solid vars.$gray-light; // CORRIGIDO
+  border: 1px solid vars.$gray-light; 
   padding: 1.5rem;
   margin-top: 1.5rem;
   border-radius: 6px;
-  background-color: color.adjust(vars.$gray-light, $lightness: 2%); // CORRIGIDO
+  background-color: color.adjust(vars.$gray-light, $lightness: 2%); 
 
   h4 {
-    color: vars.$primary-color; // CORRIGIDO
+    color: vars.$primary-color; 
     margin-top: 0;
     margin-bottom: 1rem;
   }
 }
 
-// Estilo para os botões Remover/Adicionar dentro dos itens
+
 .btn-remove,
 .btn-add {
-  background-color: vars.$error-color; // CORRIGIDO
-  color: vars.$text-light; // CORRIGIDO
+  background-color: vars.$error-color; 
+  color: vars.$text-light; 
   padding: 8px 15px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  font-size: vars.$font-size-xsmall; // CORRIGIDO
+  font-size: vars.$font-size-xsmall; 
   transition: background-color 0.3s;
   margin-top: 10px;
 }
 
 .btn-add {
-  background-color: vars.$accent-color; // CORRIGIDO
+  background-color: vars.$accent-color; 
   margin-bottom: 20px;
-  font-size: vars.$font-size-small; // CORRIGIDO
+  font-size: vars.$font-size-small; 
 }
 
 .btn-remove:hover {
-  background-color: color.adjust(vars.$error-color, $lightness: -5%); // CORRIGIDO
+  background-color: color.adjust(vars.$error-color, $lightness: -5%); 
 }
 
 .btn-add:hover {
-  background-color: color.adjust(vars.$accent-color, $lightness: -5%); // CORRIGIDO
+  background-color: color.adjust(vars.$accent-color, $lightness: -5%); 
 }
 
-// Estilo para a seção Prescrições e Recomendações do Idoso (Bloco de Resultados)
+
 .prescricoes-resultados {
   h3 {
-    color: vars.$primary-color; // CORRIGIDO
-    border-bottom: 2px solid vars.$primary-color; // CORRIGIDO
+    color: vars.$primary-color; 
+    border-bottom: 2px solid vars.$primary-color; 
   }
 }
 
-// Estilo para a área de Horários
+
 .horarios-section {
   margin-top: 1rem;
   padding: 1rem;
-  background-color: vars.$gray-light; // CORRIGIDO
+  background-color: vars.$gray-light; 
   border-radius: 4px;
 
   input[type='time'] {
@@ -210,17 +210,17 @@ textarea {
 
     li {
       display: inline-block;
-      background-color: vars.$dark-blue; // CORRIGIDO
-      color: vars.$text-light; // CORRIGIDO
+      background-color: vars.$dark-blue; 
+      color: vars.$text-light; 
       padding: 5px 10px;
       border-radius: 15px;
       margin-right: 8px;
-      font-size: vars.$font-size-xsmall; // CORRIGIDO
+      font-size: vars.$font-size-xsmall; 
 
       button {
         background: none;
         border: none;
-        color: vars.$exit-red; // CORRIGIDO
+        color: vars.$exit-red; 
         font-weight: bold;
         margin-left: 5px;
         cursor: pointer;

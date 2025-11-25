@@ -42,7 +42,6 @@ public class SaudeDiariaService {
     }
 
     public List<SaudeDiaria> listarTodos() {
-        // Usa o método findAll() do MongoRepository para trazer todos
         return saudeDiariaRepository.findAll();
     }
 

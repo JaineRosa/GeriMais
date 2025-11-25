@@ -10,7 +10,7 @@ export class MedicoService {
   constructor(private userRepo: UserRepository) {}
 
   listar(): Observable<UserModel[]> {
-    // Busca todos os usuários do tipo MEDICO
+    
     return this.userRepo.getByType('MEDICO');
   }
 
@@ -19,7 +19,7 @@ export class MedicoService {
   }
 
   criar(medico: UserModel): Observable<UserModel> {
-    medico.tipoUsuario = 'MEDICO'; // Garante o tipo correto
+    medico.tipoUsuario = 'MEDICO'; 
     return this.userRepo.post(medico);
   }
 

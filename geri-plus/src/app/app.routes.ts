@@ -5,7 +5,7 @@ import { Sobre } from './pages/sobre/sobre';
 import { Dashboard } from './pages/admin-dashboard/dashboard/dashboard';
 import { PainelIdoso } from './pages/painel-idoso/painel-idoso';
 
-// Guards
+
 import { authGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 import { AdminLayout } from './pages/admin-dashboard/components/admin-layout/admin-layout';
@@ -15,11 +15,11 @@ import { ListSaudeDiaria } from './pages/admin-dashboard/list-saude-diaria/list-
 import { CadSaudeDiaria } from './pages/admin-dashboard/cadastros/cad-saude-diaria/cad-saude-diaria';
 
 export const routes: Routes = [
-  { path: '', component: Home }, // rota raiz com navbar e footer
-  { path: 'login', component: Login }, // sem navbar e footer
-  { path: 'sobre', component: Sobre }, // rota para "Sobre Nós"
+  { path: '', component: Home }, 
+  { path: 'login', component: Login }, 
+  { path: 'sobre', component: Sobre }, 
 
-  // 🔹 Admin Dashboard
+  
   {
     path: 'admin',
     canActivate: [authGuard, RoleGuard],
@@ -100,13 +100,13 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full', // <-- redireciona /admin para /admin/dashboard
+        pathMatch: 'full', 
       },
       {
         path: 'saude-diaria/lista',
         component: ListSaudeDiaria,
         title: 'Lista de Registros de Saúde',
-        // Adicione canActivate aqui se houver guarda de rota (ex: login/autenticação)
+        
       },
       {
         path: 'saude-diaria/cadastrar',
@@ -114,7 +114,7 @@ export const routes: Routes = [
         title: 'Novo Registro de Saúde',
       },
       {
-        // Rota para EDIÇÃO, usando um parâmetro (id) na URL
+        
         path: 'saude-diaria/cadastrar/:id',
         component: CadSaudeDiaria,
         title: 'Editar Registro de Saúde',
@@ -122,7 +122,7 @@ export const routes: Routes = [
     ],
   },
 
-  // 🔹 Painel do Idoso
+  
   {
     path: 'painel-idoso/:id',
     component: PainelIdoso,

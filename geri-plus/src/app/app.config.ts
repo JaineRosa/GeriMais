@@ -9,7 +9,7 @@ import { provideHttpClient, withInterceptorsFromDi, HTTP_INTERCEPTORS } from '@a
 import { routes } from './app.routes';
 import { AuthInterceptor } from './core/interceptors/auth.interceptor';
 
-// Força any para evitar erro de tipos (alternativa: atualizar @angular/router)
+
 const routerCfg: any = {
   scrollPositionRestoration: 'enabled',
   anchorScrolling: 'enabled',

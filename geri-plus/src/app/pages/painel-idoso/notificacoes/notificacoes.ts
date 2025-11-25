@@ -39,7 +39,7 @@ export class Notificacoes {
   notificacoesDoIdoso: any[] = [];
 
   ngOnInit() {
-    // 🔹 Filtra só as notificações do idoso logado
+    
     this.notificacoesDoIdoso = this.notificacoes.filter((n) => n.idosoId === this.cpfHospede);
   }
 }

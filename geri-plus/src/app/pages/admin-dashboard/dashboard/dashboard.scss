@@ -15,6 +15,11 @@
   }
 
   .metric-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
     background-color: #fff;
     padding: 1.5rem;
     border-radius: 12px;
@@ -28,9 +33,34 @@
     }
 
     .value {
-      font-size: 2rem;
+      font-size: 1rem;
       font-weight: bold;
-      color: vars.$accent-color;
+      color: vars.$text-dark;
+      padding-bottom: 0.5rem;
+    }
+
+    canvas {
+      margin-top: 1rem;
+      width: 100% !important;
+      max-width: 100%; 
+      height: auto !important;
+      aspect-ratio: 4 / 3; 
+    }
+  }
+
+  /* Ajustes para telas menores */
+  @media (max-width: 768px) {
+    .card-grid {
+      grid-template-columns: 1fr; 
+    }
+
+    .metric-card {
+      padding: 1rem;
+
+      canvas {
+        max-width: 100%;
+        aspect-ratio: 1 / 1; 
+      }
     }
   }
 }

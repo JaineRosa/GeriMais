@@ -85,18 +85,18 @@
 
       i {
         font-size: 1rem;
-        line-height: 1; // força alinhamento vertical
+        line-height: 1; 
       }
     }
 
     .btn-outline-primary {
-      background-color: vars.$text-light; // fundo branco
-      color: vars.$primary-color; // texto azul
+      background-color: vars.$text-light; 
+      color: vars.$primary-color; 
       border: none;
 
       &:hover {
-        background-color: vars.$accent-color; // muda para cor de destaque no hover
-        color: vars.$text-light; // texto branco no hover
+        background-color: vars.$accent-color; 
+        color: vars.$text-light; 
       }
     }
   }

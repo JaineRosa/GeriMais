@@ -9,7 +9,7 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./tabela-prescricoes.scss'],
 })
 export class TabelaPrescricoes {
-   // 🔹 Recebe lista de prescrições (reaproveitando listaMedicamentos)
+   
   listaMedicamentos: any[] = [
     {
       nome: 'Paracetamol',

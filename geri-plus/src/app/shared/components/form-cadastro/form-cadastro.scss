@@ -1,7 +1,7 @@
 @use '../../../../styles/variables' as vars;
 
 .form-wrapper {
-  background: vars.$text-light; // fundo branco
+  background: vars.$text-light; 
   padding: 1.5rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
@@ -16,13 +16,13 @@
     font-size: 0.85rem;
   }
 
-  // Espaçamento entre botões de array
+  
   .btn-outline-danger,
   .btn-outline-secondary {
     font-size: 0.85rem;
     padding: 0.4rem 0.8rem;
   }
-  // BLOCO DE FOTO
+  
   .foto-container {
     display: flex;
     align-items: center;

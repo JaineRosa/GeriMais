@@ -8,7 +8,7 @@ import {
   FormControl,
 } from '@angular/forms';
 
-// Tipos de campo suportados
+
 type CampoTipo =
   | 'text'
   | 'email'

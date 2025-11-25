@@ -67,7 +67,7 @@
 
       strong {
         color: vars.$dark-blue;
-        min-width: 120px; // garante alinhamento dos labels
+        min-width: 120px; 
       }
     }
   }
@@ -85,9 +85,6 @@
   }
 }
 
-/* ================================
-   📱 Responsividade
-   ================================ */
 @media (max-width: 600px) {
   .lista-cards {
     .card {

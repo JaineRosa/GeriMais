@@ -28,7 +28,7 @@ export class RecomendacoesMedicas implements OnInit {
   carregarPrescricoes(id: string): void {
     this.prescricaoService.getByIdoso(id).subscribe({
       next: (data) => {
-        // MUDANÇA: Atribui o array completo de recomendações processadas
+        
         this.todasRecomendacoesGerais = this.processarTodasRecomendacoesGerais(data); 
       },
       error: (err) => {

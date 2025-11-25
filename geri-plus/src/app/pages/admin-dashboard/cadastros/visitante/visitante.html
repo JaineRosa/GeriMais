@@ -1,12 +1,10 @@
 <div class="cadastro-page">
   <h1>Cadastro de Visitantes</h1>
 
-  <!-- Botão para novo cadastro -->
   <button type="button" class="btn btn-primary mb-3" (click)="novoCadastro()">
     + Novo Visitante
   </button>
 
-  <!-- Lista de visitantes cadastrados -->
   <app-lista-cards
     [titulo]="'Visitantes cadastrados'"
     [itens]="listaVisitantes"
@@ -17,7 +15,6 @@
   >
   </app-lista-cards>
 
-  <!-- Formulário de cadastro -->
 <app-form-cadastro
   *ngIf="modoEdicao"
   [titulo]="'Cadastro de Visitante'"

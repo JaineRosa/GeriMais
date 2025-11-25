@@ -9,40 +9,23 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrl: './lista-cards.scss',
 })
 export class ListaCards {
-  @Input() mostrarAcoes: boolean = true; // controla se mostra botões de ação (editar, excluir etc.)
-
-  /** Título opcional da lista */
+  @Input() mostrarAcoes: boolean = true; 
   @Input() titulo?: string;
-
-  /** Lista de objetos (idosos, responsáveis, cuidadores, registros etc.) */
   @Input() itens: any[] = [];
-
-  /** Campos que devem aparecer no resumo do card */
   @Input() camposResumo: string[] = [];
-
-  /** Se deve mostrar foto/avatar */
   @Input() exibirFoto: boolean = false;
-
-  /** Evento disparado ao clicar em editar */
   @Output() editar = new EventEmitter<any>();
-
-  /** Evento disparado ao clicar em excluir (opcional) */
   @Output() excluir = new EventEmitter<any>();
-
-  /** Evento disparado ao clicar em detalhes (se quiser usar depois) */
   @Output() detalhes = new EventEmitter<any>();
 
-  /** Método para acionar edição */
   onEditar(item: any) {
     this.editar.emit(item);
   }
 
-  /** Método para acionar exclusão */
   onExcluir(item: any) {
     this.excluir.emit(item);
   }
 
-  /** Método para acionar detalhes */
   onDetalhes(item: any) {
     this.detalhes.emit(item);
   }

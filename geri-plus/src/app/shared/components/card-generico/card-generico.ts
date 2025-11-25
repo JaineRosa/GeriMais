@@ -8,15 +8,15 @@ import { Component, Input } from '@angular/core';
   templateUrl: './card-generico.html',
   styleUrls: ['./card-generico.scss'],
   host: {
-    '[class.sobre]': 'variante === "sobre"' // 🔄 aplica classe "sobre" dinamicamente
+    '[class.sobre]': 'variante === "sobre"' 
   }
 })
 export class CardGenerico {
   @Input() titulo: string = '';
   @Input() subtitulo?: string;
   @Input() descricao?: string;
-  @Input() icone?: string; // opcional, para ícones diferentes
-  @Input() cor?: string; // opcional, para destacar categorias
-  @Input() tipo: string = 'default'; // 'default' ou 'destaque'
-  @Input() variante: string = ''; // padrão vazio
+  @Input() icone?: string; 
+  @Input() cor?: string; 
+  @Input() tipo: string = 'default'; 
+  @Input() variante: string = ''; 
 }

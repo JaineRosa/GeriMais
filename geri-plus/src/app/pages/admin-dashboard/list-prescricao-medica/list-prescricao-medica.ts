@@ -44,7 +44,7 @@ export class ListPrescricaoMedicaComponent implements OnInit {
 
     this.prescricaoService.getByIdoso(this.selectedIdoso).subscribe({
       next: (res) => {
-        // 🔥 Tratamento dos horários e formatação final
+        
         this.prescricoes = res.map((p: any) => ({
           ...p,
           medicamentosPrescritos: p.medicamentosPrescritos?.map((m: any) => ({

@@ -38,7 +38,7 @@ public class UsuarioService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
 
         System.out.println("Usuário encontrado no Banco!");
-        System.out.println("Senha (Hash) no Banco: " + usuario.getSenha()); // <--- QUERO VER ISSO
+        System.out.println("Senha (Hash) no Banco: " + usuario.getSenha());
 
         return new User(usuario.getEmail(), usuario.getSenha(), new ArrayList<>());
     }
@@ -84,14 +84,17 @@ public class UsuarioService implements UserDetailsService {
             usuario.setCuidadoresId(new ArrayList<>());
         }
         Usuario usuarioSalvo = usuarioRepository.save(usuario);
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------");
 
         EmailNotificationDto notificationDto = new EmailNotificationDto(
                 usuarioSalvo.getEmail(),
                 "Bem-vindo ao Lar de Idosos!",
                 "Olá " + usuarioSalvo.getNome() + ", seu cadastro foi realizado com sucesso."
         );
-
-        System.out.println("[Produtor LarIdosos] Enviando DTO para Exchange '" + RabbitMQConfig.EXCHANGE_NAME + "' com a chave '" + RabbitMQConfig.EMAIL_WELCOME_QUEUE + "'");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("Enviando DTO para Exchange '" + RabbitMQConfig.EXCHANGE_NAME + "' com a chave '" + RabbitMQConfig.EMAIL_WELCOME_QUEUE + "'");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------");
 
 
         rabbitTemplate.convertAndSend(
@@ -99,7 +102,8 @@ public class UsuarioService implements UserDetailsService {
                 RabbitMQConfig.EMAIL_WELCOME_QUEUE,
                 notificationDto
         );
-
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------");
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------");
         System.out.println("Mensagem enviada com sucesso.");
 
         return usuarioSalvo;
@@ -144,7 +148,6 @@ public class UsuarioService implements UserDetailsService {
             usuarioExistente.setFotoUrl(usuarioAtualizado.getFotoUrl());
         }
         if (usuarioAtualizado.getIdososId() != null) {
-            // Se o payload do Angular enviar um array (pode ser vazio), atualizamos.
             usuarioExistente.setIdososId(usuarioAtualizado.getIdososId());
         }
         return usuarioRepository.save(usuarioExistente);

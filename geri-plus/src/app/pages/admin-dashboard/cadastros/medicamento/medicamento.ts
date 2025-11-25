@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Observable } from 'rxjs';
-// 1. Importar o Model (Assumindo que você o criou em /core/models)
+
 import {
   FormCadastro,
   CampoConfig,
@@ -18,7 +18,7 @@ import { MedicamentoService } from '../../../../core/service/medicamento.service
   styleUrls: ['./medicamento.scss'],
 })
 export class Medicamento implements OnInit {
-  // Lista tipada (não mais apenas por IDoso)
+  
   listaMedicamentos: MedicamentoModel[] = [];
   initialValue: any = null;
   modoEdicao = false;
@@ -29,7 +29,7 @@ export class Medicamento implements OnInit {
     this.carregarMedicamentos();
   }
 
-  // 2. CAMPOS: Apenas dados mestres, sem dados de prescrição (idosoId, medicoId, dataPrescricao)
+  
   medicamentoCampos: CampoConfig[] = [
     {
       nome: 'nome',
@@ -68,9 +68,9 @@ export class Medicamento implements OnInit {
     },
   ];
 
-  // 3. CARREGAMENTO: Método atualizado para listar TODOS os medicamentos
+  
   carregarMedicamentos() {
-    // 💡 Assumindo que você criou o método listarTodos no seu MedicamentoService
+    
     this.medicamentoService.listarTodos().subscribe({
       next: (data) => {
         this.listaMedicamentos = data;
@@ -81,32 +81,28 @@ export class Medicamento implements OnInit {
     });
   }
 
-  // **********************************
-  // MÉTODOS CRUD E ESTADO
-  // **********************************
-
   novoCadastro() {
-    this.initialValue = null; // Zera o formulário para novo cadastro
+    this.initialValue = null; 
     this.modoEdicao = true;
   }
 
   abrirFormEdicao(item: any) {
-    // Não precisamos formatar a data, pois o campo 'dataPrescricao' foi removido
+    
     this.initialValue = item;
     this.modoEdicao = true;
   }
 
   onSubmitMedicamento(payload: any): void {
-    // O payload agora só contém dados mestres (nome, dosagem, via, observacoes)
+    
     const medicamentoData: MedicamentoModel = { ...payload };
 
     let operacao: Observable<MedicamentoModel>;
 
     if (this.initialValue && this.initialValue.id) {
-      // ATUALIZAÇÃO (PUT)
+      
       operacao = this.medicamentoService.atualizar(this.initialValue.id, medicamentoData);
     } else {
-      // CRIAÇÃO (POST)
+      
       operacao = this.medicamentoService.criar(medicamentoData);
     }
 
@@ -115,7 +111,7 @@ export class Medicamento implements OnInit {
         alert('Medicamento salvo com sucesso!');
         this.modoEdicao = false;
         this.initialValue = null;
-        this.carregarMedicamentos(); // Recarrega a lista
+        this.carregarMedicamentos(); 
       },
       error: (err) => {
         console.error('Erro ao salvar medicamento:', err.error || err);

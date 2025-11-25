@@ -3,20 +3,20 @@ package com.example.LarIdosos.Models.DTO;
 import java.util.List;
 
 public class MedicamentoPrescritoDTO {
-    private String medicamentoBaseId; // O ID do medicamento no catálogo
+    private String medicamentoBaseId;
     private String dosagem;
-    private String viaAdministracao; // Adicionando este campo se for usado
+    private String viaAdministracao;
     private List<String> diasSemana;
-    private List<String> horarios; // String para facilitar o envio do front-end (ex: "18:00")
+    private List<String> horarios;
     private String frequenciaDiaria;
     private String duracaoTratamento;
     private String observacoesPrescricao;
 
-    // Getters e Setters
+
     public String getMedicamentoBaseId() {
         return medicamentoBaseId;
     }
-    // ... (restante dos getters e setters para os campos acima)
+
 
     public void setMedicamentoBaseId(String medicamentoBaseId) {
         this.medicamentoBaseId = medicamentoBaseId;

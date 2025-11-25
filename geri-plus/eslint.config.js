@@ -30,7 +30,6 @@ module.exports = tseslint.config(
         },
       ],
 
-      // 👇 sua regra personalizada:
       semi: ['warn', 'always'],
       quotes: ['warn', 'single'],
       'max-len': ['warn', { code: 120 }],

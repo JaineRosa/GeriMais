@@ -55,7 +55,6 @@ h1{
   font-size: 0.9rem;
 }
 
-/* Responsividade */
 @media (max-width: 768px) {
   .footer-container {
     flex-direction: column;
@@ -63,25 +62,25 @@ h1{
   }
 }
 .footer-about {
-  text-align: center; /* centraliza o conteúdo dentro da div */
+  text-align: center;
 }
 
 .footer-about img {
-  display: inline-block; /* garante que a imagem respeite o alinhamento */
-  width: 100px; /* ajuste o tamanho conforme necessário */
-  height: auto; /* mantém proporção */
+  display: inline-block; 
+  width: 100px; 
+  height: auto; 
 }
 
-/* Em telas médias */
+
 @media (min-width: 768px) {
   .footer-about img {
-    width: 120px; /* aumenta um pouco */
+    width: 120px; 
   }
 }
 
-/* Em telas grandes */
+
 @media (min-width: 1200px) {
   .footer-about img {
-    width: 150px; /* ocupa mais espaço no footer */
+    width: 150px; 
   }
 }

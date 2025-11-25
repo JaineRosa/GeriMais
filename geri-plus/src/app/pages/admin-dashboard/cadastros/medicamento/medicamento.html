@@ -1,12 +1,10 @@
 <div class="cadastro-page">
   <h1>Cadastro de Medicamentos</h1>
 
-  <!-- Botão para novo cadastro -->
   <button type="button" class="btn btn-primary mb-3" (click)="novoCadastro()">
     + Novo Medicamento
   </button>
 
-  <!-- Lista de medicamentos cadastrados -->
   <app-lista-cards
     [titulo]="'Medicamentos cadastrados'"
     [itens]="listaMedicamentos"
@@ -17,7 +15,7 @@
   >
   </app-lista-cards>
 
-  <!-- Formulário de cadastro -->
+
   <app-form-cadastro
     *ngIf="modoEdicao"
     [titulo]="'Cadastro de Medicamento'"

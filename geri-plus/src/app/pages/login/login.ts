@@ -35,7 +35,7 @@ export class Login {
   }
 
   setupFamiliarValidation(): void {
-    // ... (mantenha sua lógica de validação aqui, ela está correta) ...
+    
     this.loginForm.get('isFamiliar')?.valueChanges.subscribe((isFamiliar: boolean) => {
       if (isFamiliar) {
         this.loginForm.get('nomeFamiliar')?.setValidators([Validators.required]);
@@ -68,24 +68,24 @@ export class Login {
 
     const payload = this.loginForm.value;
 
-    // Lógica para ADMIN (Email/Senha)
+    
     if (!payload.isFamiliar) {
       const { email, senha } = payload;
 
       this.authService.login(email, senha).subscribe({
         next: (sucesso) => {
           if (sucesso) {
-            // Verifica o perfil para redirecionar para o lugar certo
+            
             const perfil = this.authService.getPerfil();
 
             if (perfil === 'ADMIN') {
               this.router.navigate(['/admin/dashboard']);
             } else if (perfil === 'CUIDADOR_PROFISSIONAL') {
-              // Se tiver rota específica para cuidador, redirecione aqui
-              // Por enquanto pode ser a mesma dashboard ou outra
+              
+              
               this.router.navigate(['/admin/dashboard']);
             } else {
-              // Fallback
+              
               this.router.navigate(['/home']);
             }
           } else {
@@ -94,7 +94,7 @@ export class Login {
         },
         error: (err) => {
           console.error(err);
-          // Trata o erro 401 especificamente se quiser
+          
           if (err.status === 401) {
             this.errorMessage = 'Email ou senha incorretos.';
           } else {
@@ -103,7 +103,7 @@ export class Login {
         },
       });
     } else {
-      this.errorMessage = null; // Limpa erros anteriores
+      this.errorMessage = null; 
       const { nomeFamiliar, nomeHospede, cpfHospede } = payload;
       this.authService.loginFamiliar(nomeFamiliar, nomeHospede, cpfHospede).subscribe({
         next: (sucesso) => {

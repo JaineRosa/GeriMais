@@ -1,6 +1,5 @@
 <div class="medicamentos">
   <h3>Medicamentos</h3>
-  <!-- 🔹 Select de impressão -->
   <div class="imprimir-prescricao">
     <label for="tipoPrescricao">Imprimir prescrição:</label>
     <select id="tipoPrescricao" [(ngModel)]="selectedTipoPrescricao">
@@ -22,7 +21,6 @@
       icone="pills"
       [tipo]="med.status === 'novo' ? 'success' : 'info'"
     >
-      <!-- Badge com cores da paleta -->
       <span class="badge" [ngClass]="med.status === 'novo' ? 'novo' : 'em-uso'">
         {{ med.status === 'novo' ? 'Novo' : 'Em uso' }}
       </span>
@@ -39,7 +37,6 @@
     </app-card-generico>
   </ng-template>
 
-  <!-- Legenda de badges no topo -->
   <div class="legenda-badges">
     <span class="badge novo">Novo</span> Medicamento recém-adicionado &nbsp;&nbsp;
     <span class="badge em-uso">Em uso</span> Medicamento uso contínuo

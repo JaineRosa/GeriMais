@@ -22,7 +22,7 @@ public class NotificationListener {
 
     @RabbitListener(queues = RabbitMQConfig.EMAIL_WELCOME_QUEUE)
     public void handleWelcomeEmail(@Payload EmailNotificationDto notificationDto) {
-        System.out.println("📥 Recebeu para: " + notificationDto.getToEmail());
+        System.out.println(" Recebeu para: " + notificationDto.getToEmail());
 
         simularEnvioEmail(
                 notificationDto.getToEmail(),

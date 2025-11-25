@@ -14,10 +14,10 @@ export class Medicamentos {
   @Input() cpfHospede!: string;
 
   medicamentosDoIdoso: any[] = [];
-  selectedTipoPrescricao: string = ''; // 🔹 controla o valor do select
+  selectedTipoPrescricao: string = ''; 
 
   ngOnInit() {
-    // 🔹 Lista única de medicamentos (mock)
+    
     const todosMedicamentos = [
       {
         nome: 'Losartana',
@@ -57,10 +57,10 @@ export class Medicamentos {
       },
     ];
 
-    // 🔹 Filtra só os medicamentos do hóspede atual
+    
     this.medicamentosDoIdoso = todosMedicamentos.filter((m) => m.idosoId === this.cpfHospede);
   }
-  // logica para imprimir
+  
   imprimirPrescricao() {
     let filtrados: any[] = [];
 

@@ -16,7 +16,7 @@ export class Cuidadores {
   cuidadoresHistorico: any[] = [];
 
   ngOnInit() {
-    // 🔹 Mock de cuidadores ativos
+    
     const todosCuidadores = [
       {
         nome: 'Carlos Mendes',
@@ -40,7 +40,7 @@ export class Cuidadores {
       },
     ];
 
-    // 🔹 Mock de histórico de cuidadores
+    
     const historico = [
       {
         nome: 'João Souza',
@@ -56,7 +56,7 @@ export class Cuidadores {
       },
     ];
 
-    // 🔹 Filtra só os cuidadores do hóspede atual
+    
     this.listaCuidadores = todosCuidadores.filter(
       (c) => c.idosoId === this.cpfHospede
     );

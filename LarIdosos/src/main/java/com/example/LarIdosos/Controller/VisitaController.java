@@ -65,7 +65,7 @@ public class VisitaController {
     public ResponseEntity<?> deletarVisita(@PathVariable String id) {
         try {
             visitaService.deletarVisita(id);
-            return ResponseEntity.noContent().build(); // 204 No Content
+            return ResponseEntity.noContent().build();
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

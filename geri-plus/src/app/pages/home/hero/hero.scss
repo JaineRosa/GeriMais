@@ -5,11 +5,11 @@
   color: $text-light;
   padding: 0;
   margin: 0;
-  height: 100vh; // ocupa toda a altura da tela
+  height: 100vh; 
 
   .hero-content {
     display: flex;
-    height: 100%; // garante que os filhos ocupem toda a altura
+    height: 100%; 
     align-items: center;
     justify-content: space-between;
     gap: 40px;
@@ -57,7 +57,7 @@
   .hero-image {
     flex: 1;
     position: relative;
-    height: 100%; // ocupa toda a altura da seção
+    height: 100%; 
 
     img {
       width: 100%;
@@ -80,7 +80,7 @@
 
 @media (max-width: 768px) {
   .hero-section {
-    height: auto; // libera altura fixa no mobile
+    height: auto; 
   }
 
   .hero-content {

@@ -10,9 +10,8 @@
   padding: 1rem;
 }
 
-/* Contêiner central que mantém imagem e formulário juntos */
 .login-container {
-  position: relative; /* necessário para o botão ficar dentro do container */
+  position: relative;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -23,7 +22,7 @@
   overflow: hidden;
 }
 
-/* Botão voltar */
+
 .back-btn {
   position: absolute;
   top: 1rem;
@@ -31,7 +30,7 @@
   border-radius: 50px;
   padding: 0.5rem 1rem;
   font-weight: 500;
-  z-index: 10; /* garante que fique acima da imagem/form */
+  z-index: 10;
   transition: all 0.3s ease;
 
   &:hover {
@@ -40,7 +39,6 @@
   }
 }
 
-/* Coluna da imagem (esquerda) */
 .login-image {
   flex: 1;
   display: flex;
@@ -51,11 +49,10 @@
   img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Preenche sem distorcer */
+    object-fit: cover; 
   }
 }
 
-/* Coluna do formulário (direita) */
 .login-form {
   flex: 1;
   padding: 3rem;
@@ -68,8 +65,8 @@
     margin-bottom: 1.5rem;
 
     img {
-      height: 80px; /* tamanho fixo do logo */
-      width: auto;  /* mantém proporção */
+      height: 80px; 
+      width: auto;  
     }
   }
 
@@ -95,7 +92,7 @@
   }
 }
 
-/* Responsivo */
+
 @media (max-width: 992px) {
   .login-container {
     max-width: 900px;
@@ -104,11 +101,11 @@
 
 @media (max-width: 768px) {
   .login-container {
-    flex-direction: column; /* empilha no mobile */
+    flex-direction: column;
   }
 
   .login-image {
-    display: none; /* oculta a imagem em telas pequenas */
+    display: none; 
   }
 
   .login-form {
@@ -125,6 +122,6 @@
   }
 
   .logo-container img {
-    height: 64px; /* logo um pouco menor em telas muito pequenas */
+    height: 64px; 
   }
 }

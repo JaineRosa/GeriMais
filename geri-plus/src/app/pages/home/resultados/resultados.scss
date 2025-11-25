@@ -2,7 +2,7 @@
 
 .resultados-container {
   background-color: vars.$gray-light;
-  padding: vars.$section-padding-large; // mais respiro na section
+  padding: vars.$section-padding-large; 
 }
 
 .titulo {
@@ -18,10 +18,10 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
   padding: 2rem;
-  min-height: 280px; // garante altura mínima maior
+  min-height: 280px; 
   display: flex;
   flex-direction: column;
-  justify-content: center; // centraliza conteúdo verticalmente
+  justify-content: center; 
 
   &:hover {
     transform: translateY(-5px);

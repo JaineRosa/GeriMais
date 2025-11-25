@@ -6,7 +6,6 @@ public class RecomendacaoDTO {
     private String descricaoGeral;
     private PrioridadeRecomendacao prioridade;
 
-    // Getters e Setters
     public String getDescricaoGeral() {
         return descricaoGeral;
     }

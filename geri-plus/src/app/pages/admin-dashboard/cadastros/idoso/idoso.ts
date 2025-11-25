@@ -25,7 +25,7 @@ export class Idoso implements OnInit {
     private sanitizer: DomSanitizer
   ) {}
 
-  // Configuração inicial dos campos
+  
   idosoCampos: CampoConfig[] = [
     {
       nome: 'nome',
@@ -168,14 +168,14 @@ export class Idoso implements OnInit {
       nome: payload.nome,
       cpf: cpfLimpo,
       email: emailFinal,
-      telefone: payload.telefone || null, // Envia null se estiver vazio/undefined
+      telefone: payload.telefone || null, 
       quarto: payload.quarto,
       senha: cpfLimpo,
       dataNascimento: dataNasc,
       statusResidencia: status,
       fotoUrl: fotoString,
 
-      // IMPORTANTE: Envia o ID direto como String, igual ao Java espera
+      
       responsavelId: payload.responsavelId,
 
       medicamentos: payload.medicamentos || [],
@@ -184,9 +184,9 @@ export class Idoso implements OnInit {
       tipoUsuario: 'IDOSO',
     };
 
-    console.log('Payload enviado ao Java:', data); // <--- Olhe no console o que está indo!
+    console.log('Payload enviado ao Java:', data); 
 
-    // --- ENVIO (Igual ao anterior) ---
+    
     if (this.initialValue && this.initialValue.id) {
       this.idosoService.atualizar(this.initialValue.id, data).subscribe({
         next: () => {
@@ -210,10 +210,10 @@ export class Idoso implements OnInit {
     this.carregarDados();
   }
 
-  // Função auxiliar para te ajudar a ver o erro real
+  
   tratarErro(err: any) {
     console.error('Erro detalhado:', err);
-    // Tenta pegar a mensagem que o backend mandou
+    
     if (err.error) {
       alert(`Erro do Servidor: ${JSON.stringify(err.error)}`);
     } else {

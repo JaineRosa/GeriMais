@@ -18,7 +18,7 @@ export class CuidadorService {
   }
 
   criar(cuidador: UserModel): Observable<UserModel> {
-    cuidador.tipoUsuario = 'CUIDADOR'; // Garante o tipo correto
+    cuidador.tipoUsuario = 'CUIDADOR'; 
     return this.userRepo.post(cuidador);
   }
 

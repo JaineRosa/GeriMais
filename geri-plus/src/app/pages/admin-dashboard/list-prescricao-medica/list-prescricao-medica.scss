@@ -1,7 +1,7 @@
 @use 'sass:color';
 @use '../../../../styles/variables' as vars;
 
-// Importação das variáveis de forma simplificada
+
 $primary: vars.$primary-color;
 $accent: vars.$accent-color;
 $text-dark: vars.$text-dark;
@@ -10,9 +10,6 @@ $gray-light: vars.$gray-light;
 $gray-medium: vars.$gray-medium;
 $dark-blue: vars.$dark-blue;
 
-/* ------------------------------------------------------------------- */
-/* --- ESTILOS GERAIS DO CONTAINER (Página de Visualização) --- */
-/* ------------------------------------------------------------------- */
 .container {
   padding: 30px;
   background-color: $gray-light;
@@ -28,9 +25,6 @@ $dark-blue: vars.$dark-blue;
   }
 }
 
-/* ------------------------------------------------------------------- */
-/* --- ESTILOS DO FILTRO DE IDOSO --- */
-/* ------------------------------------------------------------------- */
 .filtro {
   margin-bottom: 30px;
   display: flex;
@@ -65,7 +59,6 @@ $dark-blue: vars.$dark-blue;
   }
 }
 
-/* Mensagens de Erro/Carregamento */
 .erro {
   color: vars.$error-color;
   font-weight: 600;
@@ -76,18 +69,15 @@ $dark-blue: vars.$dark-blue;
   border-radius: 4px;
 }
 
-/* ------------------------------------------------------------------- */
-/* --- ESTILOS DO CARD DA PRESCRIÇÃO (Bloco Principal) --- */
-/* ------------------------------------------------------------------- */
 .prescricao-card {
   background-color: $text-light;
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   padding: 25px 30px;
   margin-bottom: 30px;
-  // Destaque de cor primária na lateral esquerda, mantendo a consistência do design
+  
   border-left: 5px solid $primary;
-  position: relative; // Para posicionar o botão Editar
+  position: relative; 
 
   h3 {
     color: $dark-blue;
@@ -112,15 +102,12 @@ $dark-blue: vars.$dark-blue;
     font-size: vars.$font-size-medium;
     margin-top: 20px;
     margin-bottom: 15px;
-    border-bottom: 1px dashed $gray-medium; // Linha pontilhada para separar
+    border-bottom: 1px dashed $gray-medium; 
     padding-bottom: 5px;
     font-weight: 600;
   }
 }
 
-/* ------------------------------------------------------------------- */
-/* --- ESTILOS DA LISTA DE MEDICAMENTOS (Itens Prescritos) --- */
-/* ------------------------------------------------------------------- */
 .lista-medicamentos {
   list-style: none;
   padding: 0;
@@ -128,11 +115,11 @@ $dark-blue: vars.$dark-blue;
 }
 
 .item-medicamento {
-  border: 1px solid color.adjust($primary, $alpha: -0.85); // Borda suave baseada no primário
+  border: 1px solid color.adjust($primary, $alpha: -0.85); 
   border-radius: 6px;
   padding: 15px;
   margin-bottom: 15px;
-  background-color: color.adjust($primary, $alpha: -0.95); // Fundo super sutil
+  background-color: color.adjust($primary, $alpha: -0.95); 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
@@ -144,12 +131,11 @@ $dark-blue: vars.$dark-blue;
 }
 
 .item-medicamento .linha1 strong {
-  color: $dark-blue; // Destaque para o Nome do Medicamento
+  color: $dark-blue; 
   font-size: vars.$font-size-medium;
   font-weight: 700;
 }
 
-/* Estilo para Dias da Semana e Horários */
 .dias,
 .horarios,
 .obs {
@@ -166,11 +152,10 @@ $dark-blue: vars.$dark-blue;
   color: $dark-blue;
 }
 
-/* Visualização de Dias/Horários (Pílulas) */
 .dias span,
 .horarios span {
   display: inline-block;
-  // Usando a cor de destaque (accent) ou primária
+  
   background-color: $accent;
   color: $text-light;
   padding: 4px 10px;
@@ -181,15 +166,12 @@ $dark-blue: vars.$dark-blue;
   font-weight: 500;
 }
 
-/* ------------------------------------------------------------------- */
-/* --- ESTILOS DO BOTÃO DE EDITAR --- */
-/* ------------------------------------------------------------------- */
 .btn-editar {
   position: absolute;
   top: 25px;
   right: 30px;
 
-  background-color: $accent; // Usando a cor accent para Editar
+  background-color: $accent; 
   color: $text-light;
   padding: 10px 20px;
   border: none;

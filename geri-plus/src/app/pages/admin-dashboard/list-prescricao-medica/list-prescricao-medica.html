@@ -2,7 +2,6 @@
 
   <h2>Prescrições Médicas</h2>
 
-  <!-- FILTRO -->
   <div class="filtro">
     <label>Selecionar Idoso:</label>
     <select [(ngModel)]="selectedIdoso" (change)="buscarPrescricoes()">
@@ -16,20 +15,17 @@
   <p *ngIf="erro" class="erro">{{ erro }}</p>
   <p *ngIf="carregando">Carregando...</p>
 
-  <!-- LISTAGEM -->
   <div *ngFor="let p of prescricoes" class="card prescricao-card">
 
-    <!-- DESCRIÇÃO GERAL -->
+
     <h3>{{ p.descricaoGeral }}</h3>
     <p><strong>Prioridade:</strong> {{ p.prioridade }}</p>
 
-    <!-- MEDICAMENTOS -->
     <h4>Medicamentos:</h4>
 
     <ul class="lista-medicamentos">
       <li *ngFor="let m of p.medicamentosPrescritos" class="item-medicamento">
 
-        <!-- Nome e dosagem -->
         <div class="linha1">
           <strong>{{ m.nomeMedicamento }}</strong>
           — {{ m.dosagem }}
@@ -37,7 +33,6 @@
           — {{ m.duracaoTratamento }} dias
         </div>
 
-        <!-- Dias da Semana -->
         <div class="dias">
           <strong>Dias:</strong>
           <span *ngFor="let d of m.diasSemana">
@@ -45,7 +40,6 @@
           </span>
         </div>
 
-        <!-- Horários -->
         <div class="horarios">
           <strong>Horários:</strong>
           <span *ngFor="let h of m.horarios">
@@ -53,7 +47,7 @@
           </span>
         </div>
 
-        <!-- Observações da prescrição -->
+
         <div class="obs" *ngIf="m.observacoesPrescricao">
           <strong>Observações:</strong> {{ m.observacoesPrescricao }}
         </div>
@@ -61,7 +55,6 @@
       </li>
     </ul>
 
-    <!-- BOTÃO -->
     <button (click)="editar(p.id)" class="btn-editar">
       Editar
     </button>

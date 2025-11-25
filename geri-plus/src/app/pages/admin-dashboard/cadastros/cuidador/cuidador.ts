@@ -129,7 +129,7 @@ export class Cuidador implements OnInit {
             return 'Nenhum idoso vinculado';
         }
         const nomes = ids.map((id) => {
-            // Busca o nome do Idoso na lista de opções carregada (this.idososOpcoes)
+            
             const opcao = this.idososOpcoes.find((o) => o.value === id);
             return opcao ? opcao.label : `ID ${id} (Não Encontrado)`;
         });
@@ -160,7 +160,7 @@ export class Cuidador implements OnInit {
     const cpfLimpo = payload.cpf ? payload.cpf.replace(/\D/g, '') : '';
     const status = payload.statusResidencia ? payload.statusResidencia : null;
 
-    // O payload.idososId virá como um array de IDs do multi-select
+    
     const idososIdArray = Array.isArray(payload.idososId) ? payload.idososId : [];
 
     const data: UserModel = {

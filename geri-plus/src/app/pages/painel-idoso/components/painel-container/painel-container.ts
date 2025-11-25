@@ -24,7 +24,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./painel-container.scss'],
 })
 export class PainelContainer {
-  // 🔹 Recebe os dados do PainelIdoso
+  
   @Input() nomeFamiliar!: string;
   @Input() nomeHospede!: string;
   @Input() cpfHospede!: string;

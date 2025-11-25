@@ -7,11 +7,11 @@ import { PrescricaoMedicamentoModel } from '../models/prescricaoMedicamento.mode
   providedIn: 'root',
 })
 export class MedicamentoService {
-  // URL base para o seu controller Spring Boot
+  
   private apiUrl = '/api/medicamentos';
   constructor(private http: HttpClient) {}
 
-   // Lista todos os medicamentos cadastrados
+   
   listarTodos(): Observable<PrescricaoMedicamentoModel[]> {
     return this.http.get<PrescricaoMedicamentoModel[]>(`${this.apiUrl}`);
   }

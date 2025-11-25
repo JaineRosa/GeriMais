@@ -30,15 +30,15 @@ export class UserRepository {
 
   getByIdList(ids: string[]): Observable<UserModel[]> {
     if (ids.length === 0) {
-      return of([]); // Retorna array vazio se não houver IDs
+      return of([]); 
     }
     const requests = ids.map((id) =>
       this.getById(id).pipe(
-        catchError(() => of(null)) // Retorna null se falhar, em vez de propagar erro
+        catchError(() => of(null)) 
       )
     );
     return forkJoin(requests).pipe(
-      map((results) => results.filter((result): result is UserModel => result !== null)) // Filtra nulos
+      map((results) => results.filter((result): result is UserModel => result !== null)) 
     );
   }
 

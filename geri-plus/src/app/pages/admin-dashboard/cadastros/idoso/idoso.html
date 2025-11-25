@@ -1,9 +1,7 @@
 <div class="cadastro-page">
   <h1>Cadastro de Idosos</h1>
 
-  <button type="button" class="btn btn-primary mb-3" (click)="novoCadastro()">
-    + Novo Idoso
-  </button>
+  <button type="button" class="btn btn-primary mb-3" (click)="novoCadastro()">+ Novo Idoso</button>
 
   <app-lista-cards
     [titulo]="'Idosos cadastrados'"
@@ -11,7 +9,8 @@
     [camposResumo]="['nome', 'cpf', 'quarto', 'statusResidencia']"
     [exibirFoto]="true"
     (editar)="abrirFormEdicao($event)"
-    (excluir)="onExcluir($event)">
+    (excluir)="onExcluir($event)"
+  >
   </app-lista-cards>
 
   <app-form-cadastro
@@ -21,6 +20,7 @@
     [initialValue]="initialValue"
     [salvarLabel]="'Salvar'"
     [exibirFoto]="true"
-    (submitForm)="onSubmitIdoso($event)">
+    (submitForm)="onSubmitIdoso($event)"
+  >
   </app-form-cadastro>
 </div>

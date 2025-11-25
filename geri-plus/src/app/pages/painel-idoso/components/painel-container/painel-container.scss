@@ -5,8 +5,8 @@
   padding: 1rem;
   border-radius: 12px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  width: 95%; // ocupa quase toda a largura
-  max-width: 1400px; // limite para não ficar exagerado
+  width: 95%; 
+  max-width: 1400px; 
   margin: 1rem auto;
 
   .menu-painel {
@@ -50,9 +50,9 @@
       button {
         width: 100%;
         justify-content: flex-start;
-        font-size: 0.95rem; // texto menor
-        padding: 0.8rem 1rem; // mais compacto
-        gap: 0.5rem; // ícone mais próximo do texto
+        font-size: 0.95rem; 
+        padding: 0.8rem 1rem; 
+        gap: 0.5rem; 
 
         i {
           font-size: 0.9rem;
@@ -71,7 +71,7 @@
   }
 
   .conteudo-painel {
-    min-height: 70vh; // ocupa boa parte da altura da tela
+    min-height: 70vh; 
     background-color: vars.$text-light;
     border-radius: 8px;
     padding: 2rem;
@@ -85,13 +85,13 @@
     }
   }
 
-  /* 🔹 Ajuste para telas muito grandes */
+
   @media (min-width: 1600px) {
-    width: 98%; // ocupa quase toda a largura
-    max-width: 1800px; // aumenta limite
+    width: 98%; 
+    max-width: 1800px; 
     .conteudo-painel {
-      min-height: 80vh; // ocupa mais altura
-      padding: 3rem; // mais espaço interno
+      min-height: 80vh; 
+      padding: 3rem; 
     }
   }
 }

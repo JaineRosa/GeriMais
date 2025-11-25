@@ -35,7 +35,7 @@ export class CadPrescricoMedica implements OnInit {
 
   diasSemana = ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'];
 
-  prescricaoId: string | null = null; // usado na edição
+  prescricaoId: string | null = null; 
 
   constructor(
     private fb: FormBuilder,
@@ -45,7 +45,7 @@ export class CadPrescricoMedica implements OnInit {
     private idosoService: IdosoService,
     private medicoService: MedicoService,
     private medicamentoService: MedicamentoService
-  ) {} // ----------------------------------------------------------- // 🔹 Inicialização // -----------------------------------------------------------
+  ) {} 
 
   ngOnInit(): void {
     this.prescricaoId = this.route.snapshot.paramMap.get('id');
@@ -68,13 +68,13 @@ export class CadPrescricoMedica implements OnInit {
     } else {
       this.addMedicamento();
     }
-  } // ----------------------------------------------------------- // 🔹 Carregar dados para selects // -----------------------------------------------------------
+  } 
 
   loadData() {
     this.idosoService.listar().subscribe((res) => (this.idosos = res));
     this.medicoService.listar().subscribe((res) => (this.medicos = res));
     this.medicamentoService.listarTodos().subscribe((res) => (this.medicamentos = res));
-  } // ----------------------------------------------------------- // 🔹 Carregar prescrição na tela para edição (CORRIGIDO) // -----------------------------------------------------------
+  } 
 
   loadPrescricao(id: string) {
     this.prescricaoService.getById(id).subscribe((data: any) => {
@@ -82,18 +82,18 @@ export class CadPrescricoMedica implements OnInit {
 
       this.prescricaoForm.patchValue({
         idosoId: data.idosoId,
-        medicoId: data.medicoId, // CORREÇÃO AQUI: Mapeando os campos para o grupo aninhado
+        medicoId: data.medicoId, 
         recomendacao: {
           descricaoGeral: data.descricaoGeral,
           prioridade: data.prioridade,
         },
-      }); // Limpa medicamentos existentes
+      }); 
 
-      this.medicamentosArray.clear(); // Adiciona cada medicamento retornado da API
+      this.medicamentosArray.clear(); 
 
       data.medicamentosPrescritos.forEach((m: any) => {
-        // Criando os FormArrays de Dias/Horários diretamente dos dados (MELHORIA)
-        const diasArray = this.fb.array(m.diasSemana || []); // Garante que a hora está no formato HH:mm
+        
+        const diasArray = this.fb.array(m.diasSemana || []); 
 
         const horariosArray = this.fb.array(
           (m.horarios || []).map((h: string) => h.substring(0, 5))
@@ -112,7 +112,7 @@ export class CadPrescricoMedica implements OnInit {
         this.medicamentosArray.push(mg);
       });
     });
-  } // ----------------------------------------------------------- // 🔹 Manipulação do FormArray de medicamentos // -----------------------------------------------------------
+  } 
 
   get medicamentosArray(): FormArray {
     return this.prescricaoForm.get('medicamentos') as FormArray;
@@ -133,7 +133,7 @@ export class CadPrescricoMedica implements OnInit {
 
   removeMedicamento(i: number) {
     this.medicamentosArray.removeAt(i);
-  } // ----------------------------------------------------------- // 🔹 Dias da semana // -----------------------------------------------------------
+  } 
 
   toggleDiaSemana(index: number, dia: string, event: any) {
     const dias = this.medicamentosArray.at(index).get('diasSemana') as FormArray;
@@ -143,7 +143,7 @@ export class CadPrescricoMedica implements OnInit {
       const idx = dias.controls.findIndex((x) => x.value === dia);
       if (idx >= 0) dias.removeAt(idx);
     }
-  } // ----------------------------------------------------------- // 🔹 Horários // -----------------------------------------------------------
+  } 
 
   addHorario(i: number, horario: string, input: any) {
     if (!horario) return;
@@ -159,7 +159,7 @@ export class CadPrescricoMedica implements OnInit {
 
   getHorarios(i: number): FormArray {
     return this.medicamentosArray.at(i).get('horarios') as FormArray;
-  } // ----------------------------------------------------------- // 🔹 Enviar Formulário // -----------------------------------------------------------
+  } 
 
   submit() {
     const payload: PrescricaoDTO = this.prescricaoForm.value;
@@ -184,7 +184,7 @@ export class CadPrescricoMedica implements OnInit {
           });
         },
         (error) => {
-          // Adicione tratamento de erro
+          
           console.error('Erro ao cadastrar prescrição:', error);
           alert('Erro ao cadastrar prescrição. Verifique o console.');
         }

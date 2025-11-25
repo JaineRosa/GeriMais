@@ -96,7 +96,6 @@ public class AuthController {
             );
 
         } catch (RuntimeException e) {
-            // Captura erros de "não encontrado" ou "vínculo inválido"
             System.out.println("ERRO LOGIN FAMILIAR: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(e.getMessage());
         } catch (Exception e) {
