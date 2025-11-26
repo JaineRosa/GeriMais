@@ -58,8 +58,7 @@
     </app-dados-gerais>
 
     <app-medicamentos
-      *ngIf="abaSelecionada === 'medicamentos'"
-      [cpfHospede]="'909.443.059-20'"
+      *ngIf="abaSelecionada === 'medicamentos'"[idosoId]="idosoMongoId"
     ></app-medicamentos>
 
     <app-cuidadores *ngIf="abaSelecionada === 'cuidadores'" [cpfHospede]="cpfHospede">

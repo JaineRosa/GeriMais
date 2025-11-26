@@ -1,5 +1,9 @@
 <div class="medicamentos">
-  <h3>Medicamentos</h3>
+  <h3>Medicamentos Prescritos</h3>
+
+  <div *ngIf="carregando">Carregando medicamentos...</div>
+  <div *ngIf="erro" class="erro">{{ erro }}</div>
+
   <div class="imprimir-prescricao">
     <label for="tipoPrescricao">Imprimir prescrição:</label>
     <select id="tipoPrescricao" [(ngModel)]="selectedTipoPrescricao">
@@ -19,11 +23,22 @@
       [subtitulo]="med.dosagem"
       [descricao]="med.frequenciaDiaria + ' | ' + med.duracaoTratamento + ' | ' + med.observacoes"
       icone="pills"
-      [tipo]="med.status === 'novo' ? 'success' : 'info'"
+      [tipo]="'info'"
     >
-      <span class="badge" [ngClass]="med.status === 'novo' ? 'novo' : 'em-uso'">
-        {{ med.status === 'novo' ? 'Novo' : 'Em uso' }}
-      </span>
+      <div class="card-medicamento">
+        <div class="header-card">
+          <span class="badge em-uso">EM USO</span>
+        </div>
+        <div class="data-prescricao">
+          Data da Prescrição: <strong>{{ med.dataPrescricao | date : 'dd/MM/yyyy' }}</strong>
+        </div>
+
+        <div class="badge-list">
+          <span *ngIf="med.diasSemana?.length">Dias: {{ med.diasSemana.join(', ') }}</span
+          ><br />
+          <span *ngIf="med.horarios?.length">Horários: {{ med.horarios.join(' • ') }}</span>
+        </div>
+      </div>
     </app-card-generico>
   </ng-container>
 
@@ -36,9 +51,4 @@
     >
     </app-card-generico>
   </ng-template>
-
-  <div class="legenda-badges">
-    <span class="badge novo">Novo</span> Medicamento recém-adicionado &nbsp;&nbsp;
-    <span class="badge em-uso">Em uso</span> Medicamento uso contínuo
-  </div>
 </div>

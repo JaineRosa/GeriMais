@@ -9,18 +9,16 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [CommonModule, RouterModule, RouterLink, RouterLinkActive],
   templateUrl: './navbar.html',
-  styleUrls: ['./navbar.scss'], 
+  styleUrls: ['./navbar.scss'],
 })
 export class Navbar {
   usuarioLogado: any;
 
-  
   constructor(
     private viewportScroller: ViewportScroller,
     public authService: AuthService,
     private router: Router
   ) {
-    
     this.usuarioLogado = this.authService.getUsuario();
   }
 
@@ -28,22 +26,20 @@ export class Navbar {
     this.viewportScroller.scrollToAnchor(section);
   }
 
-  
   isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
-  
   isAdmin(): boolean {
-    return this.usuarioLogado?.tipoUsuario === 'ADMIN';
+    this.usuarioLogado = this.authService.getUsuario();
+    const tipo = this.usuarioLogado?.tipoUsuario;
+    return tipo && tipo.toUpperCase() === 'ADMIN';
   }
 
-  
   isFamiliar(): boolean {
     return this.usuarioLogado?.tipoUsuario === 'FAMILIAR';
   }
 
-  
   logout(): void {
     this.authService.logout();
     this.router.navigate(['/login']);

@@ -1,7 +1,7 @@
 @use '../../../../styles/variables' as vars;
 
 .badge {
-  position: absolute; 
+  position: absolute;
   top: 0.5rem;
   right: 0.5rem;
   padding: 0.2rem 0.6rem;
@@ -11,11 +11,13 @@
   color: vars.$text-light;
 
   &.novo {
-    background-color: vars.$accent-color; 
+    background-color: vars.$accent-color;
   }
 
   &.em-uso {
-    background-color: vars.$primary-color; 
+    margin-top: 10px;
+    margin-right: 10px;
+    background-color: vars.$primary-color;
   }
 }
 
@@ -26,7 +28,7 @@
   color: vars.$text-dark;
 
   .badge {
-    position: static; 
+    position: static;
     margin-right: 0.5rem;
     font-size: vars.$font-size-xsmall;
   }

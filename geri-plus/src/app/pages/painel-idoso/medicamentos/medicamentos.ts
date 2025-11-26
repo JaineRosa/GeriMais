@@ -1,7 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CardGenerico } from '../../../shared/components/card-generico/card-generico';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { PrescricaoService } from '../../../core/service/prescricao.service';
 
 @Component({
   selector: 'app-medicamentos',
@@ -11,72 +12,116 @@ import { FormsModule } from '@angular/forms';
   styleUrls: ['./medicamentos.scss'],
 })
 export class Medicamentos {
-  @Input() cpfHospede!: string;
+  private _idosoId: string | null = null;
 
   medicamentosDoIdoso: any[] = [];
-  selectedTipoPrescricao: string = ''; 
+  selectedTipoPrescricao: string = '';
 
-  ngOnInit() {
-    
-    const todosMedicamentos = [
-      {
-        nome: 'Losartana',
-        dosagem: '100mg',
-        frequenciaDiaria: '1 vez ao dia',
-        duracaoTratamento: 'Indeterminado',
-        viaAdministracao: 'ORAL',
-        dataPrescricao: '2025-11-20',
-        medicoId: 'MED-001',
-        idosoId: '909.443.059-20',
-        observacoes: 'Controle da pressão arterial',
-        status: 'em uso',
-      },
-      {
-        nome: 'Paracetamol',
-        dosagem: '500mg',
-        frequenciaDiaria: '2 vezes ao dia',
-        duracaoTratamento: '7 dias',
-        viaAdministracao: 'ORAL',
-        dataPrescricao: '2025-11-21',
-        medicoId: 'MED-002',
-        idosoId: '909.443.059-20',
-        observacoes: 'Tomar após as refeições',
-        status: 'novo',
-      },
-      {
-        nome: 'Clomipramina',
-        dosagem: '75mg',
-        frequenciaDiaria: '1 vez ao dia',
-        duracaoTratamento: '30 dias',
-        viaAdministracao: 'ORAL',
-        dataPrescricao: '2025-11-19',
-        medicoId: 'MED-003',
-        idosoId: '909.443.059-20',
-        observacoes: 'Uso noturno',
-        status: 'em uso',
-      },
-    ];
+  carregando = false;
+  erro = '';
 
-    
-    this.medicamentosDoIdoso = todosMedicamentos.filter((m) => m.idosoId === this.cpfHospede);
-  }
-  
-  imprimirPrescricao() {
-    let filtrados: any[] = [];
+  constructor(private prescricaoService: PrescricaoService) {}
 
-    if (this.selectedTipoPrescricao === 'novos') {
-      filtrados = this.medicamentosDoIdoso.filter((m) => m.status === 'novo');
-    } else if (this.selectedTipoPrescricao === 'continuos') {
-      filtrados = this.medicamentosDoIdoso.filter((m) => m.status === 'em uso');
-    }
-
-    if (filtrados.length > 0) {
-      console.log('Medicamentos selecionados para impressão:', filtrados);
-      alert(
-        `Imprimindo ${filtrados.length} medicamento(s): ${filtrados.map((m) => m.nome).join(', ')}`
-      );
+  @Input()
+  set idosoId(id: string | null) {
+    this._idosoId = id;
+    if (id) {
+      this.carregarMedicamentos(id);
     } else {
-      alert('Nenhum medicamento encontrado para esta opção.');
+      this.medicamentosDoIdoso = [];
     }
+  }
+  get idosoId() {
+    return this._idosoId;
+  }
+
+  private carregarMedicamentos(id: string) {
+    this.carregando = true;
+    this.erro = '';
+    console.log('[Medicamentos] carregando prescrições para idosoId=', id);
+
+    this.prescricaoService.getByIdoso(id).subscribe({
+      next: (prescricoes: any[]) => {
+        console.log('[Medicamentos] resposta getByIdoso:', prescricoes);
+        this.medicamentosDoIdoso = this.processarMedicamentos(prescricoes);
+        this.carregando = false;
+      },
+      error: (err) => {
+        console.error('[Medicamentos] erro ao buscar prescrições:', err);
+        this.erro = 'Erro ao carregar medicamentos';
+        this.carregando = false;
+      },
+    });
+  }
+
+  private processarMedicamentos(prescricoes: any[]): any[] {
+    if (!prescricoes || prescricoes.length === 0) return [];
+
+    const meds: any[] = [];
+
+    prescricoes.forEach((p) => {
+      const itens = p.itensPrescritos ?? p.medicamentosPrescritos ?? [];
+      if (!Array.isArray(itens)) return;
+      const dataPrescricao = p.dataRecomendacao ?? p.dataPrescricao ?? p.createdAt ?? null;
+      itens.forEach((item: any) => {
+        meds.push({
+          nome: item.nomeMedicamento ?? item.nome ?? item.nome_remedio ?? '—',
+          dosagem: item.dosagem ?? item.dose ?? '—',
+          frequenciaDiaria: item.frequenciaDiaria ?? item.frequencia ?? '—',
+          duracaoTratamento: item.duracaoTratamento ?? item.duracao ?? '—',
+          viaAdministracao: item.viaAdministracao ?? item.via ?? '—',
+          observacoes: item.observacoesPrescricao ?? item.observacoes ?? '',
+
+          horarios: (item.horarios ?? []).map((h: any) =>
+            typeof h === 'string' ? h.substring(0, 5) : String(h).substring(0, 5)
+          ),
+          diasSemana: item.diasSemana ?? [],
+          status: item.status ?? null,
+          novo: item.status === 'NOVO',
+
+          dataPrescricao: dataPrescricao,
+        });
+      });
+    });
+
+    const unique = meds.reduce((acc: any[], cur) => {
+      const exists = acc.find((m) => m.nome === cur.nome && m.dosagem === cur.dosagem);
+      if (!exists) acc.push(cur);
+      return acc;
+    }, []);
+
+    unique.sort((a, b) => {
+      const da = a.dataPrescricao ? new Date(a.dataPrescricao).getTime() : 0;
+      const db = b.dataPrescricao ? new Date(b.dataPrescricao).getTime() : 0;
+      return db - da;
+    });
+
+    return unique;
+  }
+
+  imprimirPrescricao() {
+    const filtrados =
+      this.selectedTipoPrescricao === 'novos'
+        ? this.medicamentosDoIdoso.filter((m) => m.novo)
+        : this.medicamentosDoIdoso.filter((m) => !m.novo);
+
+    if (!filtrados.length) {
+      alert('Nenhum medicamento encontrado para esta opção.');
+      return;
+    }
+
+    alert(
+      `Imprimindo ${filtrados.length} medicamento(s): ${filtrados.map((m) => m.nome).join(', ')}`
+    );
+  }
+
+  definirBadge(med: any): string {
+    if (med.novo) return 'Novo';
+    return 'Em uso';
+  }
+
+  definirBadgeTipo(med: any): string {
+    if (med.novo) return 'success';
+    return 'info';
   }
 }

@@ -70,7 +70,6 @@ public class SchedulerService {
                     RabbitMQConfig.EMAIL_RESUMO_QUEUE,
                     emailDto
             );
-
         }
     }
 
