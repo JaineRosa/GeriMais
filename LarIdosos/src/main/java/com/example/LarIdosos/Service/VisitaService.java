@@ -42,10 +42,6 @@ public class VisitaService {
         return visitaRepository.findByCuidadorId(cuidadorId);
     }
 
-    public List<Visita> listarPorMedico(String medicoId) {
-        return visitaRepository.findByMedicoId(medicoId);
-    }
-
     public Visita agendarVisita(Visita visita) {
         usuarioRepository.findById(visita.getIdosoId())
                 .orElseThrow(() -> new RuntimeException("Erro: Idoso com ID " + visita.getIdosoId() + " não encontrado."));
@@ -113,7 +109,7 @@ public class VisitaService {
                         visitaExistente.getDataHoraVisita()
                 );
 
-                System.out.println("Enviando notificação: " + tipoNotificacao);
+                System.out.println("Enviando notificação: " + tipoNotificacao + " para o cuidador.");
                 rabbitTemplate.convertAndSend(
                         RabbitMQConfig.EXCHANGE_NAME,
                         RabbitMQConfig.VISIT_NOTIFICATION_QUEUE,

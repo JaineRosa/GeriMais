@@ -46,10 +46,6 @@ public class VisitaController {
         return ResponseEntity.ok(visitaService.listarPorCuidador(cuidadorId));
     }
 
-    @GetMapping("/medico/{medicoId}")
-    public ResponseEntity<List<Visita>> listarPorMedico(@PathVariable String medicoId) {
-        return ResponseEntity.ok(visitaService.listarPorMedico(medicoId));
-    }
 
     @PutMapping("/{id}")
     public ResponseEntity<?> atualizarVisita(@PathVariable String id, @RequestBody Visita visita) {

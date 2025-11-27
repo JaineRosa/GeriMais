@@ -1,0 +1,96 @@
+<div class="container mt-4">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="titulo">Gerenciar Visitas</h2>
+    <button (click)="novaVisita()" class="btn btn-primary">
+      <i class="fas fa-plus me-2"></i> Nova Visita
+    </button>
+  </div>
+
+  <table class="table table-striped table-hover">
+    <thead>
+      <tr>
+        <th>Idoso</th>
+        <th>Cuidador</th>
+        <th>Visitante</th>
+        <th>Data/Hora</th>
+        <th>Status</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let visita of visitas">
+        <td>{{ visita.nomeIdoso }}</td>
+        <td>{{ visita.nomeCuidador || '-' }}</td>
+        <td>{{ visita.nomeVisitante }}</td>
+        <td>{{ visita.dataHoraVisita | date : 'short' }}</td>
+        <td>{{ visita.statusVisita }}</td>
+        <td>
+          <button class="btn btn-sm btn-info me-2" (click)="selecionarVisita(visita)">
+            <i class="fas fa-edit"></i>
+          </button>
+          <button class="btn btn-sm btn-danger" (click)="deletarVisita(visita.id)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="visitaSelecionada" class="form-visita">
+    <h3>{{ visitaSelecionada.id ? 'Editar Visita' : 'Nova Visita' }}</h3>
+
+    <div class="form-group">
+      <label>Idoso:</label>
+      <select [(ngModel)]="visitaSelecionada.idosoId" class="form-select">
+        <option *ngFor="let idoso of listaIdosos" [value]="idoso.id">{{ idoso.nome }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Cuidador:</label>
+      <select [(ngModel)]="visitaSelecionada.cuidadorId" class="form-select">
+        <option *ngFor="let cuidador of listaCuidadores" [value]="cuidador.id">
+          {{ cuidador.nome }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Visitante:</label>
+      <select [(ngModel)]="visitaSelecionada.visitanteId" class="form-select">
+        <option *ngFor="let visitante of listaVisitantes" [value]="visitante.id">
+          {{ visitante.nome }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Data/Hora:</label>
+      <input
+        type="datetime-local"
+        [(ngModel)]="visitaSelecionada.dataHoraVisita"
+        class="form-control"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Status:</label>
+      <select [(ngModel)]="visitaSelecionada.statusVisita" class="form-select">
+        <option value="AGENDADA">Agendada</option>
+        <option value="INICIADA">Iniciada</option>
+        <option value="CONCLUIDA">Concluída</option>
+        <option value="CANCELADA">Cancelada</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Observações:</label>
+      <input [(ngModel)]="visitaSelecionada.observacoes" class="form-control" />
+    </div>
+
+    <div class="form-actions">
+      <button class="btn btn-success" (click)="salvarVisita()">Salvar</button>
+      <button class="btn btn-outline-danger" (click)="visitaSelecionada = null">Cancelar</button>
+    </div>
+  </div>
+</div>

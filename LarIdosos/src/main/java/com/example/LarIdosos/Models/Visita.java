@@ -19,18 +19,16 @@ public class Visita {
     private String idosoId;
     private String cuidadorId;
     private String visitanteId;
-    private String medicoId;
     private TipoVisita tipoVisita;
     private LocalDateTime dataHoraVisita;
     private StatusVisita statusVisita;
     private String observacoes;
 
-    public Visita(String id, String idosoId, String cuidadorId, String visitanteId, String medicoId, TipoVisita tipoVisita, LocalDateTime dataHoraVisita, StatusVisita statusVisita, String observacoes) {
+    public Visita(String id, String idosoId, String cuidadorId, String visitanteId, TipoVisita tipoVisita, LocalDateTime dataHoraVisita, StatusVisita statusVisita, String observacoes) {
         this.id = id;
         this.idosoId = idosoId;
         this.cuidadorId = cuidadorId;
         this.visitanteId = visitanteId;
-        this.medicoId = medicoId;
         this.tipoVisita = tipoVisita;
         this.dataHoraVisita = dataHoraVisita;
         this.statusVisita = statusVisita;
@@ -72,13 +70,6 @@ public class Visita {
         this.visitanteId = visitanteId;
     }
 
-    public String getMedicoId() {
-        return medicoId;
-    }
-
-    public void setMedicoId(String medicoId) {
-        this.medicoId = medicoId;
-    }
 
     public TipoVisita getTipoVisita() {
         return tipoVisita;

@@ -15,7 +15,5 @@ public interface VisitaRepository extends MongoRepository<Visita, String> {
 
     List<Visita> findByCuidadorId(String cuidadorId);
 
-    List<Visita> findByMedicoId(String medicoId);
-
     List<Visita> findByIdosoIdAndDataHoraVisitaBetween(String idosoId, LocalDateTime inicio, LocalDateTime fim);
 }

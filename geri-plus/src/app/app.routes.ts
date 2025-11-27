@@ -5,7 +5,6 @@ import { Sobre } from './pages/sobre/sobre';
 import { Dashboard } from './pages/admin-dashboard/dashboard/dashboard';
 import { PainelIdoso } from './pages/painel-idoso/painel-idoso';
 
-
 import { authGuard } from './core/guards/auth.guard';
 import { RoleGuard } from './core/guards/role.guard';
 import { AdminLayout } from './pages/admin-dashboard/components/admin-layout/admin-layout';
@@ -13,13 +12,13 @@ import { ListPrescricaoMedicaComponent } from './pages/admin-dashboard/list-pres
 import { CadPrescricoMedica } from './pages/admin-dashboard/cadastros/cad-prescrico-medica/cad-prescrico-medica';
 import { ListSaudeDiaria } from './pages/admin-dashboard/list-saude-diaria/list-saude-diaria';
 import { CadSaudeDiaria } from './pages/admin-dashboard/cadastros/cad-saude-diaria/cad-saude-diaria';
+import { CadVisitas } from './pages/admin-dashboard/cad-visitas/cad-visitas';
 
 export const routes: Routes = [
-  { path: '', component: Home }, 
-  { path: 'login', component: Login }, 
-  { path: 'sobre', component: Sobre }, 
+  { path: '', component: Home },
+  { path: 'login', component: Login },
+  { path: 'sobre', component: Sobre },
 
-  
   {
     path: 'admin',
     canActivate: [authGuard, RoleGuard],
@@ -64,6 +63,9 @@ export const routes: Routes = [
           ),
       },
       {
+        path: 'cadastros/visitas', component: CadVisitas, title: 'Gerenciar Visitas'
+      },
+      {
         path: 'cadastros/admin',
         loadComponent: () =>
           import('./pages/admin-dashboard/cadastros/admin/admin').then((m) => m.Admin),
@@ -100,13 +102,12 @@ export const routes: Routes = [
       {
         path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full', 
+        pathMatch: 'full',
       },
       {
         path: 'saude-diaria/lista',
         component: ListSaudeDiaria,
         title: 'Lista de Registros de Saúde',
-        
       },
       {
         path: 'saude-diaria/cadastrar',
@@ -114,7 +115,6 @@ export const routes: Routes = [
         title: 'Novo Registro de Saúde',
       },
       {
-        
         path: 'saude-diaria/cadastrar/:id',
         component: CadSaudeDiaria,
         title: 'Editar Registro de Saúde',
@@ -122,7 +122,6 @@ export const routes: Routes = [
     ],
   },
 
-  
   {
     path: 'painel-idoso/:id',
     component: PainelIdoso,

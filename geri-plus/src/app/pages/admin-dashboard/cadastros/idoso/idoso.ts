@@ -199,7 +199,7 @@ export class Idoso implements OnInit {
     } else {
       this.idosoService.criar(data).subscribe({
         next: (resp) => {
-          alert('Idoso criado com sucesso!');
+          alert('Idoso criado com sucesso! Enviando Email de boas-vindas.');
           this.listaIdosos.push(resp);
           this.modoEdicao = false;
           this.initialValue = null;
