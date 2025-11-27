@@ -1,6 +1,9 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { CardGenerico } from '../../../shared/components/card-generico/card-generico';
 import { CommonModule } from '@angular/common';
+import { UserModel } from '../../../core/models/user.model';
+import { CuidadorService } from '../../../core/service/cuidador.service';
+import { IdosoService } from '../../../core/service/idoso.service';
 
 @Component({
   selector: 'app-cuidadores',
@@ -9,60 +12,35 @@ import { CommonModule } from '@angular/common';
   templateUrl: './cuidadores.html',
   styleUrls: ['./cuidadores.scss'],
 })
-export class Cuidadores {
-  @Input() cpfHospede!: string;
+export class Cuidadores implements OnInit {
+  @Input() idosoId: string | null = null;
 
-  listaCuidadores: any[] = [];
+  listaCuidadores: UserModel[] = [];
   cuidadoresHistorico: any[] = [];
 
+  constructor(private cuidadorService: CuidadorService) {}
+
   ngOnInit() {
-    
-    const todosCuidadores = [
-      {
-        nome: 'Carlos Mendes',
-        cpf: '111.222.333-44',
-        telefone: '(47) 98888-7777',
-        email: 'carlos@email.com',
-        statusResidencia: 'ATIVO',
-        turno: 'Manhã',
-        foto: 'assets/images/profissional-avatar.png',
-        idosoId: '909.443.059-20',
-      },
-      {
-        nome: 'Maria Silva',
-        cpf: '222.333.444-55',
-        telefone: '(47) 97777-8888',
-        email: 'maria@email.com',
-        statusResidencia: 'ATIVO',
-        turno: 'Noite',
-        foto: 'assets/images/profissional-avatar.png',
-        idosoId: '909.443.059-20',
-      },
-    ];
+    if (!this.idosoId) return;
+    this.carregarCuidadores(this.idosoId);
+  }
 
-    
-    const historico = [
-      {
-        nome: 'João Souza',
-        periodo: 'Janeiro - Março 2025',
-        turno: 'Tarde',
-        idosoId: '909.443.059-20',
-      },
-      {
-        nome: 'Ana Costa',
-        periodo: 'Abril - Junho 2025',
-        turno: 'Manhã',
-        idosoId: '909.443.059-20',
-      },
-    ];
+  private carregarCuidadores(idosoId: string) {
+    this.cuidadorService.listar().subscribe({
+      next: (cuidadores: UserModel[]) => {
+        this.listaCuidadores = cuidadores.filter(
+          (c) => c.idososId?.includes(idosoId) && c.statusResidencia === 'ATIVO'
+        );
 
-    
-    this.listaCuidadores = todosCuidadores.filter(
-      (c) => c.idosoId === this.cpfHospede
-    );
-
-    this.cuidadoresHistorico = historico.filter(
-      (c) => c.idosoId === this.cpfHospede
-    );
+        this.cuidadoresHistorico = cuidadores
+          .filter((c) => c.idososId?.includes(idosoId) && c.statusResidencia !== 'ATIVO')
+          .map((c) => ({
+            nome: c.nome,
+          }));
+      },
+      error: (err) => {
+        console.error('Erro ao buscar cuidadores:', err);
+      },
+    });
   }
 }

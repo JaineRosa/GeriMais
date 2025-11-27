@@ -1,8 +1,5 @@
 <section class="painel-container">
   <app-painel-header
-    [nomeFamiliar]="nomeFamiliar"
-    [nomeHospede]="nomeHospede"
-    [cpfHospede]="cpfHospede"
   >
   </app-painel-header>
 
@@ -51,6 +48,7 @@
   <div class="conteudo-painel">
     <app-dados-gerais
       *ngIf="abaSelecionada === 'dados-gerais'"
+      [idosoId]="idosoMongoId"
       [nomeFamiliar]="nomeFamiliar"
       [nomeHospede]="nomeHospede"
       [cpfHospede]="cpfHospede"
@@ -58,10 +56,11 @@
     </app-dados-gerais>
 
     <app-medicamentos
-      *ngIf="abaSelecionada === 'medicamentos'"[idosoId]="idosoMongoId"
+      *ngIf="abaSelecionada === 'medicamentos'"
+      [idosoId]="idosoMongoId"
     ></app-medicamentos>
 
-    <app-cuidadores *ngIf="abaSelecionada === 'cuidadores'" [cpfHospede]="cpfHospede">
+    <app-cuidadores *ngIf="abaSelecionada === 'cuidadores'" [idosoId]="idosoMongoId">
     </app-cuidadores>
 
     <app-recomendacoes-medicas *ngIf="abaSelecionada === 'recomendacoes'" [idosoId]="idosoMongoId">

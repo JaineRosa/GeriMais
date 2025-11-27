@@ -1,7 +1,8 @@
-<section class="dados-gerais">
+<section class="dados-gerais" *ngIf="dadosIdoso">
   <div class="card-idoso">
+
     <img
-      [src]="dadosIdoso.foto"
+      [src]="dadosIdoso.fotoUrl || 'assets/images/idoso-avatar.png'"
       alt="Foto de {{ dadosIdoso.nome }}"
       class="foto-idoso"
       aria-label="Foto do idoso"
@@ -15,6 +16,7 @@
   </div>
 
   <div class="dados-detalhados">
+
     <div class="grupo">
       <h3>Dados Pessoais</h3>
       <div class="linha">
@@ -25,18 +27,18 @@
 
     <div class="grupo">
       <h3>Medicamentos</h3>
-      <p>{{ dadosIdoso.medicamentos.join(', ') }}</p>
+      <p>{{ ultimosDoisMedicamentos }}</p>
     </div>
+
 
     <div class="grupo">
       <h3>Recomendações Médicas</h3>
-      <p>{{ dadosIdoso.recomendacoesMedicas.join(', ') }}</p>
+      <p>{{ ultimaRecomendacao }}</p>
     </div>
   </div>
 </section>
-
 <div class="notificacoes-recentes">
-  <h3>Notificações Recentes <i class="fas fa-exclamation-triangle "></i></h3>
+  <h3>Notificações Recentes <i class="fas fa-exclamation-triangle"></i></h3>
 
   <ng-container *ngIf="notificacoes.length > 0; else vazio">
     <app-card-generico
@@ -50,7 +52,8 @@
     </app-card-generico>
 
     <p class="msg-ir-notificacoes">
-      Para ver todas as notificações, use o menu superior e clique na aba <strong>Notificações</strong>.
+      Para ver todas as notificações, use o menu superior e clique na aba
+      <strong>Notificações</strong>.
     </p>
   </ng-container>
 

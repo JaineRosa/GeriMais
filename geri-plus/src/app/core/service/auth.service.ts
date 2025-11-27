@@ -35,11 +35,8 @@ export class AuthService {
   loginFamiliar(nomeFamiliar: string, nomeIdoso: string, cpfIdoso: string): Observable<boolean> {
     return this.repository.login({ nomeFamiliar, nomeIdoso, cpfIdoso, platform: 'WEB' }).pipe(
       map((response: any) => {
-        
         localStorage.setItem(currentKey, JSON.stringify(response));
 
-        
-        
         const idosoId = response.idosoId || response.idoso_id_acesso;
 
         if (idosoId) {
@@ -49,7 +46,6 @@ export class AuthService {
           console.warn(
             'AuthService: Login Familiar efetuado, mas ID do idoso não encontrado na resposta.'
           );
-          
           return false;
         }
       }),
@@ -65,25 +61,28 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem(currentKey);
-    localStorage.removeItem(idosoAcessoKey); 
-  }
+    localStorage.removeItem(currentKey);
+    localStorage.removeItem(idosoAcessoKey);
+  }
 
- getIdosoIdAcesso(): string | null {
+  getIdosoIdAcesso(): string | null {
     return localStorage.getItem(idosoAcessoKey);
   }
 
-  getUsuario(): UserModel | null {
-    const raw = localStorage.getItem(currentKey);
-    if (!raw) return null;
-    try {
-      const auth: AuthModel = JSON.parse(raw);
-      return auth.user;
-    } catch (err) {
-      console.error('Erro ao parsear localStorage:', err);
-      return null;
-    }
+ getUsuario(): UserModel | null {
+  const raw = localStorage.getItem(currentKey);
+  if (!raw) return null;
+  try {
+    const auth = JSON.parse(raw);
+    if (auth.usuario) return auth.usuario;
+    if (auth.user) return auth.user;
+
+    return null;
+  } catch (err) {
+    console.error('Erro ao parsear localStorage:', err);
+    return null;
   }
+}
 
   getPerfil(): string {
     const raw = localStorage.getItem(currentKey);
@@ -92,13 +91,10 @@ export class AuthService {
     try {
       const data = JSON.parse(raw);
 
-      
       if (data?.usuario?.tipoUsuario) return data.usuario.tipoUsuario;
 
-      
       if (data?.user?.tipoUsuario) return data.user.tipoUsuario;
 
-      
       if (data?.tipoUsuario) return data.tipoUsuario;
 
       return '';
