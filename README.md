@@ -10,7 +10,7 @@ Desenvolvido para apoiar a gestão de lares de idosos, o GERI+, oferece ferramen
 - **MongoDB** → Banco de dados NoSQL
 - **RabbitMQ** → Mensageria e comunicação entre serviços
 - **Docker & Docker Compose** → Orquestração e execução dos containers
-  
+
 ![Java](https://img.shields.io/badge/Java-Spring%20Boot-red?logo=springboot)
 ![Angular](https://img.shields.io/badge/Angular-20.3.10-darkred?logo=angular)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Database-green?logo=mongodb)
@@ -50,7 +50,7 @@ Desenvolvido para apoiar a gestão de lares de idosos, o GERI+, oferece ferramen
 - Notification Service → http://localhost:8090
 
 - RabbitMQ Dashboard → http://localhost:15672
-  
+
 - Mongo_DB → http://localhost:27017
 
 ## Principais endpoints da API
@@ -88,7 +88,7 @@ Desenvolvido para apoiar a gestão de lares de idosos, o GERI+, oferece ferramen
 - `GET /{id}` → Buscar por ID
 - `PUT /{id}` → Atualizar registro
 - `DELETE /{id}` → Deletar registro
-  
+
 ### Usuário
 **Base URL:** `/api/usuarios`
 
@@ -112,7 +112,7 @@ Desenvolvido para apoiar a gestão de lares de idosos, o GERI+, oferece ferramen
 - `GET /cuidador/{cuidadorId}` → Listar por cuidador
 - `GET /medico/{medicoId}` → Listar por médico
 - `PUT /{id}` → Atualizar visita
-  
+
 ## Exemplo de requisição
 
 ```http
@@ -153,7 +153,10 @@ Agenda visita → Valida dados → Salva no banco → Monta DTO → Envia Rabbit
 ```
 Atualiza status → Identifica tipo de notificação → Monta DTO → Envia RabbitMQ → Consumer envia notificação
 ```
-## Link video funcionamento projeto
+## Video de Marketing Geri+
+📺 [Assista no YouTube](https://www.youtube.com/watch?v=e9snkxQH6fI)
+
+## Video funcionamento projeto
 📺 [Assista no YouTube](https://www.youtube.com/projeto-geri+)
 
 ## Projeto Final FullStack-DEVS2BLU 2025
