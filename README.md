@@ -157,7 +157,7 @@ Atualiza status → Identifica tipo de notificação → Monta DTO → Envia Rab
 📺 [Assista no YouTube](https://www.youtube.com/watch?v=e9snkxQH6fI)
 
 ## Video funcionamento projeto
-📺 [Assista no YouTube](https://www.youtube.com/projeto-geri+)
+📺 [Assista no YouTube](https://www.youtube.com/watch?v=_yRGwTkLUIU)
 
 ## Projeto Final FullStack-DEVS2BLU 2025
 **Autoria**
